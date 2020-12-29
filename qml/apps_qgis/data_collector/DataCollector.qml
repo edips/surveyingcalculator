@@ -158,6 +158,9 @@ FluidControls.Page{
             featureMenu.addItem(get_coord.createObject(featureMenu, { text: "Get Coordinates" }))
         }
 
+
+
+
         // For Line
         // Length item
         function lengthItem() {
@@ -167,14 +170,17 @@ FluidControls.Page{
             id: length
             MenuItem {
                 onTriggered: {
+                    lengthcombo.currentIndex = 0
                     var res = identifyKit.identifyOne(screenPoint);
                     var length_val = __surveyingUtils.getLength( res )
-                    feature_dialog.title = "Length"
-                    feature_dialog.text = length_val
-                    feature_dialog.open()
+                    length_metric = length_val
+                    length_dialog.title = "Length"
+                    length_dialog.lengthValue.text = length_val
+                    length_dialog.open()
                 }
             }
         }
+
         // For Polygon
         // Area item
         function areaItem() {
@@ -184,11 +190,13 @@ FluidControls.Page{
             id: area
             MenuItem {
                 onTriggered: {
+                    areacombo.currentIndex = 0
                     var res = identifyKit.identifyOne(screenPoint);
                     var area_val = __surveyingUtils.getArea( res )
-                    feature_dialog.title = "Area"
-                    feature_dialog.text = area_val
-                    feature_dialog.open()
+                    area_metric = area_val
+                    area_dialog.areaValue.text = area_val
+                    area_dialog.title = "Area"
+                    area_dialog.open()
                 }
             }
         }
@@ -233,9 +241,125 @@ FluidControls.Page{
         }
     }
 
+
+    // Area unit conversion
+    /*
+    TODO:
+    - Make component of measurement dialogs
+    - Separate JS files to data_collector.js
+    */
+    property double area_metric;
+
+    function areaUnits( area, area_metric ) {
+         if (areacombo.currentIndex === 0){
+             area.text = ( area_metric ).toFixed( 2 )
+         }
+         // km2
+         else if( areacombo.currentIndex === 1 ){
+             area.text = ( area_metric * 0.000001 ).toFixed( 2 )
+         }
+         // ha
+         else if( areacombo.currentIndex === 2 ){
+             area.text = ( area_metric * 0.0001 ).toFixed( 2 )
+         }
+         // acre
+         else if( areacombo.currentIndex === 3 ){
+             area.text = ( area_metric * 0.000247105381467165 ).toFixed( 2 )
+         }
+         // mile
+         else if( areacombo.currentIndex === 4 ){
+             area.text = ( area_metric * 0.000000386102158542446 ).toFixed( 2 )
+         }
+         // yard
+         else if( areacombo.currentIndex === 5 ){
+             area.text = ( area_metric * 1.19599004630108).toFixed( 2 )
+         }
+         // feet
+         else if( areacombo.currentIndex === 6 ){
+             area.text = ( ( area_metric * 10.7639104167097 ) ).toFixed( 2 )
+         }
+    }
+
     // area and length dialog
     SErrorDialog {
-        id: feature_dialog
+        id: area_dialog
+        property alias areaValue: area_value
+        Row{
+            anchors.horizontalCenter: parent.horizontalCenter
+            spacing: 10
+            STextField{id: area_value; width: 150; readOnly:true}
+            CustomComboBox {
+                id: areacombo
+                height: area_value.height
+                currentIndex: 0
+                implicitWidth:80
+                model: ListModel {
+                    ListElement { text: qsTr("m²") }
+                    ListElement { text: qsTr("km²") }
+                    ListElement { text: qsTr("ha") }
+                    ListElement { text: qsTr("acre") }
+                    ListElement { text: qsTr("mi²") }
+                    ListElement { text: qsTr("yd²") }
+                    ListElement { text: qsTr("ft²") }
+                }
+                onCurrentIndexChanged: areaUnits( area_value, area_metric );
+            }
+        }
+    }
+
+    // length unit conversion
+    property double length_metric;
+
+    function lengthUnits( length, length_metric ) {
+        // meter
+         if ( lengthcombo.currentIndex === 0 ){
+             length.text = ( length_metric ).toFixed( 2 )
+         }
+         // kilometer
+         else if( lengthcombo.currentIndex === 1 ){
+             length.text = ( length_metric * 0.001 ).toFixed( 2 )
+         }
+         // miles
+         else if( lengthcombo.currentIndex === 2 ){
+             length.text = ( length_metric * 0.0006213712 ).toFixed( 2 )
+         }
+         // n. miles
+         else if( lengthcombo.currentIndex === 3 ){
+             length.text = ( length_metric * 0.0005399568 ).toFixed( 2 )
+         }
+         // yard 1.09361
+         else if( lengthcombo.currentIndex === 4 ){
+             length.text = ( length_metric * 1.0936132983 ).toFixed( 2 )
+         }
+         // feet
+         else if( lengthcombo.currentIndex === 5 ){
+             length.text = ( length_metric * 3.280839895 ).toFixed( 2 )
+         }
+    }
+    // length dialog
+    SErrorDialog {
+        id: length_dialog
+        property alias lengthValue: length_value
+        Row{
+            anchors.horizontalCenter: parent.horizontalCenter
+            spacing: 10
+            STextField{id: length_value; width: 150; readOnly:true}
+            CustomComboBox {
+                id: lengthcombo
+                height: length_value.height
+                currentIndex: 0
+                implicitWidth:80
+                model: ListModel {
+                    ListElement { text: qsTr("m") }
+                    ListElement { text: qsTr("km") }
+                    ListElement { text: qsTr("mi") }
+                    ListElement { text: qsTr("nmi") }
+                    ListElement { text: qsTr("yds") }
+                    ListElement { text: qsTr("ft") }
+                }
+                onCurrentIndexChanged: lengthUnits( length_value, length_metric );
+            }
+        }
     }
 
     Component.onCompleted: {
