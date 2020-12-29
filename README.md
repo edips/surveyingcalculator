@@ -10,7 +10,7 @@ Features:
 - Degree - Decimal Conversion
 - Coordinate Transformation: WGS84 Latitude/Longitude to UTM XY or UTM XY to Latitude/Longitude Conventer, Coordinate Converter tool, 2D Helmert transformation
 - Point Data Collector - Survey:
-→ Create projects in SHP or GeoPackage formats with coordinate system code (EPSG code).
+→ Create projects in GeoPackage formats with coordinate system code (EPSG code).
 → You can also prepare a job in QGIS on desktop with CAD-GIS data. Import CAD, GIS, raster data or add online map services in QGIS. And transfer the data folder to Surveying_Calculator/projects folder on your device. Select the project to display in Survey module.
 → Collect unlimited points with "name" and "description". You can record your location or any place you want.
 → This app supports the formats to display:
