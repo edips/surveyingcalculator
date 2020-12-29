@@ -33,6 +33,6 @@ Requirements:
 
 Qt 5.14.2
 
-Fluid QML Library
+Fluid QML Library (https://github.com/lirios/fluid)
 
 QGIS libraries from input-sdk/android-13 (armv7 and armv8), also QgsQuick libraries and files
