@@ -14,7 +14,6 @@ import "../../components/common/script.js" as Util
 */
 // Add Point Dialog --------------------------------------------------------------------------------------
 FluidControls.AlertDialog {
-
     property string xText: "";
     property string yText: "";
     property alias coord_row1: row1;
@@ -28,15 +27,14 @@ FluidControls.AlertDialog {
     }
 
     id: addPoint
+    title: qsTr("Add Point")
     closePolicy: Popup.CloseOnEscape // prevents the drawer closing while moving canvas
     x: (parent.width - width) / 2
     y: (parent.height - height) / 2
     width: parent.width
     height: point_column.height + 50
-    // didn't work: onOpened: inputDialog.textField = ""
-    title: qsTr("Add Point")
     standardButtons: Dialog.Ok | Dialog.Cancel
-    Rectangle{
+    Rectangle {
         height: 200
         width: 200
         color: "transparent"
@@ -72,9 +70,10 @@ FluidControls.AlertDialog {
                 }
                 Row{
                     id: lat_DMS
+                    spacing: 5
                     visible: Util.visibility_latlong()
                     anchors.left:n_txt.right
-                    STextField{id:latdeg; implicitWidth: 35; placeholderText: "°";  font.pixelSize: 16}
+                    STextField{id:latdeg; implicitWidth: 40; placeholderText: "°";  font.pixelSize: 16}
                     STextField{id:latmin; implicitWidth: 35; placeholderText: "'";  font.pixelSize: 16}
                     STextField{id:latsec; implicitWidth: 100; placeholderText: "''";font.pixelSize: 16}
                 }
@@ -102,10 +101,11 @@ FluidControls.AlertDialog {
                     font.pixelSize: 16
                     selectByMouse: true
                 }
-                RowLayout{
+                Row{
+                    spacing: 5
                     visible: lat_DMS.visible
                     anchors.left:e_txt.right
-                    STextField{id:londeg; implicitWidth: 35; placeholderText: "°";  font.pixelSize: 16;}
+                    STextField{id:londeg; implicitWidth: 40; placeholderText: "°";  font.pixelSize: 16;}
                     STextField{id:lonmin; implicitWidth: 35; placeholderText: "'";  font.pixelSize: 16;}
                     STextField{id:lonsec; implicitWidth: 100; placeholderText: "''";font.pixelSize: 16;}
                 }

@@ -74,6 +74,7 @@ class Loader: public QObject
 
     Q_INVOKABLE bool layerChecked( QString layerId);
     Q_INVOKABLE bool layerVisibility( QString layerId );
+    Q_INVOKABLE bool layerProjectCrs( ) const;
 
     //! A File on this path represents a project is loading and exists only during the process.
     static const QString LOADING_FLAG_FILE_PATH;

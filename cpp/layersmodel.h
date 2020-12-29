@@ -18,7 +18,7 @@ class LayersModel : public QgsMapLayerModel
     QList<QgsMapLayer *> layers() const { return mLayers; };
 
     Q_INVOKABLE QgsPoint addFeatureSurvey(QString n_str, QString e_str);
-    Q_INVOKABLE bool layerProjectCrs( QgsVectorLayer *layer ) const;
+
 
 
     enum LayerRoles

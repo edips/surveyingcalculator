@@ -116,14 +116,6 @@ QgsPoint LayersModel::addFeatureSurvey(QString n_str, QString e_str)
     return mypoint;
 }
 
-bool LayersModel::layerProjectCrs(QgsVectorLayer *layer) const
-{
-    mProject->instance();
-    if(layer->crs() == mProject->crs()) {
-        return true;
-    } else {
-        return false;
-    }
-}
+
 
 

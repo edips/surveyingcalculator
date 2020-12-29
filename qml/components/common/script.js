@@ -98,13 +98,14 @@ function getLetterDesignator(lat) {
 function add_point() {
     var en1;
     var boy1;
+    console.log("debug 1")
 
     if( __appSettings.latlongDisplay === "display_dms" && __loader.isGeographic() ) {
         if(latdeg.text==="" || latmin.text==="" || latsec.text==="" || londeg.text==="" || lonmin.text==="" || lonsec.text===""){
             snack.open("Cannot add point. Please check the cordinates.")
         }
         else if ( digitizing.hasPointGeometry(activeLayerPanel.activeVectorLayer)) {
-            if(__layersModel.layerProjectCrs(activeLayerPanel.activeVectorLayer)) {
+            if( __loader.layerProjectCrs() ) {
                 var lat_deg = parseFloat(latdeg.text)
                 var lat_min = parseFloat(latmin.text)
                 var lat_sec = parseFloat(latsec.text)
@@ -144,6 +145,7 @@ function add_point() {
         }
     }
     else {
+        console.log("debug 2")
         en1 = add_N.text
         boy1 = add_E.text
         // if coordinate inputs are empty, warn user
@@ -152,7 +154,9 @@ function add_point() {
         }
         // If active layer is point, convert coordinates to pixel coordinates and open the record panel for this
         else if ( digitizing.hasPointGeometry(activeLayerPanel.activeVectorLayer) ) {
-            if(__layersModel.layerProjectCrs(activeLayerPanel.activeVectorLayer)) {
+            console.log("debug 3")
+            if( __loader.layerProjectCrs() ) {
+                console.log("debug 4")
                 // addFeatureSurvey only requires x and y coordinates
                 var newpoint2 = __layersModel.addFeatureSurvey(en1, boy1)
                 //set the point to mapcanvas's map settings in order to zoom the point, convert it from CRS to screen coordinates
