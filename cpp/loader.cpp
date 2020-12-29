@@ -690,11 +690,8 @@ QString Loader::extractCoordinates( )
 
 bool Loader::layerProjectCrs() const
 {
-    qDebug() << "c++ 1";
     mProject->instance();
-    qDebug() << "c++ 2";
     if(mActiveLayer.layer()->crs() == mProject->crs()) {
-        qDebug() << "c++ 3";
         return true;
     } else {
         return false;

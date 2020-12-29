@@ -92,13 +92,11 @@ function getLetterDesignator(lat) {
     return LetterDesignator;
 }
 
-
 // Add point to data collector
 // Add point to data collector
 function add_point() {
     var en1;
     var boy1;
-    console.log("debug 1")
 
     if( __appSettings.latlongDisplay === "display_dms" && __loader.isGeographic() ) {
         if(latdeg.text==="" || latmin.text==="" || latsec.text==="" || londeg.text==="" || lonmin.text==="" || lonsec.text===""){
@@ -145,7 +143,6 @@ function add_point() {
         }
     }
     else {
-        console.log("debug 2")
         en1 = add_N.text
         boy1 = add_E.text
         // if coordinate inputs are empty, warn user
@@ -154,9 +151,7 @@ function add_point() {
         }
         // If active layer is point, convert coordinates to pixel coordinates and open the record panel for this
         else if ( digitizing.hasPointGeometry(activeLayerPanel.activeVectorLayer) ) {
-            console.log("debug 3")
             if( __loader.layerProjectCrs() ) {
-                console.log("debug 4")
                 // addFeatureSurvey only requires x and y coordinates
                 var newpoint2 = __layersModel.addFeatureSurvey(en1, boy1)
                 //set the point to mapcanvas's map settings in order to zoom the point, convert it from CRS to screen coordinates
@@ -170,7 +165,6 @@ function add_point() {
                 dataCollector.recordFeature(screenX_2, screenY_2)
             }
             else {
-                console.log("error!!!!")
                 error_dialog.error = "Coordinate system of the layer is not the same with coordinate system of the project. Layer and project coordinate systems must be the same before adding coordinates."
                 error_dialog.open()
             }
@@ -180,7 +174,6 @@ function add_point() {
         }
     }
 }
-
 
 // Seeting for visibility according to DMS mode for lat long
 function visibility_latlong(){
@@ -212,7 +205,6 @@ function coord_direction_latlong(){
     }
 }
 
-
 // Lat long coordinates order with layout direction
 function coord_display_latlong(){
     if(__appSettings.latlongDisplay === "display_dec"){
@@ -222,7 +214,6 @@ function coord_display_latlong(){
         return false
     }
 }
-
 
 /*
 // North East coordinates order with layout direction
@@ -244,8 +235,6 @@ function coord_order_latlon(){
     }
 }
 */
-
-
 
 // Order of [North East Lat Long] for QGIS coordinate input
 function coord_order(){
@@ -298,9 +287,6 @@ function lon_east(){
     }
 }
 
-
-
-
 // another template
 /*function coord_display2(){
     // is geographic or srs is undefined
@@ -332,14 +318,12 @@ function lon_east(){
         else if(windoww.order_en){
 
         }
-
     }
 }
 */
 
 
 //                  Coordinate order for Data Collection
-
 // General functions for coordinate display
 // Codes for N S W E codes for geographic coordinate systems
 // include decimal geographic W E S N codes or not
@@ -510,10 +494,6 @@ function datacollector_coord(){
     }
 }
 
-
-
-
-
 // Keyboard type keyboard_settings
 function keyboard_display(){
     if(__appSettings.keyboard === 0){
@@ -667,8 +647,6 @@ function angle_unit(angle){
         return grad(angle)
     }
 }
-
-
 
 //(angle/Math.PI)
 function angle_pi(){

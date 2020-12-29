@@ -137,7 +137,6 @@
         <file>qml/components/common/SText.qml</file>
         <file>qml/components/common/STextField.qml</file>
         <file>qml/components/common/STextGrid.qml</file>
-        <file>qml/components/common/utils.js</file>
         <file>qml/components/common/TopSheet.qml</file>
         <file>qml/components/common/STextField2.qml</file>
         <file>qml/components/common/LatLong.qml</file>
