@@ -651,8 +651,15 @@ QString SurveyingUtils::getArea(QgsQuickFeatureLayerPair p)
     QString area_str;
     if( featureIsPolygon( p ) ) {
         QgsDistanceArea area;
-        //area.setEllipsoid( p.layer()->crs().ellipsoidAcronym() );
-        area_str = QString::number( area.measureArea( p.feature().geometry() ), 'f', 2 );
+        // Get area from ellipsoidal earth
+        if( p.layer()->crs().isGeographic() ) {
+            area.setEllipsoid( p.layer()->crs().ellipsoidAcronym() );
+            area_str = QString::number( area.measureArea( p.feature().geometry() ), 'f', 2 );
+        }
+        // Get area from cartesien flat earth (accurate for big scale maps)
+        else {
+            area_str = QString::number( area.measureArea( p.feature().geometry() ), 'f', 2 );
+        }
     }
     return area_str;
 }
@@ -662,8 +669,15 @@ QString SurveyingUtils::getLength(QgsQuickFeatureLayerPair p)
     QString length_str;
     if( featureIsLine( p ) ) {
         QgsDistanceArea length;
-        length.setEllipsoid( p.layer()->crs().ellipsoidAcronym() );
-        length_str = QString::number( length.measureLength( p.feature().geometry() ), 'f', 2 );
+        // Get length from ellipsoidal earth
+        if( p.layer()->crs().isGeographic() ) {
+            length.setEllipsoid( p.layer()->crs().ellipsoidAcronym() );
+            length_str = QString::number( length.measureLength( p.feature().geometry() ), 'f', 2 );
+        }
+        // Get length from cartesien flat earth (accurate for big scale maps)
+        else {
+            length_str = QString::number( length.measureLength( p.feature().geometry() ), 'f', 2 );
+        }
     }
     return length_str;
 }
