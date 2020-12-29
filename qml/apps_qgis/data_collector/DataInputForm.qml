@@ -50,7 +50,7 @@ Rectangle {
             Row {
                 spacing: 30
                 
-                STextTop{
+                STextTop {
                     clip: true
                     font.bold: false
                     horizontalAlignment: Text.AlignRight
