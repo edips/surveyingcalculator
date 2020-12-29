@@ -1,0 +1,4 @@
+singleton Shared 1.0 Shared.qml
+singleton SharedWgs 1.0 apps/wgs84/SharedWGS84.qml
+singleton SharedXY 1.0 apps/coordinate_converter/SharedXY.qml
+#singleton SharedSurvey 1.0 apps_qgis/data_collector/SharedSurvey.qml
