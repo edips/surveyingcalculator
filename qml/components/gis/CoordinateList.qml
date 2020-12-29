@@ -134,7 +134,7 @@ Popup {
                                 STextTop {
                                     text: index + 1
                                     color: 'gray'
-                                    font.pixelSize: 19
+                                    font.pixelSize: 15
                                 }
                             }
                         }
@@ -147,7 +147,7 @@ Popup {
                             topPadding: 0
                             leftPadding: 10
                             inputMethodHints:  Util.keyboard_display()
-                            font.pixelSize: 19
+                            font.pixelSize: 15
                             anchors.left: lineNumber.right
 
                         }

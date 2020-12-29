@@ -22,8 +22,8 @@ Item {
             target: busy_ind;
             running: busy_ind.running
             from: 0;
-            to: 0.5;
-            duration: 2000
+            to: 0.7;
+            duration: 1000
         }
     }
 }

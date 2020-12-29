@@ -588,103 +588,107 @@ bool Loader::layerChecked( QString layerId )
 
 // Extract coordinates from point layer
 /**
-TODO: Add condition, when Northing before easting, use y x, else x, y (default)
-Include __appsettings.neOrder for this
-Find a way to make double fixed size, like QString::number(x(), 2)
+TODO: Try to clear if else hell
 */
-QString Loader::extractCoordinates( )
+QString Loader::extractCoordinates( QString pointName )
 {
-
+    // plain text
     QString coordList2;
+    // to add strings from loop
     QTextStream coordList(&coordList2);
-    qDebug() << "debug 11";
-
+    // select active point layer
     QgsMapLayer *layer = mActiveLayer.layer();
 
     if ( layer && layer->isValid())
     {
-
-        qDebug() << "debug 12";
-
         QgsVectorLayer *vectorLayer = qobject_cast<QgsVectorLayer *>( layer );
-
-        qDebug() << "debug 14";
-        // Type of the first layer in the qgs project
+        // Get layer type
         QgsWkbTypes::GeometryType type = vectorLayer->geometryType();
-        qDebug() << "debug 15";
+        // extract coords for point layer
         if(type == QgsWkbTypes::GeometryType::PointGeometry) {
-            // layer name
-            qDebug() << layer->name() << " is a point layer.";
-            // 2. index of feature name in attributes
-            qDebug() << "vector layer first attribute: " << vectorLayer->attributeDisplayName(1);
-            qDebug() << "vector layer first type: " << vectorLayer->getFeature(17).geometry().type();
-            // get point geometry information in json, like coordinates and geometry type
-            qDebug() << "vector layer first json geometry: " << vectorLayer->getFeature(17).geometry().asJson(2);
-            // get x and y coordinates depending on a fid value, the point's fid value is 17
-            qDebug() << "vector layer first geometry().asPoint().x() : " << vectorLayer->getFeature(17).geometry().asPoint().x() << " .y(): " << vectorLayer->getFeature(17).geometry().asPoint().y();
-            // get azimuth
-            qDebug() << "vector layer azimuth between 17 and 18: " << vectorLayer->getFeature(17).geometry().asPoint().azimuth(vectorLayer->getFeature(18).geometry().asPoint());
+            // to get feature count
             int count {0};
+            // create feature iterator
             QgsFeatureIterator iter = vectorLayer->getFeatures();
-
             QgsFeature mFeat;
             // get a point layer's x and y coordinate list.
-            // get list of fields
-            QgsFields fields = vectorLayer->fields();
-            for(auto i : fields){
-                i.defaultValueDefinition().expression();
-                qDebug() << vectorLayer->name() << " fields: " << i.name();
-            }
-
-
-            while(iter.nextFeature(mFeat)){
+            while( iter.nextFeature( mFeat ) ) {
                 count++;
-                // get x or y of the point geometry layer
-                //qDebug() << "mfeat xy is: " << mFeat.geometry().asPoint().toString(2);
-
                 double xCoord = mFeat.geometry().asPoint().x();
                 double yCoord = mFeat.geometry().asPoint().y();
-                if( layer->crs().isGeographic() ) {
-                    if( mAppSettings.latlongOrder() == "order_latlong") {
-                        coordList << QString::number( yCoord, 'f', 7 ) << "   " <<  QString::number( xCoord, 'f', 7 )  << "\n";
-                    } else {
-                        coordList << QString::number( xCoord, 'f', 7 ) << "   " << QString::number( yCoord, 'f', 7 )  << "\n";
+                QString attributeName = mFeat.attribute( pointName ).toString();
+                // set precision and coordinate order according to geographic or projected CRS
+                if( !pointName.isEmpty() ) {
+                    if( layer->crs().isGeographic() ) {
+                        if( mAppSettings.latlongOrder() == "order_latlong") {
+                            coordList << attributeName << "   " << QString::number( yCoord, 'f', 7 ) << "   " <<  QString::number( xCoord, 'f', 7 )  << "\n";
+                        } else {
+                            coordList << attributeName << "   " << QString::number( xCoord, 'f', 7 ) << "   " << QString::number( yCoord, 'f', 7 )  << "\n";
+                        }
+                    }
+                    else {
+                        if( mAppSettings.xyOrder() == "en" ) {
+                            coordList << attributeName << "   " << QString::number( xCoord, 'f', 2 ) << "   " << QString::number( yCoord, 'f', 2 )  << "\n";
+                        } else {
+                            coordList << attributeName << "   " << QString::number( yCoord, 'f', 2 ) << "   " << QString::number( xCoord, 'f', 2 )  << "\n";
+                        }
                     }
                 }
                 else {
-                    if( mAppSettings.xyOrder() == "en" ) {
-                        coordList << QString::number( xCoord, 'f', 2 ) << "   " << QString::number( yCoord, 'f', 2 )  << "\n";
-                    } else {
-                        coordList << QString::number( yCoord, 'f', 2 ) << "   " << QString::number( xCoord, 'f', 2 )  << "\n";
+                    if( layer->crs().isGeographic() ) {
+                        if( mAppSettings.latlongOrder() == "order_latlong") {
+                            coordList << QString::number( yCoord, 'f', 7 ) << "   " <<  QString::number( xCoord, 'f', 7 )  << "\n";
+                        } else {
+                            coordList << QString::number( xCoord, 'f', 7 ) << "   " << QString::number( yCoord, 'f', 7 )  << "\n";
+                        }
+                    }
+                    else {
+                        if( mAppSettings.xyOrder() == "en" ) {
+                            coordList << QString::number( xCoord, 'f', 2 ) << "   " << QString::number( yCoord, 'f', 2 )  << "\n";
+                        } else {
+                            coordList << QString::number( yCoord, 'f', 2 ) << "   " << QString::number( xCoord, 'f', 2 )  << "\n";
+                        }
                     }
                 }
-
-                //qDebug() << "mfeat xy json is: " << mFeat.geometry().asJson(2);
-                // get the index of Kot_degeri
-                //qDebug() << "kot degeri fieldNameIndex: " << mFeat.fieldNameIndex("Kot_degeri");
-                // get Kot_degeri field's values
-                //qDebug() << "attribute(Kot_degeri) " << mFeat.attribute("Kot_degeri").toString();
             }
-
+            // There is no count? no point
             if( count < 1 ) {
                 return "noPoint";
             }
-
-            //qDebug() << "vector layer first type: " << vectorLayer->getFeature(17).geometry().asPoint().set()
-
-        } else if(type == QgsWkbTypes::GeometryType::LineGeometry){
-            qDebug() << layer->name() << " is a line----------------------***********";
         }
-        else if(type == QgsWkbTypes::GeometryType::PolygonGeometry){
-            qDebug() << layer->name() << " is a polygon----------------------***********";
-        }
-
+        // convert text stream to QString
         coordList2 = coordList.readAll();
         return coordList2;
     }
     else {
         return "nolayer";
     }
+}
+
+// Get Attribute list of active point layer for combo box
+QStringList Loader::getFields( )
+{
+    QStringList fieldList;
+    QgsMapLayer *layer = mActiveLayer.layer();
+    // "No Name" is the default index of combo box before extracting points
+    if ( layer && layer->isValid())
+    {
+        fieldList.append("No Name");
+        QgsVectorLayer *vectorLayer = qobject_cast<QgsVectorLayer *>( layer );
+        QgsWkbTypes::GeometryType type = vectorLayer->geometryType();
+        if(type == QgsWkbTypes::GeometryType::PointGeometry) {
+            QgsFeature mFeat;
+            // get list of fields
+            QgsFields fields = vectorLayer->fields();
+            for( auto i : fields) {
+                qDebug() << "field name: " << i.name();
+                fieldList.append( i.name() );
+            }
+        }
+        return fieldList;
+    }
+    fieldList.append("nolayer");
+    return fieldList;
 }
 
 

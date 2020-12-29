@@ -488,6 +488,42 @@ FluidControls.Page{
     SettingsDialog {
         id: settingsDialog
     }
+
+    // Choose point name as field dialog
+    SErrorDialog {
+        id: pointNameDialog
+        title: "Point Name"
+        height: 170
+        property alias lengthValue: length_value
+        Row{
+            anchors.horizontalCenter: parent.horizontalCenter
+            CustomComboBox {
+                id: pointNameCombo
+                height: 38
+                currentIndex: 0
+                implicitWidth: 190
+            }
+        }
+        standardButtons: Dialog.Ok | Dialog.Cancel
+        onAccepted: {
+            // Extract coordinates based on the index of the point name combo box
+            var pointName = pointNameCombo.currentIndex === 0 ? "" : pointNameCombo.currentText
+            var coords = __loader.extractCoordinates( pointName )
+            if( coords === "nolayer" ) {
+                error_dialog.text = "Active layer is not selected. Please select a point layer from active layer panel."
+                error_dialog.open()
+            }
+            else if( coords === "noPoint") {
+                error_dialog.text = "There is no point in the active layer."
+                error_dialog.open()
+            }
+            else {
+                coordList.editor.text = String(coords)
+                coordList.open()
+            }
+        }
+    }
+
     // Menu
     Menu {
         id: moreMenu
@@ -517,20 +553,15 @@ FluidControls.Page{
         }
         // Extract Coordinates
         MenuItem{
-            onTriggered:{
+            onTriggered: {
                 coordList.editor.text = ""
-                var coords = __loader.extractCoordinates()
-                if( coords === "nolayer" ) {
+                var fieldList = __loader.getFields()
+                pointNameCombo.model = fieldList
+                if( fieldList[0] === "nolayer" ){
                     error_dialog.text = "Active layer is not selected. Please select a point layer from active layer panel."
                     error_dialog.open()
-                }
-                else if( coords === "noPoint") {
-                    error_dialog.text = "There is no point in the active layer."
-                    error_dialog.open()
-                }
-                else {
-                    coordList.editor.text = String(coords)
-                    coordList.open()
+                } else {
+                    pointNameDialog.open()
                 }
             }
             text: qsTr("Coordinate List")

@@ -43,7 +43,7 @@ class Loader: public QObject
     Q_INVOKABLE QString loadIconFromLayer( QgsMapLayer *layer );
     Q_INVOKABLE QString loadIconFromFeature( QgsFeature feature );
 
-    Q_INVOKABLE QString extractCoordinates( );
+    Q_INVOKABLE QString extractCoordinates( QString pointName );
 
     /**
      * Updates active map theme.
@@ -75,6 +75,8 @@ class Loader: public QObject
     Q_INVOKABLE bool layerChecked( QString layerId);
     Q_INVOKABLE bool layerVisibility( QString layerId );
     Q_INVOKABLE bool layerProjectCrs( ) const;
+    // Get field list for combo box
+    Q_INVOKABLE QStringList getFields( );
 
     //! A File on this path represents a project is loading and exists only during the process.
     static const QString LOADING_FLAG_FILE_PATH;
