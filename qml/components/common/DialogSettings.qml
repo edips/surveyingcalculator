@@ -7,7 +7,6 @@ import QtQuick.Layouts 1.12
 import QtQuick.Window 2.12
 import Qt.labs.settings 1.1
 import "script.js" as Js
-import "utils.js" as Db
 import "../../"
 import lc 1.0
 // Settings dialog

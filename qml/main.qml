@@ -37,12 +37,12 @@ FluidControls.ApplicationWindow {
         //banner2.show();
     }
 
-    QQ.Loader{
+    QQ.Loader {
         id: about
         anchors.fill: parent
         source: loaderAboutVisible ? "components/common/DialogAbout.qml" : ""
     }
-    QQ.Loader{
+    QQ.Loader {
         id: dialog_settings
         anchors.fill: parent
         source: loaderVisible ? "components/common/DialogSettings.qml" : ""
