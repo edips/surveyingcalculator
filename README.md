@@ -27,7 +27,12 @@ fb.me/surveyingcalculator
 You can open issues for any suggestions or bug reports.
 
 # Development
+Surveying calculator uses open source GIS libraries (QGIS, GDAL, Proj, SpatialIndex, GEOS) libraries. This app uses source codes of Input app(https://github.com/lutraconsulting/input). 
+
 Requirements:
+
 Qt 5.14.2
+
 Fluid QML Library
+
 QGIS libraries from input-sdk/android-13 (armv7 and armv8), also QgsQuick libraries and files
