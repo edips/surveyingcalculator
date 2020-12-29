@@ -176,8 +176,8 @@ function add_point() {
 }
 
 // Seeting for visibility according to DMS mode for lat long
-function visibility_latlong(){
-    if(__appSettings.latlongDisplay === "display_dms" && (__loader.isGeographic() || !__loader.crsValid())){
+function visibility_latlong() {
+    if( __appSettings.latlongDisplay === "display_dms" && ( __loader.isActiveLayerGeographic() ) ){
         return true
     }
     else{

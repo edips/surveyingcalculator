@@ -1,6 +1,6 @@
 // Author: Edip AHmet Taşkın
 // Copy Right Edip Ahmet Taşkın
-import QtQuick 2.10
+import QtQuick 2.10 as QQ
 import QtQuick.Controls 2.12
 import QtQuick.Controls.Universal 2.3
 import QtQuick.Layouts 1.3
@@ -117,8 +117,8 @@ FluidControls.Page{
             }
         }
         // MapView's initialization
-        Component.onCompleted: {
-             isGeographic = __loader.isGeographic()
+        QQ.Component.onCompleted: {
+            isGeographic = __loader.isGeographic()
             //console.log("__activeLayer.layerId ): ", __activeLayer.layerId)
             //console.log("index of active layer ): ", __browseDataLayersModel.indexFromLayerId( __activeLayer.layerId ))
 
@@ -166,7 +166,7 @@ FluidControls.Page{
         function lengthItem() {
             featureMenu.addItem( length.createObject( featureMenu, { text: "Length" } ) )
         }
-        Component {
+        QQ.Component {
             id: length
             MenuItem {
                 onTriggered: {
@@ -186,7 +186,7 @@ FluidControls.Page{
         function areaItem() {
             featureMenu.addItem( area.createObject( featureMenu, { text: "Area" } ) )
         }
-        Component {
+        QQ.Component {
             id: area
             MenuItem {
                 onTriggered: {
@@ -206,7 +206,7 @@ FluidControls.Page{
         function getCoordItem() {
             featureMenu.addItem(get_coord.createObject(featureMenu, { text: "Get Coordinate" }))
         }
-        Component {
+        QQ.Component {
             id: get_coord
             MenuItem {
                 onTriggered: {
@@ -223,7 +223,7 @@ FluidControls.Page{
         function editAttributeItem() {
             featureMenu.addItem(edit_attribute.createObject(featureMenu, { text: "Edit Attributes" }))
         }
-        Component {
+        QQ.Component {
             id: edit_attribute
             MenuItem {
                 onTriggered: {
@@ -251,40 +251,40 @@ FluidControls.Page{
     property double area_metric;
 
     function areaUnits( area, area_metric ) {
-         if (areacombo.currentIndex === 0){
-             area.text = ( area_metric ).toFixed( 2 )
-         }
-         // km2
-         else if( areacombo.currentIndex === 1 ){
-             area.text = ( area_metric * 0.000001 ).toFixed( 2 )
-         }
-         // ha
-         else if( areacombo.currentIndex === 2 ){
-             area.text = ( area_metric * 0.0001 ).toFixed( 2 )
-         }
-         // acre
-         else if( areacombo.currentIndex === 3 ){
-             area.text = ( area_metric * 0.000247105381467165 ).toFixed( 2 )
-         }
-         // mile
-         else if( areacombo.currentIndex === 4 ){
-             area.text = ( area_metric * 0.000000386102158542446 ).toFixed( 2 )
-         }
-         // yard
-         else if( areacombo.currentIndex === 5 ){
-             area.text = ( area_metric * 1.19599004630108).toFixed( 2 )
-         }
-         // feet
-         else if( areacombo.currentIndex === 6 ){
-             area.text = ( ( area_metric * 10.7639104167097 ) ).toFixed( 2 )
-         }
+        if (areacombo.currentIndex === 0){
+            area.text = ( area_metric ).toFixed( 2 )
+        }
+        // km2
+        else if( areacombo.currentIndex === 1 ){
+            area.text = ( area_metric * 0.000001 ).toFixed( 2 )
+        }
+        // ha
+        else if( areacombo.currentIndex === 2 ){
+            area.text = ( area_metric * 0.0001 ).toFixed( 2 )
+        }
+        // acre
+        else if( areacombo.currentIndex === 3 ){
+            area.text = ( area_metric * 0.000247105381467165 ).toFixed( 2 )
+        }
+        // mile
+        else if( areacombo.currentIndex === 4 ){
+            area.text = ( area_metric * 0.000000386102158542446 ).toFixed( 2 )
+        }
+        // yard
+        else if( areacombo.currentIndex === 5 ){
+            area.text = ( area_metric * 1.19599004630108).toFixed( 2 )
+        }
+        // feet
+        else if( areacombo.currentIndex === 6 ){
+            area.text = ( ( area_metric * 10.7639104167097 ) ).toFixed( 2 )
+        }
     }
 
     // area and length dialog
     SErrorDialog {
         id: area_dialog
         property alias areaValue: area_value
-        Row{
+        QQ.Row{
             anchors.horizontalCenter: parent.horizontalCenter
             spacing: 10
             STextField{id: area_value; width: 150; readOnly:true}
@@ -312,35 +312,35 @@ FluidControls.Page{
 
     function lengthUnits( length, length_metric ) {
         // meter
-         if ( lengthcombo.currentIndex === 0 ){
-             length.text = ( length_metric ).toFixed( 2 )
-         }
-         // kilometer
-         else if( lengthcombo.currentIndex === 1 ){
-             length.text = ( length_metric * 0.001 ).toFixed( 2 )
-         }
-         // miles
-         else if( lengthcombo.currentIndex === 2 ){
-             length.text = ( length_metric * 0.0006213712 ).toFixed( 2 )
-         }
-         // n. miles
-         else if( lengthcombo.currentIndex === 3 ){
-             length.text = ( length_metric * 0.0005399568 ).toFixed( 2 )
-         }
-         // yard 1.09361
-         else if( lengthcombo.currentIndex === 4 ){
-             length.text = ( length_metric * 1.0936132983 ).toFixed( 2 )
-         }
-         // feet
-         else if( lengthcombo.currentIndex === 5 ){
-             length.text = ( length_metric * 3.280839895 ).toFixed( 2 )
-         }
+        if ( lengthcombo.currentIndex === 0 ){
+            length.text = ( length_metric ).toFixed( 2 )
+        }
+        // kilometer
+        else if( lengthcombo.currentIndex === 1 ){
+            length.text = ( length_metric * 0.001 ).toFixed( 2 )
+        }
+        // miles
+        else if( lengthcombo.currentIndex === 2 ){
+            length.text = ( length_metric * 0.0006213712 ).toFixed( 2 )
+        }
+        // n. miles
+        else if( lengthcombo.currentIndex === 3 ){
+            length.text = ( length_metric * 0.0005399568 ).toFixed( 2 )
+        }
+        // yard 1.09361
+        else if( lengthcombo.currentIndex === 4 ){
+            length.text = ( length_metric * 1.0936132983 ).toFixed( 2 )
+        }
+        // feet
+        else if( lengthcombo.currentIndex === 5 ){
+            length.text = ( length_metric * 3.280839895 ).toFixed( 2 )
+        }
     }
     // length dialog
     SErrorDialog {
         id: length_dialog
         property alias lengthValue: length_value
-        Row{
+        QQ.Row{
             anchors.horizontalCenter: parent.horizontalCenter
             spacing: 10
             STextField{id: length_value; width: 150; readOnly:true}
@@ -362,7 +362,7 @@ FluidControls.Page{
         }
     }
 
-    Component.onCompleted: {
+    QQ.Component.onCompleted: {
         recordToolbar.focus = true
         recordToolbar.visible = true
         recordToolbar.extraPanelVisible = true
@@ -394,10 +394,25 @@ FluidControls.Page{
     DataInputForm {
         id: collect_pane
     }
-    // Input Point Dialog
-    AddPoint {
-        id: addPoint
+
+    property bool ploaderVisible: false
+    QQ.Loader {
+        id: addpoint_loader
+        anchors.fill: parent
+        sourceComponent: addPointComp
+        active: false
     }
+
+    QQ.Component {
+        id: addPointComp
+        // Input Point Dialog
+        AddPoint {
+            id: addPoint
+        }
+    }
+
+
+
     // Digitizing Controller
     DigitizingController {
         id: digitizing
@@ -495,7 +510,7 @@ FluidControls.Page{
         title: "Point Name"
         height: 170
         property alias lengthValue: length_value
-        Row{
+        QQ.Row{
             anchors.horizontalCenter: parent.horizontalCenter
             CustomComboBox {
                 id: pointNameCombo
@@ -536,19 +551,27 @@ FluidControls.Page{
             id:setAction
             text: qsTr("Add Point")
             icon.source: "qrc:/assets/icons/material/maps/add_location.svg"
-            onTriggered:{
-                addPoint.xText = __loader.isGeographic() || !__loader.crsValid() ? "Latitude"+ ":  " : Util.textN() + ":  ";
-                addPoint.yText = __loader.isGeographic() || !__loader.crsValid() ? "Longitude" + ":  " : Util.textE() + ":  ";
+            onTriggered: {
+                if( __loader.activeLayerValid() ) {
+                    addpoint_loader.active = true
 
-                addPoint.coord_row1.anchors.top = Util.coord_order() === "en" || Util.coord_order() === "lonlat" ? addPoint.coord_row2.bottom : parent.top
-                addPoint.coord_row2.anchors.top = Util.coord_order() === "en" || Util.coord_order() === "lonlat" ? parent.top : addPoint.coord_row1.bottom
+                    addpoint_loader.item.xText = __loader.isGeographic() || !__loader.crsValid() ? "Latitude"+ ":  " : Util.textN() + ":  ";
+                    addpoint_loader.item.yText = __loader.isGeographic() || !__loader.crsValid() ? "Longitude" + ":  " : Util.textE() + ":  ";
 
-                console.log("Util.coord_order(): ", Util.coord_order())
+                    addpoint_loader.item.coord_row1.anchors.top = Util.coord_order() === "en" || Util.coord_order() === "lonlat" ? addpoint_loader.item.coord_row2.bottom : parent.top
+                    addpoint_loader.item.coord_row2.anchors.top = Util.coord_order() === "en" || Util.coord_order() === "lonlat" ? parent.top : addpoint_loader.item.coord_row1.bottom
 
-                console.log("n_txt: ", addPoint.xText)
-                console.log("e_txt: ", addPoint.yText)
+                    console.log("Util.coord_order(): ", Util.coord_order())
 
-                addPoint.open()
+                    console.log("n_txt: ", addpoint_loader.item.xText)
+                    console.log("e_txt: ", addpoint_loader.item.yText)
+
+                    addpoint_loader.item.open()
+                }
+                else {
+                    error_dialog.error = "Active point layer is not selected."
+                    error_dialog.open()
+                }
             }
         }
         // Extract Coordinates
@@ -687,21 +710,21 @@ FluidControls.Page{
         inputFormHeight: collect_pane.inputFormHeight
     }
     // when go back button pressed, the app must ensure to exit fullscreen settings
-    Component.onDestruction: {
+    QQ.Component.onDestruction: {
         if(count_full %2 === 1) {
             windoww.visibility = Window.AutomaticVisibility
             windoww.footer.visible = true
         }
     }
     // North arrow
-    Rectangle{
+    QQ.Rectangle{
         width: north.width
         height: north.height
         color: "transparent"
         anchors.top: count_full %2 === 0 ? recordToolbar.bottom : parent.top
         anchors.left: mapView.left
         z:1
-        Image {
+        QQ.Image {
             id: north
             source: "qrc:/assets/icons/north-arrow.svg"
             sourceSize.width: 65
@@ -709,7 +732,7 @@ FluidControls.Page{
         }
     }
     // Cursor coordinate connection
-    Connections {
+    QQ.Connections {
         target: mapView.canvasMapSettings
         onExtentChanged: {
             collect_pane.coordinateText = (Util.datacollector_coord()).toString()

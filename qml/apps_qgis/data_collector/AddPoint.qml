@@ -11,6 +11,7 @@ import "../../components/common/script.js" as Util
 
 /*
 * TODO: Fix the error: 80:13: QML Rectangle: Cannot anchor to an item that isn't a parent or sibling.
+* Re design qml structure, make it simple
 */
 // Add Point Dialog --------------------------------------------------------------------------------------
 FluidControls.AlertDialog {
@@ -114,6 +115,8 @@ FluidControls.AlertDialog {
     }
 
     onAccepted:{
+        // to initialization
+        var latlong_visible = Util.visibility_latlong()
         Util.add_point()
     }
 }
