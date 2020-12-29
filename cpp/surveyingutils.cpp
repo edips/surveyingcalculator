@@ -651,7 +651,7 @@ QString SurveyingUtils::getArea(QgsQuickFeatureLayerPair p)
     QString area_str;
     if( featureIsPolygon( p ) ) {
         QgsDistanceArea area;
-        area.setEllipsoid( p.layer()->crs().ellipsoidAcronym() );
+        //area.setEllipsoid( p.layer()->crs().ellipsoidAcronym() );
         area_str = QString::number( area.measureArea( p.feature().geometry() ), 'f', 2 );
     }
     return area_str;
