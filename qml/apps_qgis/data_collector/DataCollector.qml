@@ -680,6 +680,7 @@ FluidControls.Page{
     CoordinateList {
         id: coordList
         isGeographic: dataCollector.isGeographic
+        onClosed: coordList.editor.text = ""
     }
     // ScaleBar in metric or imperial units
     ScaleBar {
