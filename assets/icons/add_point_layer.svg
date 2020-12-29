@@ -1,0 +1,167 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   id="svg993"
+   version="1.1"
+   width="48"
+   height="48"
+   sodipodi:docname="start_survey.svg"
+   inkscape:version="0.92.4 (5da689c313, 2019-01-14)">
+  <sodipodi:namedview
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1"
+     objecttolerance="10"
+     gridtolerance="10"
+     guidetolerance="10"
+     inkscape:pageopacity="0"
+     inkscape:pageshadow="2"
+     inkscape:window-width="1920"
+     inkscape:window-height="1021"
+     id="namedview31"
+     showgrid="false"
+     inkscape:zoom="4.9166667"
+     inkscape:cx="-20.135593"
+     inkscape:cy="24"
+     inkscape:window-x="0"
+     inkscape:window-y="27"
+     inkscape:window-maximized="1"
+     inkscape:current-layer="svg993" />
+  <metadata
+     id="metadata999">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+        <dc:title />
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  <defs
+     id="defs997">
+    <filter
+       id="filter2254"
+       style="color-interpolation-filters:sRGB">
+      <feGaussianBlur
+         id="feGaussianBlur2252"
+         result="blur"
+         stdDeviation="0.11 0.31" />
+    </filter>
+    <clipPath
+       id="clipPath2764"
+       clipPathUnits="userSpaceOnUse">
+      <rect
+         y="-32.016331"
+         x="0.00076198613"
+         height="48.010361"
+         width="47.998222"
+         id="rect2766"
+         style="opacity:0.61799999;fill:#ffff00;fill-opacity:1;stroke:none;stroke-width:0.64938647;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;paint-order:fill markers stroke" />
+    </clipPath>
+    <clipPath
+       id="clipPath2768"
+       clipPathUnits="userSpaceOnUse">
+      <rect
+         y="-32.016331"
+         x="0.00076198613"
+         height="48.010361"
+         width="47.998222"
+         id="rect2770"
+         style="opacity:0.61799999;fill:#ffff00;fill-opacity:1;stroke:none;stroke-width:0.64938647;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;paint-order:fill markers stroke" />
+    </clipPath>
+    <clipPath
+       id="clipPath2772"
+       clipPathUnits="userSpaceOnUse">
+      <rect
+         y="-32.016331"
+         x="0.00076198613"
+         height="48.010361"
+         width="47.998222"
+         id="rect2774"
+         style="opacity:0.61799999;fill:#ffff00;fill-opacity:1;stroke:none;stroke-width:0.64938647;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;paint-order:fill markers stroke" />
+    </clipPath>
+    <clipPath
+       id="clipPath2776"
+       clipPathUnits="userSpaceOnUse">
+      <rect
+         y="6.5236082"
+         x="11.695295"
+         height="30.418655"
+         width="30.410965"
+         id="rect2778"
+         style="opacity:0.61799999;fill:#ffff00;fill-opacity:1;stroke:none;stroke-width:0.41144168;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;paint-order:fill markers stroke" />
+    </clipPath>
+    <filter
+       id="filter8204"
+       style="color-interpolation-filters:sRGB;">
+      <feGaussianBlur
+         id="feGaussianBlur8194"
+         result="blur"
+         stdDeviation="0.3"
+         in="SourceGraphic" />
+      <feDiffuseLighting
+         id="feDiffuseLighting8198"
+         result="diffuse"
+         lighting-color="rgb(255,255,0)"
+         surfaceScale="10"
+         diffuseConstant="1">
+        <feDistantLight
+           id="feDistantLight8196"
+           azimuth="354"
+           elevation="42" />
+      </feDiffuseLighting>
+      <feComposite
+         id="feComposite8200"
+         result="composite1"
+         k1="1"
+         operator="arithmetic"
+         in2="diffuse"
+         in="diffuse" />
+      <feComposite
+         id="feComposite8202"
+         result="composite2"
+         k3="1"
+         operator="arithmetic"
+         k1="1"
+         in2="SourceGraphic"
+         in="composite1" />
+    </filter>
+  </defs>
+  <path
+     id="path1083"
+     d="M 34.838982,20.072641 H 21.182807 V 33.728816 H 16.630748 V 20.072641 H 2.9745751 V 15.520582 H 16.630748 V 1.864409 h 4.552059 v 13.656173 h 13.656175 z"
+     inkscape:connector-curvature="0"
+     style="stroke-width:1.13801444" />
+  <g
+     id="g1100"
+     transform="matrix(2.6584094,0,0,2.6584094,9.5475853,-30.998044)"
+     style="fill:#eeeeec;fill-rule:evenodd;stroke:#888a85;stroke-linecap:round;stroke-linejoin:round">
+    <path
+       id="path1094"
+       overflow="visible"
+       d="m 4.5,27.74767 c 0,0.552285 -0.4477153,1 -1,1 -0.5522847,0 -1,-0.447715 -1,-1 0,-0.552285 0.4477153,-1 1,-1 0.5522847,0 1,0.447715 1,1 z"
+       inkscape:connector-curvature="0"
+       style="overflow:visible" />
+    <path
+       id="path1096"
+       overflow="visible"
+       d="m 11.855566,25.631437 c 0,0.552285 -0.447715,1 -1,1 -0.552284,0 -0.9999996,-0.447715 -0.9999996,-1 0,-0.552285 0.4477156,-1 0.9999996,-1 0.552285,0 1,0.447715 1,1 z"
+       inkscape:connector-curvature="0"
+       style="overflow:visible" />
+    <path
+       id="path1098"
+       transform="translate(9,6)"
+       overflow="visible"
+       d="m 4.5,12.5 c 0,0.552285 -0.4477153,1 -1,1 -0.5522847,0 -1,-0.447715 -1,-1 0,-0.552285 0.4477153,-1 1,-1 0.5522847,0 1,0.447715 1,1 z"
+       inkscape:connector-curvature="0"
+       style="overflow:visible" />
+  </g>
+</svg>
