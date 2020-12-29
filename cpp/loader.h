@@ -77,6 +77,8 @@ class Loader: public QObject
     Q_INVOKABLE bool layerProjectCrs( ) const;
     // Get field list for combo box
     Q_INVOKABLE QStringList getFields( );
+    Q_INVOKABLE bool isActiveLayerGeographic();
+    Q_INVOKABLE bool activeLayerValid();
 
     //! A File on this path represents a project is loading and exists only during the process.
     static const QString LOADING_FLAG_FILE_PATH;

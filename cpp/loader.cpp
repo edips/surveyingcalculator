@@ -691,11 +691,27 @@ QStringList Loader::getFields( )
     return fieldList;
 }
 
+bool Loader::isActiveLayerGeographic()
+{
+    if( mActiveLayer.layer()->crs().isGeographic() ){
+        return true;
+    }
+    return false;
+}
+
+bool Loader::activeLayerValid()
+{
+    if( mActiveLayer.layer() && mActiveLayer.layer()->isValid() ) {
+        return true;
+    }
+    return false;
+}
+
 
 bool Loader::layerProjectCrs() const
 {
     mProject->instance();
-    if(mActiveLayer.layer()->crs() == mProject->crs()) {
+    if( mActiveLayer.layer()->crs() == mProject->crs() ) {
         return true;
     } else {
         return false;
