@@ -160,14 +160,11 @@ void ProjectModel::deleteProjectDirectory(const QString &projectDir)
     qDebug() << "projectDir in deleteProjectDirectory: " << projectDir;
     qDebug() << "mProjectfiles count: " << mProjectFiles.count();
 
-
     for ( int i = 0; i < mProjectFiles.count(); ++i )
     {
-        qDebug() << "mProjectFiles[i].path: " << mProjectFiles[i].path;
         if ( dataDir() + "/" + mProjectFiles[i].folderName == projectDir )
         {
             Q_ASSERT( !projectDir.isEmpty() && projectDir != "/" );
-            qDebug() << "Project dir found! :" << mProjectFiles[i].path;
             QDir( projectDir ).removeRecursively();
             mProjectFiles.removeAt( i );
             return;
@@ -182,13 +179,6 @@ void ProjectModel::deleteProject( int row )
         return;
     }
 
-    /** ProjectFile is a struct
-   *
-   * mProjectFiles is QList<ProjectFile> mProjectFiles; it is struct based QList
-   *
-   *
-  */
-
     ProjectFile project = mProjectFiles.at( row );
 
     deleteProjectDirectory( dataDir() + "/" + project.folderName  );
@@ -198,9 +188,6 @@ void ProjectModel::deleteProject( int row )
     findProjectFiles();
     endResetModel();
 }
-
-
-
 
 
 int ProjectModel::rowCount( const QModelIndex &parent ) const
@@ -364,17 +351,23 @@ QString ProjectModel::addNewProject(QString name, QString epsgcode )
 
 QString ProjectModel::addNewProject(QString name, QString epsgcode )
 {
-    QString new_path = dataDir() + "/" + name;
-
-    QDir dir(new_path);
-
-    QgsCoordinateReferenceSystem my_crs = QgsCoordinateReferenceSystem("EPSG:" + epsgcode);
-
+    // set crs
+    QgsCoordinateReferenceSystem my_crs = QgsCoordinateReferenceSystem( "EPSG:" + epsgcode );
     if ( !(my_crs.isValid()) ) {
         return "crs_not_found";
     }
-    else if ( !(dir.exists()) ) {
-        copy_survey_project(name);
+
+    // new project folder path name
+    QString new_path = dataDir() + "/" + name;
+    qDebug() << "new_path: " << new_path;
+
+    // folder path name to directory
+    QDir dir( new_path );
+
+
+
+    if ( !(dir.exists()) ) {
+        copy_survey_project( name );
 
         QString projectName = new_path + "/" + name + ".qgs";
 
@@ -386,8 +379,13 @@ QString ProjectModel::addNewProject(QString name, QString epsgcode )
 
         data.open(QIODevice::Text | QIODevice::ReadWrite); // open for read and write
 
+
+        /*
+        * Todo: delete lat long coordinates fields and also delete unnecessary tables from gpkg, only point name, description, photo and date can be there
+        */
+        /*
         fileData = data.readAll(); // read all the data into the byte array
-        QString text(fileData); // add to text string for easy string replace
+        QString text( fileData ); // add to text string for easy string replace
         QString replace_text = QString("'EPSG:3857', 'EPSG:%1'").arg(epsgcode);
         qDebug() << "replace text is " << replace_text;
         text.replace(QString("'EPSG:3857', 'EPSG:4326'"), replace_text); // replace text in string
@@ -397,7 +395,23 @@ QString ProjectModel::addNewProject(QString name, QString epsgcode )
             out << text;
         }
         newData.close();
+        */
 
+
+        mProject = QgsProject::instance();
+        mProject->clear();
+
+        mProject->read( projectName );
+        qDebug() << "project path is " << projectName;
+
+        QgsMapLayer *myLayer = mProject->mapLayersByName("survey")[0];
+
+        if( myLayer && myLayer->isValid() ){
+            qDebug() << "map layer is valid";
+            myLayer->setCrs( my_crs );
+            mProject->write( projectName );
+            mProject->clear();
+        }
         return "ok";
     }
     else{
@@ -422,7 +436,6 @@ static QString getDataDir()
         qDebug() << "extDir: " << extDir.path() << " not writable";
 
         QStringList split = QDir::homePath().split( "/" ); // something like /data/user/0/org.project.geoclass/files
-        // TODO support active user from QDir::homePath()
         QFileInfo usrDir( "/storage/emulated/" + split[2] + "/" );
         dataPathRaw = usrDir.path() + "/" + dataPathRaw;
         if ( !( usrDir.isDir() && usrDir.isWritable() ) )
@@ -440,14 +453,14 @@ static QString getDataDir()
 void ProjectModel::copy_survey_project(QString name)
 {
     QString dataDir = getDataDir();
+    qDebug() << "data dir is " << getDataDir();
+
     QString projectDir = dataDir + "/projects/" + name;
+    qDebug() << "Project Dir is " << projectDir;
+
 #if defined (ANDROID) || defined (Q_OS_IOS)
     InputUtils::cpDir( "assets:/projects/survey", projectDir );
     QFile::rename(projectDir + "/survey.qgs", projectDir + "/" + name + ".qgs");
-#elif defined (Q_OS_WIN32)
-    InputUtils::cpDir( QCoreApplication::applicationDirPath() + "/demo-projects", projectDir );
-#else
-    Q_UNUSED( projectDir );
 #endif
 }
 
