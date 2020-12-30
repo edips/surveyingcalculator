@@ -93,16 +93,14 @@ function getLetterDesignator(lat) {
 }
 
 // Add point to data collector
-// Add point to data collector
 function add_point() {
     var en1;
     var boy1;
-
     if( __appSettings.latlongDisplay === "display_dms" && __loader.isGeographic() ) {
         if(latdeg.text==="" || latmin.text==="" || latsec.text==="" || londeg.text==="" || lonmin.text==="" || lonsec.text===""){
             snack.open("Cannot add point. Please check the cordinates.")
         }
-        else if ( digitizing.hasPointGeometry(activeLayerPanel.activeVectorLayer)) {
+        else if ( digitizing.hasPointGeometry( activeLayerPanel.activeVectorLayer )) {
             if( __loader.layerProjectCrs() ) {
                 var lat_deg = parseFloat(latdeg.text)
                 var lat_min = parseFloat(latmin.text)
@@ -111,32 +109,30 @@ function add_point() {
                 var lon_min = parseFloat(lonmin.text)
                 var lon_sec = parseFloat(lonsec.text)
                 // DMS
-                en1 = (Math.abs(lat_deg) + Math.abs(lat_min/60) + Math.abs(lat_sec/3600)).toString()
-                if (lat_deg<0){
+                en1 = ( Math.abs( lat_deg ) + Math.abs( lat_min/60 ) + Math.abs( lat_sec/3600 ) ).toString()
+                if ( lat_deg < 0 ) {
                     en1=-en1.toString()
                 }
-                boy1= (Math.abs(lon_deg) + Math.abs(lon_min/60) + Math.abs(lon_sec/3600)).toString()
-                if (lon_deg<0){
+                boy1= ( Math.abs( lon_deg ) + Math.abs( lon_min/60 ) + Math.abs( lon_sec/3600 ) ).toString()
+                if ( lon_deg < 0 ) {
                     boy1=-boy1.toString()
                 }
                 // addFeatureSurvey only requires x and y coordinates
-                var newpoint = __layersModel.addFeatureSurvey(en1, boy1)
+                var newpoint = __layersModel.addFeatureSurvey( en1, boy1 )
                 //set the point to mapcanvas's map settings in order to zoom the point, convert it from CRS to screen coordinates
-                var newqpoint = mapView.canvasMapSettings.coordinateToScreen(newpoint)
+                var newqpoint = mapView.canvasMapSettings.coordinateToScreen( newpoint )
                 // zoom_to_point zooms to point to open feature form to record the point. It requires mapsettings of map canvas and screen point
-                __loader.zoom_to_point(mapView.canvasMapSettings, newqpoint)
+                __loader.zoom_to_point( mapView.canvasMapSettings, newqpoint )
                 // After zooming, screenX and screenY are set half of hight and width, it will be the new recorded coordinate
                 var screenX = mapView.mapCanvas.width/2
                 var screenY = mapView.mapCanvas.height/2
                 // Record feature, open feature form panel and record the point
-                dataCollector.recordFeature(screenX, screenY)
+                dataCollector.recordFeature( screenX, screenY )
             }
             else {
                 error_dialog.error = "Coordinate system of the layer is not the same with coordinate system of the project. Layer and project coordinate systems must be the same before adding coordinates."
                 error_dialog.open()
             }
-
-
         }
         else{
             snack.open("Cannot add point. Point layer is not selected.")
@@ -150,19 +146,19 @@ function add_point() {
             snack.open("Cannot add point. Please check the cordinates.")
         }
         // If active layer is point, convert coordinates to pixel coordinates and open the record panel for this
-        else if ( digitizing.hasPointGeometry(activeLayerPanel.activeVectorLayer) ) {
+        else if ( digitizing.hasPointGeometry( activeLayerPanel.activeVectorLayer ) ) {
             if( __loader.layerProjectCrs() ) {
                 // addFeatureSurvey only requires x and y coordinates
-                var newpoint2 = __layersModel.addFeatureSurvey(en1, boy1)
+                var newpoint2 = __layersModel.addFeatureSurvey( en1, boy1 )
                 //set the point to mapcanvas's map settings in order to zoom the point, convert it from CRS to screen coordinates
-                var newqpoint2 = mapView.canvasMapSettings.coordinateToScreen(newpoint2)
+                var newqpoint2 = mapView.canvasMapSettings.coordinateToScreen( newpoint2 )
                 // zoom_to_point zooms to point to open feature form to record the point. It requires mapsettings of map canvas and screen point
-                __loader.zoom_to_point(mapView.canvasMapSettings, newqpoint2)
+                __loader.zoom_to_point( mapView.canvasMapSettings, newqpoint2 )
                 // After zooming, screenX and screenY are set half of hight and width, it will be the new recorded coordinate
-                var screenX_2 = mapView.mapCanvas.width/2
-                var screenY_2 = mapView.mapCanvas.height/2
+                var screenX_2 = mapView.mapCanvas.width / 2
+                var screenY_2 = mapView.mapCanvas.height / 2
                 // Record feature, open feature form panel and record the point
-                dataCollector.recordFeature(screenX_2, screenY_2)
+                dataCollector.recordFeature( screenX_2, screenY_2 )
             }
             else {
                 error_dialog.error = "Coordinate system of the layer is not the same with coordinate system of the project. Layer and project coordinate systems must be the same before adding coordinates."
@@ -335,20 +331,20 @@ function includeFormatDecimal(coords) {
     }
 }
 // include DMS W E S N codes or not
-function includeFormatDMS(coords) {
-    if(__appSettings.latlongFormat === "format_included"){
+function includeFormatDMS( coords ) {
+    if( __appSettings.latlongFormat === "format_included" ) {
         coords = (__surveyingUtils.formatPoint_dms( coordinateTransformer.projectedPosition, "included"  )).split(",")
     }else{
-        coords = (__surveyingUtils.formatPoint_dms( coordinateTransformer.projectedPosition, "not_included"  )).split(",")
+        coords = ( __surveyingUtils.formatPoint_dms( coordinateTransformer.projectedPosition, "not_included" ) ).split(",")
     }
 }
 // Coordinate order
 // !! UNUSED !!  Lat Long or Long Lat
 function latlonOrder(coords) {
-    if(__appSettings.latlongOrder === "order_latlong"){
+    if( __appSettings.latlongOrder === "order_latlong" ){
         return "<b>" + "Lat" + ":</b> " + coords[1] + "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"  + "<b>" + "Long" + ":</b> " + coords[0]
     }
-    else if(__appSettings.latlongOrder === "order_longlat"){
+    else if( __appSettings.latlongOrder === "order_longlat" ) {
         return "<b>" + "Long" + ":</b> " + coords[0] + "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"  + "<b>" + "Lat" + ":</b> " + coords[1]
     }
 }
@@ -366,7 +362,7 @@ function xyOrder(coords) {
 // Projected coordinate
 function cursorTextProjected() {
     var screenPoint = Qt.point( mapView.mapCanvas.width/2, mapView.mapCanvas.height/2 )
-    var centerPoint = mapView.canvasMapSettings.screenToCoordinate(screenPoint)
+    var centerPoint = mapView.canvasMapSettings.screenToCoordinate( screenPoint )
     var coords = (QgsQuick.Utils.formatPoint( centerPoint )).split(",")
     if(__appSettings.xyOrder === "ne"){
         return "<b>" + textN() + ":</b> " + coords[1] + "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"  + "<b>" + textE() + ":</b> " + coords[0]
@@ -398,7 +394,7 @@ function coord_XY(){
 // Coordinate order of Cursor for DMS
 function cursorTextDMS() {
     var screenPoint = Qt.point( mapView.mapCanvas.width/2, mapView.mapCanvas.height/2 )
-    var centerPoint = mapView.canvasMapSettings.screenToCoordinate(screenPoint)
+    var centerPoint = mapView.canvasMapSettings.screenToCoordinate( screenPoint )
     var coords;
     if(__appSettings.latlongFormat === "format_included") {
         coords = (__surveyingUtils.formatPoint_dms( centerPoint, "included"  )).split(",")
@@ -440,7 +436,7 @@ function coord_DMS(){
 // Coordinate order of Cursor for Decimal Lat/Long
 function cursorTextDeg() {
     var screenPoint = Qt.point( mapView.mapCanvas.width/2, mapView.mapCanvas.height/2 )
-    var centerPoint = mapView.canvasMapSettings.screenToCoordinate(screenPoint)
+    var centerPoint = mapView.canvasMapSettings.screenToCoordinate( screenPoint )
     var coords;
     if(__appSettings.latlongFormat === "format_included"){
         coords = (__surveyingUtils.formatPoint_decimal( centerPoint, "included"  )).split(",")
@@ -481,11 +477,11 @@ function coord_decimal(){
 // Displaying coordinates for Data Collector
 //* TODO: isValid must be added to QML in order to check projected or geographic coordinates, we should set default to geographic if it isn't valid, means WGS84
 function datacollector_coord(){
-    if(__loader.isGeographic() || !__loader.crsValid()){
+    if( __loader.isGeographic() ){
         if(__appSettings.latlongDisplay === "display_dms"){
             return coord_DMS()
         }
-        else if(__appSettings.latlongDisplay === "display_dec"){
+        else if( __appSettings.latlongDisplay === "display_dec" ){
             return coord_decimal()
         }
     }
