@@ -630,8 +630,8 @@ FluidControls.Page{
             //visible: navDrawer.modal
             onTriggered: {
                 // make focus false for TExtFields to prevent keyboard automatically show up
-                //collect_pane.pointName.focus = false
-                //collect_pane.pointDesc.focus = false
+                // collect_pane.pointName.focus = false
+                // collect_pane.pointDesc.focus = false
                 //featurePanel.visible ? featurePanel.close() : featurePanel.open()
                 navDrawer.open()
             }
@@ -656,11 +656,6 @@ FluidControls.Page{
             onTriggered: {
                 moreMenu.open()
                 //fileDialog.open()
-
-                //__loader.getCoordsTepe()
-
-
-                //mapView.openProject = true
             }
         }
     ]
