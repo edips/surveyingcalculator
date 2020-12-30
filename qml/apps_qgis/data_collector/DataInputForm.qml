@@ -49,7 +49,7 @@ Rectangle {
             }
             Row {
                 spacing: 30
-                
+                // Accuracy
                 STextTop {
                     clip: true
                     font.bold: false
@@ -78,7 +78,7 @@ Rectangle {
                         }
                     }*/
                 }
-                
+                // EPSG Name
                 SText {
                     horizontalAlignment: Text.AlignLeft
                     // Project's Ccoordinate System Name
