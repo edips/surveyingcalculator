@@ -1,3 +1,87 @@
+// length unit conversion from meters to other units
+function lengthUnits( length, length_metric ) {
+    // meter
+    if ( __appSettings.lenUnit === 0 ){
+        length.text = ( parseFloat( length_metric ) ).toFixed( 2 ) + " m"
+    }
+    // kilometer
+    else if( __appSettings.lenUnit === 1 ){
+        length.text = ( parseFloat( length_metric ) * 0.001 ).toFixed( 2 ) + " km"
+    }
+    // miles
+    else if( __appSettings.lenUnit === 2 ){
+        length.text = ( parseFloat( length_metric ) * 0.0006213712 ).toFixed( 2 ) + " mi"
+    }
+    // n. miles
+    else if( __appSettings.lenUnit === 3 ){
+        length.text = ( parseFloat( length_metric ) * 0.0005399568 ).toFixed( 2 ) + " nmi"
+    }
+    // yard 1.09361
+    else if( __appSettings.lenUnit === 4 ){
+        length.text = ( parseFloat( length_metric ) * 1.0936132983 ).toFixed( 2 ) + " yds"
+    }
+    // feet
+    else if( __appSettings.lenUnit === 5 ){
+        length.text = ( parseFloat( length_metric ) * 3.280839895 ).toFixed( 2 ) + " ft"
+    }
+}
+
+// length unit conversion from other units to meter
+function units2meter( unitVal ) {
+    // meter
+    if ( __appSettings.lenUnit === 0 ){
+        return parseFloat( unitVal )
+    }
+    // kilometer
+    else if( __appSettings.lenUnit === 1 ){
+        return parseFloat( unitVal ) / 0.001
+    }
+    // miles
+    else if( __appSettings.lenUnit === 2 ){
+        return parseFloat( unitVal ) / 0.0006213712
+    }
+    // n. miles
+    else if( __appSettings.lenUnit === 3 ){
+        return parseFloat( unitVal ) / 0.0005399568
+    }
+    // yard 1.09361
+    else if( __appSettings.lenUnit === 4 ){
+        return parseFloat( unitVal ) / 1.0936132983
+    }
+    // feet
+    else if( __appSettings.lenUnit === 5 ){
+        return parseFloat( unitVal ) / 3.280839895
+    }
+}
+
+// for placeholder text or as unit string
+function length_txt( ) {
+    if ( __appSettings.lenUnit === 0 ){
+        return "m"
+    }
+    // kilometer
+    else if( __appSettings.lenUnit === 1 ){
+        return "km"
+    }
+    // miles
+    else if( __appSettings.lenUnit === 2 ){
+        return "mi"
+    }
+    // n. miles
+    else if( __appSettings.lenUnit === 3 ){
+        return "nmi"
+    }
+    // yard 1.09361
+    else if( __appSettings.lenUnit === 4 ){
+        return "yds"
+    }
+    // feet
+    else if( __appSettings.lenUnit === 5 ){
+        return "ft"
+    }
+}
+
+
 // message for android
 function showMessage(message) {
     if (__androidUtils.isAndroid) {
@@ -184,10 +268,10 @@ function visibility_latlong() {
 //----------------------------------------SETTINGS--------------------------------------
 // North East coordinates order with layout direction
 function coord_display(){
-    if(__appSettings.xyOrder === "ne"){
+    if(__appSettings.xyOrder === "en"){
         return Qt.LeftToRight
     }
-    else if(__appSettings.xyOrder === "en"){
+    else if(__appSettings.xyOrder === "ne"){
         return Qt.RightToLeft
     }
 }
@@ -340,7 +424,7 @@ function includeFormatDMS( coords ) {
 }
 // Coordinate order
 // !! UNUSED !!  Lat Long or Long Lat
-function latlonOrder(coords) {
+function latlonOrder( coords ) {
     if( __appSettings.latlongOrder === "order_latlong" ){
         return "<b>" + "Lat" + ":</b> " + coords[1] + "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"  + "<b>" + "Long" + ":</b> " + coords[0]
     }
@@ -349,7 +433,7 @@ function latlonOrder(coords) {
     }
 }
 // !! UNUSED !! xy or yx
-function xyOrder(coords) {
+function xyOrder( coords ) {
     if(__appSettings.xyOrder === "ne"){
         return "<b>" + textN() + ":</b> " + coords[1] + "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"  + "<b>" + textE() + ":</b> " + coords[0]
     }
@@ -468,7 +552,7 @@ function gps_decimal(){
 // coordinate order for Decimal Lat Lon
 function coord_decimal(){
     if(__appSettings.autoCenterMapChecked) {
-        return gps_decimal()
+        return "9999"//gps_decimal()
     } else {
         return cursorTextDeg()
     }
@@ -476,12 +560,12 @@ function coord_decimal(){
 //-------------------------------------------------------------------------------------
 // Displaying coordinates for Data Collector
 //* TODO: isValid must be added to QML in order to check projected or geographic coordinates, we should set default to geographic if it isn't valid, means WGS84
-function datacollector_coord(){
-    if( __loader.isGeographic() ){
-        if(__appSettings.latlongDisplay === "display_dms"){
+function datacollector_coord() {
+    if( __loader.isGeographic() ) {
+        if(__appSettings.latlongDisplay === "display_dms") {
             return coord_DMS()
         }
-        else if( __appSettings.latlongDisplay === "display_dec" ){
+        else if( __appSettings.latlongDisplay === "display_dec" ) {
             return coord_decimal()
         }
     }
@@ -601,7 +685,7 @@ function angle_text_output(output,my_angle){
         my_angle.second.text=(Math.abs(latdecsn)).toFixed(4) + "''"
     }
     else if(__appSettings.angleUnit === 2){
-        my_angle.gon.text = output  + " ‎ᵍ"
+        my_angle.gon.text = output  + " gon"
     }
 }
 
