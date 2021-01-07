@@ -43,19 +43,18 @@ TopSheet{
             model: __recordingLayersModel
             boundsBehavior: Flickable.StopAtBounds
             delegate: ItemDelegate {
-                id:listItem
+                id: listItem
                 width: parent.width
                 //height: isVector && !isReadOnly && hasGeometry ? grid.cellHeight : 0
                 SText {
                     text: layerName ? layerName : ""
                     font.pixelSize: 15
-                    font.bold: false
+                    font.bold: listItem.highlighted
                     leftPadding: 50
                     width: parent.width - 60
                     clip: true
                     anchors.verticalCenter: parent.verticalCenter
-                    color: highlighted ? Universal.accent
-                                       : Universal.foreground
+                    color: Universal.foreground
                 }
                 enabled: hasPointGeometry
                 icon.source: iconSource ? iconSource : ""

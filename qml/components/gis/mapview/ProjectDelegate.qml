@@ -16,10 +16,9 @@ Component {
             leftPadding: 50
             width: parent.width - 60
             clip: true
-            font.bold: false
+            font.bold: listItem.highlighted
             anchors.verticalCenter: parent.verticalCenter
-            color: listItem.highlighted ? Universal.accent
-                                        : Universal.foreground
+            color: Universal.foreground
         }
         // use question mark for unrecognized projects
         icon.source: {
