@@ -28,8 +28,8 @@ SColumnHelp{
         }
     }
     STextHelp{
-            stext:qsTr("If <b>A,B</b> and <b>C</b> coordinates are known <b>(ABC)</b> interior angle can be calculated with <b>(BA)</b> and <b>(BC)</b> azimuth angles.
- For more information about azimuth calculation, you can see help page in 'Distance, Azimuth' app.<br><br>
+            stext:qsTr("If <b>A,B</b> and <b>C</b> coordinates are known <b>(ABC)</b> interior angle can be calculated with <b>(BA)</b> and <b>(BC)</b>
+ azimuth angles.<br><br>
 <b>(ABC) = (BA) - (BC)</b>
 ")
     }
