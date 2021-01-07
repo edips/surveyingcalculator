@@ -1,4 +1,5 @@
 # Surveying Calculator
+A modern engineering app with surveying and GIS aromas
 
 Surveying Calculator has commonly used land surveying tools. This includes coordinate geometry calculations, offline point data collection, displaying CAD, GIS, raster data and online maps in QGIS 3 project format. Surveying Calculator supports QGIS 3 projects. (qgs, qgz)
 It is available on Play Store: https://play.google.com/store/apps/details?id=org.project.geoclass
