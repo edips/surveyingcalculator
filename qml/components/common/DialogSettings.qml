@@ -28,11 +28,69 @@ TopSheet {
         anchors.margins: 10
         ColumnLayout{
             id:settings_column
-            spacing: 15
+            spacing: 20
 
+            // Units
             ColumnLayout {
                 spacing: 10
-                // Coordinate display
+                SText{
+                    text:qsTr("Units")
+                    font.pixelSize: 16
+                    font.bold: true
+                }
+                Rectangle{
+                    width: windoww.width
+                    height: 1
+                    color: __appSettings.theme === 0 ? "#d5d5c3" : "#505050"
+                }
+            }
+
+            // Distance unit chooser
+            RowLayout {
+                SText{
+                    text:qsTr("Distance Unit: ")
+                }
+                CustomComboBox {
+                    id: distance_chooser
+                    implicitWidth: 150
+                    currentIndex: __appSettings.lenUnit
+                    onCurrentIndexChanged: __appSettings.lenUnit = currentIndex
+                    model: ListModel {
+                        ListElement { text: qsTr("meter") }
+                        ListElement { text: qsTr("kilometer") }
+                        ListElement { text: qsTr("mile") }
+                        ListElement { text: qsTr("nautical mile") }
+                        ListElement { text: qsTr("yard") }
+                        ListElement { text: qsTr("feet") }
+                    }
+                }
+            }
+            // Ange unit chooser
+            RowLayout {
+                SText{
+                    text:qsTr("Angle Unit: ")
+                    font.bold: false
+                }
+                CustomComboBox {
+                    id: angle_chooser
+                    implicitWidth: 200
+                    currentIndex: __appSettings.angleUnit
+                    onCurrentIndexChanged: __appSettings.angleUnit = currentIndex
+                    model: ListModel {
+                        ListElement { text: qsTr("Degree Decimal") }
+                        ListElement { text: qsTr("Degree DMS") }
+                        ListElement { text: qsTr("Grad (Gon)") }
+                    }
+                }
+            }
+            // Coordinate Settings
+            ColumnLayout {
+                spacing: 10
+                Rectangle{
+                    width: windoww.width
+                    height: 1
+                    color: __appSettings.theme === 0 ? "#d5d5c3" : "#505050"
+                }
                 SText{
                     id:coord_display_txt
                     text:qsTr("Coordinate Settings")
@@ -46,7 +104,7 @@ TopSheet {
                 }
             }
             // Order of Northing and Easting
-            QQC2.Button{
+            QQC2.Button {
                 id: coordinate_display
                 implicitWidth: settingsDialog.width
                 implicitHeight: 80
@@ -201,6 +259,8 @@ TopSheet {
                 }
                 onClicked: latlon_format_dialog.open()
             }
+
+            // General settings
             ColumnLayout {
                 spacing: 10
                 Rectangle{
@@ -208,72 +268,7 @@ TopSheet {
                     height: 1
                     color: __appSettings.theme === 0 ? "#d5d5c3" : "#505050"
                 }
-                // End of Coordinate Display
-                // Units
-                SText{
-                    text:qsTr("Units")
-                    font.pixelSize: 16
-                    font.bold: true
-                }
-                Rectangle{
-                    width: windoww.width
-                    height: 1
-                    color: __appSettings.theme === 0 ? "#d5d5c3" : "#505050"
-                }
-            }
-
-            // Ange unit chooser
-            RowLayout{
-                SText{
-                    text:qsTr("Angle Unit: ")
-                    font.bold: false
-                }
-                CustomComboBox {
-                    id: angle_chooser
-                    implicitWidth: 200
-                    currentIndex: __appSettings.angleUnit
-                    onCurrentIndexChanged: __appSettings.angleUnit = currentIndex
-                    model: ListModel {
-                        ListElement { text: qsTr("Degree Decimal") }
-                        ListElement { text: qsTr("Degree DMS") }
-                        ListElement { text: qsTr("Grad (Gon)") }
-                    }
-                }
-            }
-
-            // Distance unit chooser
-            /* RowLayout{
-                  SText{
-                      text:qsTr("Distance Unit: ")
-                  }
-                  CustomComboBox {
-                      id: distance_chooser
-                      implicitWidth: 200
-                      currentIndex: 0
-
-                      model: ListModel {
-                          ListElement { text: qsTr("Meter") }
-                          ListElement { text: qsTr("Kilometer") }
-                          ListElement { text: qsTr("Feet") }
-                          ListElement { text: qsTr("Yard") }
-                          ListElement { text: qsTr("Mile") }
-                      }
-                  }
-             }
-             Rectangle{
-                 width: windoww.width
-                 height: 1
-                 color: __appSettings.theme === 0 ? "#d5d5c3" : "#505050"
-             } */
-            ColumnLayout {
-                spacing: 10
-                Rectangle{
-                    width: windoww.width
-                    height: 1
-                    color: __appSettings.theme === 0 ? "#d5d5c3" : "#505050"
-                }
-                // Appearance
-                SText{
+                SText {
                     text:qsTr("General")
                     font.pixelSize: 16
                     font.bold: true
@@ -302,6 +297,28 @@ TopSheet {
                     }
                     onCurrentIndexChanged: __appSettings.keyboard = currentIndex
                 }
+            }
+            // Theme
+            RowLayout{
+                SText{
+                    text:qsTr("Theme: ")
+                    font.bold: false
+                }
+                CustomComboBox {
+                    implicitWidth: 150
+                    currentIndex: __appSettings.theme
+                    model: ListModel {
+                        ListElement { text: qsTr("Light") }
+                        ListElement { text: qsTr("Dark") }
+                    }
+                    onCurrentIndexChanged: __appSettings.theme = currentIndex
+                }
+            }
+
+            // Space
+            Rectangle {
+                height: 100
+                color: "transparent"
             }
         }
     }
@@ -348,20 +365,20 @@ TopSheet {
         width: parent.width
         Column{
             QQC2.RadioButton{
-                id:rd_NE_order
-                text: qsTr("Northing before Easting")
-                checked: __appSettings.xyOrder === "ne"
-                onClicked: {
-                    __appSettings.xyOrder = "ne"
-                    xy_order_dialog.close()
-                }
-            }
-            QQC2.RadioButton{
                 id:rd_EN_order
                 text: qsTr("Easting before Northing")
                 checked: __appSettings.xyOrder === "en"
                 onClicked: {
                     __appSettings.xyOrder = "en"
+                    xy_order_dialog.close()
+                }
+            }
+            QQC2.RadioButton{
+                id:rd_NE_order
+                text: qsTr("Northing before Easting")
+                checked: __appSettings.xyOrder === "ne"
+                onClicked: {
+                    __appSettings.xyOrder = "ne"
                     xy_order_dialog.close()
                 }
             }
