@@ -9,7 +9,7 @@ import "../../components/common/script.js" as Util
 
 Rectangle {
     property int inputFormHeight: data_column.implicitHeight
-    property string coordinateText: (Util.datacollector_coord()).toString()
+    property string coordinateText: ( Util.datacollector_coord() ).toString()
     color: Universal.background
     id: collect_pane
     width: parent.width
