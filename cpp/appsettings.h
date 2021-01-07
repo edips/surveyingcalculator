@@ -27,6 +27,7 @@ class AppSettings: public QObject
     Q_PROPERTY( int keyboard READ keyboard WRITE setKeyboard NOTIFY keyboardChanged )
     Q_PROPERTY( int myfont READ myfont WRITE setMyFont NOTIFY myFontChanged )
     Q_PROPERTY( int theme READ theme WRITE setTheme NOTIFY themeChanged )
+    Q_PROPERTY( int lenUnit READ lenUnit WRITE setLenUnit NOTIFY lenUnitChanged )
 
 public:
     explicit AppSettings( QObject *parent = nullptr );
@@ -85,6 +86,9 @@ public:
     // theme
     int theme() const;
     void setTheme( int value );
+    // length units
+    int lenUnit() const;
+    void setLenUnit( int value );
 
 signals:
     void defaultProjectChanged();
@@ -106,6 +110,7 @@ signals:
     void keyboardChanged();
     void myFontChanged();
     void themeChanged();
+    void lenUnitChanged();
 
 private:
     // Projects path
@@ -147,6 +152,8 @@ private:
     int mmyFont;
     // theme
     int mTheme;
+    // length unit
+    int mLenUnit;
 };
 
 #endif // APPSETTINGS_H
