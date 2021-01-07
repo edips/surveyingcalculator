@@ -64,7 +64,6 @@ Popup {
                 horizontalAlignment: Qt.AlignHCenter
                 verticalAlignment: Qt.AlignVCenter
                 Layout.fillWidth: true
-                color: "white"
             }
 
             FluidControls.ToolButton {
@@ -72,7 +71,6 @@ Popup {
                 Layout.alignment: Qt.AlignRight
                 flat: true
                 icon.source: "qrc:/assets/icons/material/navigation/close.svg"
-                icon.color: "white"
                 onClicked: {
                     topSheet.close()
                 }
