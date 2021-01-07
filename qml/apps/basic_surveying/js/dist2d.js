@@ -1,4 +1,4 @@
-Qt.include( "script.js" )
+Qt.include( "../../../components/common/script.js" )
 function calc2d() {
     if(dist2d_1.east.text==="" || dist2d_2.east.text==="" || dist2d_1.north.text==="" || dist2d_2.north.text==="")
     {

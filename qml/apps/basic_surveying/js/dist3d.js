@@ -1,4 +1,4 @@
-Qt.include("script.js")
+Qt.include( "../../../components/common/script.js" )
 
 function calc3d() {
     if(dist3d_1.easting.text==="" || dist3d_2.easting.text==="" || dist3d_1.northing.text==="" || dist3d_2.northing.text==="" || dist3d_1.elev.text==="" || dist3d_2.elev.text==="")
@@ -50,6 +50,6 @@ function calc3d() {
         lengthUnits( dist3dd, dist3d )
         lengthUnits( hdist, hdistt )
         lengthUnits( zdif, zdiff )
-        angle_text_output(abg_z.toFixed(4), abg_to2_z)
+        angle_text_output( abg_z.toFixed(4), abg_to2_z )
     }
 }

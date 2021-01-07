@@ -1,4 +1,4 @@
-Qt.include( "script.js" )
+Qt.include( "../../../components/common/script.js" )
 
 function firstcalc(){
 

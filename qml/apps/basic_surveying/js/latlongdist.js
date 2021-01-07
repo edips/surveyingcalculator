@@ -1,9 +1,9 @@
-Qt.include( "script.js" )
-Qt.include( "geographiclib.js" )
+Qt.include( "../../../components/common/script.js" )
+Qt.include( "../../other_tools/libs/geographiclib.js" )
 // Lat Long distance function
 function distance_latlong( ) {
     // DMS
-    if( !decimChecked )
+    if( !hesap_btn.decimalCheck )
     {
         if(dist_latlon1.lat_deg.text === "" || dist_latlon1.lat_min.text === "" ||
                 dist_latlon1.lat_sec.text === "" || dist_latlon2.lat_deg.text === "" ||
@@ -67,7 +67,7 @@ function distance_latlong( ) {
         }
     }
     // Decimal
-    else if ( decimChecked )
+    else if ( hesap_btn.decimalCheck )
     {
         if( dist_latlon1.lat_decimal.text === "" || dist_latlon1.lon_decimal.text === "" || dist_latlon2.lat_decimal.text === "" || dist_latlon2.lon_decimal.text === "" )
         {

@@ -1,5 +1,5 @@
-Qt.include( "script.js" )
-Qt.include( "geographiclib.js" )
+Qt.include( "../../../components/common/script.js" )
+Qt.include( "../../other_tools/libs/geographiclib.js" )
 function distancecalc() {
     //---------LAT LON -----------------------------------------------------------------------------------------------
     // Degree minute second (DMS)
@@ -14,7 +14,7 @@ function distancecalc() {
     // angle fonksiyonu kullanilir
     var bearing_
     // for grad unit mysetting2.anglechooser === 1
-    if( mysetting2.anglechooser === 1 ){
+    if( __appSettings.angleUnit === 2 ) {
         bearing_ = angle_text_input( bearing ) * ( 180 / 200 )
     } else{
         bearing_ = angle_text_input( bearing )
@@ -47,7 +47,7 @@ function distancecalc() {
     //----------------------------------------------------------------------
     function distance(){
         // Decimal
-        if( decimChecked ) {
+        if( hesap_btn.decimalCheck ) {
             if(rect_input.lat_decimal.text === "" || rect_input.lon_decimal.text==="")
             {
                 snack.open(qsTr("Please enter the values."))
@@ -58,7 +58,7 @@ function distancecalc() {
             }
         }
         // DMS
-        else if( !decimChecked ) {
+        else if( !hesap_btn.decimalCheck ) {
             if( rect_input.lat_deg.text === "" || rect_input.lat_min.text === "" || rect_input.lat_sec.text === ""
                     || rect_input.lon_deg.text === "" || rect_input.lon_min.text === "" || rect_input.lon_sec.text === "" )
             {
