@@ -58,7 +58,6 @@ Popup {
                 id: copyBtn
                 flat: true
                 icon.source: "qrc:/assets/icons/material/content/content_copy.svg"
-                icon.color: "white"
                 onClicked: {
                     editor_txt.selectAll()
                     editor_txt.copy()
@@ -68,7 +67,7 @@ Popup {
             FluidControls.ToolButton {
                 id: editBtn
                 icon.source: "qrc:/assets/icons/material/editor/mode_edit.svg"
-                icon.color: "white"
+                icon.color: checked ? "white" : "black"
                 checkable: true
                 onClicked: {
                     if( editBtn.checked ) {
@@ -76,9 +75,6 @@ Popup {
                     } else {
                         editable = false
                     }
-                }
-                background: Rectangle {
-                    color: editBtn.checked ? "#0088ff" : "#003B6D"
                 }
             }
             Item{
@@ -90,7 +86,6 @@ Popup {
                 Layout.alignment: Qt.AlignRight
                 flat: true
                 icon.source: "qrc:/assets/icons/material/navigation/close.svg"
-                icon.color: "white"
                 onClicked: {
                     coordList.close()
                 }
