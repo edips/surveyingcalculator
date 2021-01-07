@@ -11,7 +11,7 @@ Item {
     property alias second_txt: sec.text;
     property alias gon_txt: gon_txt.text;
 
-    property var text_value: angle_settings()
+    //property var text_value: angle_settings()
     property int sfontsize: 16;
     property alias degree: deg;
     property alias minute: min;
@@ -23,6 +23,7 @@ Item {
     property bool read_only:false
 
     // angle text values for settings
+    /*
     function angle_settings(){
         if(__appSettings.angleUnit === 0){
             var x = String(/decimal_txt/);
@@ -39,11 +40,11 @@ Item {
             z = z.substring(1, z.length-1);
             return z
         }
-    }
-    height: dec.height
+    }*/
+    height: 38
     width: __appSettings.angleUnit === 0 ? dec.width : dec_row.implicitWidth
 
-    Row{
+    Row {
         id: dec_row
         visible: {
             if(__appSettings.angleUnit === 1){
@@ -55,11 +56,11 @@ Item {
         }
 
         spacing: 5
-        STextField{id:deg; placeholderText: qsTr("°"); implicitWidth: 40; font.pixelSize: sfontsize; readOnly: read_only  }
-        STextField{id:min; placeholderText: qsTr("'"); implicitWidth: 35; font.pixelSize: sfontsize; readOnly: read_only   }
-        STextField{id:sec; placeholderText: qsTr("''"); implicitWidth: 100; font.pixelSize: sfontsize; readOnly: read_only   }
+        STextField{ id:deg; placeholderText: qsTr("°"); implicitWidth: 45; font.pixelSize: sfontsize; readOnly: read_only; }
+        STextField{ id:min; placeholderText: qsTr("'"); implicitWidth: 35; font.pixelSize: sfontsize; readOnly: read_only; }
+        STextField{ id:sec; placeholderText: qsTr("''"); implicitWidth: 100; font.pixelSize: sfontsize; readOnly: read_only; }
     }
-    Row{
+    Row {
         visible: {
             if(__appSettings.angleUnit === 0 ){
                 return true
@@ -69,10 +70,10 @@ Item {
             }
         }
         spacing: 5
-        STextField{id:dec; placeholderText: qsTr("°"); font.pixelSize: sfontsize; readOnly: read_only  }
+        STextField { id: dec; placeholderText: qsTr("°"); font.pixelSize: sfontsize; readOnly: read_only;  }
     }
 
-    Row{
+    Row {
         visible: {
             if(__appSettings.angleUnit === 2){
                 return true
@@ -82,7 +83,7 @@ Item {
             }
         }
         spacing: 5
-        STextField{id:gon_txt; placeholderText: qsTr("‎ᵍ"); font.pixelSize: sfontsize; readOnly: read_only }
+        STextField { id: gon_txt; placeholderText: qsTr("‎ᵍ"); font.pixelSize: sfontsize; readOnly: read_only; }
     }
 
 }
