@@ -15,6 +15,8 @@ Item {
     id: ne_root
     height: grid_utm.height
     width: parent.width
+
+    property string name;
     property int neWidth: 2*north.width + 2*mat2.width
     // Properties Decimal
     property alias northing : north
@@ -55,30 +57,11 @@ Item {
                 Row{
                     layoutDirection: Script.coord_display()
                     spacing: z_enabled ? 5 : 10
-
-                    Row{
-                        Label {
-                            id:mat2;
-                            text: n_txt;
-                            font.bold: true;
-                            verticalAlignment: Text.AlignVCenter;
-                            height: parent.height;
-                            font.pixelSize: z_enabled ? 13 : 15
-                        }
-                        STextField {
-                            id:north;
-                            width: z_enabled ? 90 : 110;
-                            readOnly: ne_root.readonly;
-                            font.pixelSize: z_enabled ? 15 : 16;
-                            font.bold: !z_enabled
-                        }
-                    }
-
+                    // Easting
                     Row{
                         Label {
                             id:mateee2;
                             text: e_txt;
-                            font.bold: true;
                             verticalAlignment:
                                 Text.AlignVCenter; height: parent.height;
                             font.pixelSize: z_enabled ? 13 : 15
@@ -87,29 +70,43 @@ Item {
                             width: z_enabled ? 90 : 110;
                             readOnly: ne_root.readonly;
                             font.pixelSize: z_enabled ? 15 : 16;
-                            font.bold: !z_enabled
+                        }
+                    }
+                    // Northing
+                    Row{
+                        Label {
+                            id:mat2;
+                            text: n_txt;
+                            verticalAlignment: Text.AlignVCenter;
+                            height: parent.height;
+                            font.pixelSize: z_enabled ? 13 : 15
+                        }
+                        STextField {
+                            id: north;
+                            width: z_enabled ? 90 : 110;
+                            readOnly: ne_root.readonly;
+                            font.pixelSize: z_enabled ? 15 : 16;
                         }
                     }
                 }
                 Row{
                     visible: z_enabled
                     Label {
-                        id: z_label;
-                        text: z_txt;
-                        font.bold: true;
-                        verticalAlignment: Text.AlignVCenter;
-                        height: parent.height;
+                        id: z_label
+                        text: z_txt
+                        verticalAlignment: Text.AlignVCenter
+                        height: parent.height
                         font.pixelSize: z_enabled ? 13 : 15
                     }
-                    STextField{id: kot;
-                        width: 55;
-                        font.pixelSize: z_enabled ? 15 : 16;
-                        font.bold: !z_enabled
+                    STextField{
+                        id: kot
+                        width: 55
+                        font.pixelSize: z_enabled ? 15 : 16
                     }
                 }
             }
 
-            Row{
+            Row {
                 visible: utm_exists
                 anchors.horizontalCenter: parent.horizontalCenter
                 rightPadding: 50;

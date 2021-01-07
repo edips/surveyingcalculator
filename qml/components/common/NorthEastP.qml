@@ -6,7 +6,7 @@ This component is used with manuel and map input like that:
 1: ____   ____ BTN
 2: ____   ____ BTN
 */
-Row{
+Row {
     property string name;
     property alias north: x1;
     property alias east: y1;
@@ -22,7 +22,7 @@ Row{
     // requirements: mapDialog: CoordinateSelect Dialog, and errDialog Error dialog ID
     function coordinateSelector ( mapDialog, errDialog ) {
         if(__loader.isGeographic()) {
-            errDialog.text = "Coordinate system of the current project is not in projected coordinate system."
+            errDialog.text = "Coordinate system of the current project is not in projected (metric) coordinate system."
             errDialog.open()
         } else {
             mapDialog.open()
@@ -37,8 +37,8 @@ Row{
         Row{
             spacing: 10
             layoutDirection: Script.coord_display()
-            STextField{id:x1; readOnly: readonly; }
-            STextField{id:y1; readOnly: readonly; }
+            STextField{id:y1; readOnly: readonly; placeholderText: Script.textE() + name; } // easting
+            STextField{id:x1; readOnly: readonly; placeholderText: Script.textN() + name; } // northing
         }
         Button {
             id: btn

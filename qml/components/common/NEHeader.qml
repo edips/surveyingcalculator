@@ -1,9 +1,12 @@
 import QtQuick 2.9
 import "script.js" as Calc
-Row{
+Row {
+    property int rowspace: 120
+    property bool has_z: false
     anchors.horizontalCenter: parent.horizontalCenter
-    spacing: 120
+    spacing: rowspace
     layoutDirection: Calc.coord_display()
-    STextTop{text: Calc.textN(); }
-    STextTop{text: Calc.textE(); }
+    STextTop { text: Calc.textE(); }
+    STextTop { text: Calc.textN(); }
+    STextTop { visible: has_z; text: "Z"; }
 }
