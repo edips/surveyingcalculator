@@ -136,7 +136,7 @@ Item{
             //-----------Hesap-------------------------------------
             Row{
                 anchors.horizontalCenter: parent.horizontalCenter
-                Hesap{
+                Hesapla {
                     id: hesap_btn
                     decimalCheck: true
                     // Calculate the result
