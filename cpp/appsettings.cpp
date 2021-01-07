@@ -25,6 +25,7 @@ AppSettings::AppSettings( QObject *parent ): QObject( parent )
   int keyboardVal = settings.value( "keyboard", 0 ).toInt();
   int myFontVal = settings.value( "myfont", 5 ).toInt();
   int themeVal = settings.value( "theme", 1 ).toInt();
+  int lenUnitVal = settings.value( "lenUnit", 0 ).toInt();
 
   settings.endGroup();
 
@@ -47,6 +48,7 @@ AppSettings::AppSettings( QObject *parent ): QObject( parent )
   setKeyboard( keyboardVal );
   setMyFont( myFontVal );
   setTheme( themeVal );
+  setLenUnit( lenUnitVal );
 }
 
 QString AppSettings::defaultLayer() const
@@ -388,5 +390,24 @@ void AppSettings::setTheme(int value)
         settings.endGroup();
 
         emit themeChanged();
+    }
+}
+
+int AppSettings::lenUnit() const
+{
+    return mLenUnit;
+}
+
+void AppSettings::setLenUnit(int value)
+{
+    if( mLenUnit != value )
+    {
+        mLenUnit = value;
+        QSettings settings;
+        settings.beginGroup( mGroupName );
+        settings.setValue( "lenUnit", value );
+        settings.endGroup();
+
+        emit lenUnitChanged();
     }
 }
