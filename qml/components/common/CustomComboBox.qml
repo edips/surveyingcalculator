@@ -74,8 +74,8 @@ T.ComboBox {
             width: parent.width
             height: parent.height
             color: control.activeFocus ? control.Universal.accent :
-                   control.pressed ? control.Universal.baseMediumLowColor :
-                   control.hovered ? control.Universal.baseLowColor : "transparent"
+                                         control.pressed ? control.Universal.baseMediumLowColor :
+                                                           control.hovered ? control.Universal.baseLowColor : "transparent"
             visible: control.editable && !contentItem.hovered && (control.pressed || control.hovered)
             opacity: control.activeFocus && !control.pressed ? 0.4 : 1.0
         }
@@ -97,7 +97,7 @@ T.ComboBox {
 
         font: control.font
         color: !control.enabled ? control.Universal.chromeDisabledLowColor :
-                control.editable && control.activeFocus ? control.Universal.chromeBlackHighColor : control.Universal.foreground
+                                  control.editable && control.activeFocus ? control.Universal.chromeBlackHighColor : control.Universal.foreground
         selectionColor: control.Universal.accent
         selectedTextColor: control.Universal.chromeWhiteColor
         verticalAlignment: Text.AlignVCenter
@@ -109,13 +109,13 @@ T.ComboBox {
 
         border.width: control.flat ? 0 : 2 // ComboBoxBorderThemeThickness
         border.color: !control.enabled ? control.Universal.baseLowColor :
-                       control.editable && control.activeFocus ? control.Universal.accent :
-                       control.down ? control.Universal.baseMediumLowColor :
-                       control.hovered ? control.Universal.baseMediumColor : control.Universal.baseMediumLowColor
+                                         control.editable && control.activeFocus ? control.Universal.accent :
+                                                                                   control.down ? control.Universal.baseMediumLowColor :
+                                                                                                  control.hovered ? control.Universal.baseMediumColor : control.Universal.baseMediumLowColor
         color: !control.enabled ? control.Universal.baseLowColor :
-                control.down ? control.Universal.listMediumColor :
-                control.flat && control.hovered ? control.Universal.listLowColor :
-                control.editable && control.activeFocus ? control.Universal.background : control.Universal.altMediumLowColor
+                                  control.down ? control.Universal.listMediumColor :
+                                                 control.flat && control.hovered ? control.Universal.listLowColor :
+                                                                                   control.editable && control.activeFocus ? control.Universal.background : control.Universal.altMediumLowColor
         visible: !control.flat || control.pressed || control.hovered || control.visualFocus
 
         Rectangle {
@@ -133,8 +133,10 @@ T.ComboBox {
     popup: T.Popup {
         width: control.width
         height: Math.min(contentItem.implicitHeight, control.Window.height - topMargin - bottomMargin)
-        topMargin: 8
+        topMargin: 60
         bottomMargin: 8
+        modal: true
+        dim: false
 
         Universal.theme: control.Universal.theme
         Universal.accent: control.Universal.accent
@@ -145,6 +147,7 @@ T.ComboBox {
             model: control.delegateModel
             currentIndex: control.highlightedIndex
             highlightMoveDuration: 0
+            boundsBehavior: Flickable.StopAtBounds
 
             T.ScrollIndicator.vertical: ScrollIndicator { }
         }
