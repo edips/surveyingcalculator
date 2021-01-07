@@ -24,14 +24,14 @@ FluidControls.ApplicationWindow {
     height: 720
     // Count of the app action icons
     appBar.maxActionCount: 1
-    Universal.theme: Universal.Light
-    Universal.accent: "#003B6D"
+    Universal.theme: __appSettings.theme === 0 ? Universal.Light : Universal.Dark
+    Universal.accent: "#0050EF"
     //Universal.background: Universal.chromeMediumLowColor
 
     // snack bar
     FluidControls.SnackBar { id: snack }
     QQ.Component.onCompleted: {
-        console.log( "__loader.isGeographic() in func: ", __loader.isGeographic() )
+        //console.log( "__loader.isGeographic() in func: ", __loader.isGeographic() )
         // banner makes the app slow, is there any way to load it asyncroniously? for example the app opens on Galaxy a5 in 2.5 secons
         // without banner2.show the start up time is 2.0 seconds
         //banner2.show();
@@ -54,7 +54,7 @@ FluidControls.ApplicationWindow {
         /*Loader{
             layer.enabled: true
             anchors.fill: parent
-            source: "LocationCalculus.qml"
+            source: "MainMenu.qml"
         }*/
         id:initPage
         actions: [
