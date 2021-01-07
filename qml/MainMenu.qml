@@ -31,17 +31,16 @@ SFlickable {
             cellHeight: 140
             model: ListModel {
                 ListElement { title: qsTr("Project Manager"); source: "apps_qgis/ProjectManager/ProjectManager.qml"; imgsrc:"qrc:/assets/icons/projects.svg" }
-                ListElement { title: qsTr("Store Points"); source: "apps_qgis/data_collector/DataCollector.qml"; imgsrc:"qrc:/assets/icons/point_data_collector.png" }
+                ListElement { title: qsTr("Survey"); source: "apps_qgis/data_collector/DataCollector.qml"; imgsrc:"qrc:/assets/icons/point_data_collector.png" }
 
                 //ListElement { title: qsTr("Map Viewer"); source: "apps_qgis/mapviewer/MapViewer2.qml"; imgsrc:"qrc:/assets/icons/mapviewer.png" }
-                ListElement { title: qsTr("Basic Surveying Tools"); source: "apps/basic_surveying/BasicSurveying.qml" ; imgsrc:"qrc:/assets/icons/basic_surveying.png" }
+                ListElement { title: qsTr("Distance, Bearing"); source: "apps/basic_surveying/BasicSurveying.qml" ; imgsrc:"qrc:/assets/icons/basic_surveying.png" }
                 ListElement { title: qsTr("Intersection Methods"); source: "apps/intersection/Intersection.qml" ; imgsrc:"qrc:/assets/icons/intersection.png" }
                 ListElement { title: qsTr("Lat/Long UTM"); source: "apps/wgs84/Wgs842.qml" ; imgsrc:"qrc:/assets/icons/utm_latlon.png" }
                 ListElement { title: qsTr("Degree Decimal"); source: "apps/other_tools/deg2dec/Degree2decimal2.qml" ; imgsrc:"qrc:/assets/icons/degree_decimal.png" }
                 ListElement { title: qsTr("UTM Map"); source: "apps/other_tools/mylocation/Maps2.qml"; imgsrc:"qrc:/assets/icons/mylocation.png"  }
                 ListElement { title: qsTr("Generate Coordinates"); source: "apps_qgis/coordinate_generator/CoordinateGenerator.qml"; imgsrc:"qrc:/assets/icons/generator.png" }
                 ListElement { title: qsTr("Coordinate Converter"); source: "apps/coordinate_converter/CoordinateConverter2.qml" ; imgsrc:"qrc:/assets/icons/coord_convert.png" }
-                ListElement { title: qsTr("Distance between Coordinates"); source: "apps/distance/Distance2.qml"; imgsrc:"qrc:/assets/icons/distance.png"  }
                 ListElement { title: qsTr("Other Tools"); source: "apps/other_tools/OtherTools.qml"; imgsrc:"qrc:/assets/icons/others.png" }
             }
 
