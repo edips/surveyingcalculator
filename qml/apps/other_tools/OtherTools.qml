@@ -24,13 +24,8 @@ SFlickable {
             cellHeight: 130
             model: ListModel {
                 ListElement { title: qsTr("Area from X,Y"); source: "areaFromPoints/areaCalc2.qml" ; imgsrc:"qrc:/assets/icons/areaXY.png" }
-                //ListElement { title: qsTr("PyCalculator"); source: "pycalc/SmartCalc2.qml"; imgsrc:"qrc:/assets/icons/pyCalculator.png" }
                 ListElement { title: qsTr("2D Helmert Transform"); source: "helmert/Helmert2.qml"; imgsrc:"qrc:/assets/icons/helmert.png"  }
-                //ListElement { title: qsTr("Cosine Law"); source: "cosine/Cosinus2.qml"; imgsrc:"qrc:/assets/images/cosinus.png" }
-                //ListElement { title: qsTr("Sine Law"); source: "sine/Sine2.qml"; imgsrc:"qrc:/assets/images/sine1.png" }
                 ListElement { title: qsTr("Horizontal Curve"); source: "hz_curve/RoadCalc2.qml"; imgsrc:"qrc:/assets/images/karayolu.png" }
-                ListElement { title: qsTr("Error Limit of Parcel"); source: "error_parcel/Tecviz2.qml"; imgsrc:"qrc:/assets/icons/parcel.png" }
-                ListElement { title: qsTr("Linear Interpolation"); source: "linear_interpolation/Linear2.qml" ; imgsrc:"qrc:/assets/icons/linear.png"}
                 ListElement { title: qsTr("Angle Conversion"); source: "angle/Angle_convert2.qml"; imgsrc:"qrc:/assets/icons/angle_conversion.png"  }
                 ListElement { title: qsTr("Map Scale Calculator"); source: "mapscale/MapScale2.qml" ; imgsrc:"qrc:/assets/icons/map_scale.png" }
             }
