@@ -1,3 +1,4 @@
+Qt.include("../../../components/common/script.js")
 function myparser(inp){
     return parseFloat(inp.text.replace(',','.').replace(' ',''))
 }
@@ -22,9 +23,14 @@ function circlecalc(){
     else{
         pt_c.north.text = nc.toFixed(3)
         pt_c.east.text = ec.toFixed(3)
-        rc.text=r.toFixed(3) + " m"
-        area.text=ar.toFixed(3) + " m²"
-        per.text=peri.toFixed(3) + " m"
+
+        //rc.text=r.toFixed(3) + " m"
+        lengthUnits( rc, r )
+
+        areaUnits( area, ar )
+
+        //per.text=peri.toFixed(3) + " m"
+        lengthUnits( per, peri )
     }
 }
 //----------CIRCLE PAGE------------------------------------------------

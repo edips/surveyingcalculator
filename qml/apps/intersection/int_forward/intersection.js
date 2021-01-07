@@ -87,7 +87,10 @@ function intersectioncalc(){
         yp_2.text=ypp.toFixed(3)
         xp_2.text=xpp.toFixed(3)
     }
-    s_1.text = s1.toFixed(3) + " m"
-    s_2.text = s2.toFixed(3) + " m"
+    //s_1.text = s1.toFixed(3) + " m"
+    lengthUnits( s_1, s1 )
+
+    //s_2.text = s2.toFixed(3) + " m"
+    lengthUnits( s_2, s2 )
 
 }

@@ -1,3 +1,30 @@
+// area unit conversion from meter to other units
+function areaUnits( area, area_metric ) {
+    if ( __appSettings.lenUnit === 0){
+        area.text = ( area_metric ).toFixed( 2 ) + " m²"
+    }
+    // km2
+    else if(  __appSettings.lenUnit === 1 ){
+        area.text = ( area_metric * 0.000001 ).toFixed( 2 ) + " km²"
+    }
+    // mile
+    else if( __appSettings.lenUnit === 2 ){
+        area.text = ( area_metric * 0.000000386102158542446 ).toFixed( 2 ) + " mi²"
+    }
+    // mile
+    else if( __appSettings.lenUnit === 3 ){
+        area.text = ( area_metric * 0.000000386102158542446 ).toFixed( 2 ) + " mi²"
+    }
+    // yard
+    else if( __appSettings.lenUnit === 4 ){
+        area.text = ( area_metric * 1.19599004630108).toFixed( 2 ) + " yd²"
+    }
+    // feet
+    else if( __appSettings.lenUnit === 5 ){
+        area.text = ( ( area_metric * 10.7639104167097 ) ).toFixed( 2 ) + " ft²"
+    }
+}
+
 // length unit conversion from meters to other units
 function lengthUnits( length, length_metric ) {
     // meter
