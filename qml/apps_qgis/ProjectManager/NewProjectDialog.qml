@@ -6,22 +6,23 @@ import Fluid.Controls 1.0 as FluidControls
 import Fluid.Core 1.0 as FluidCore
 import QgsQuick 0.1 as QgsQuick
 import lc 1.0
-import Qt.labs.settings 1.1
+//import Qt.labs.settings 1.1
 import "../../components/common"
 
 FluidControls.AlertDialog {
     // For resetting project name text field when clicking round button
     property alias project_name: projectName
-    Settings { id: projSettings; property alias epsgCode: epsg_code.text }
+    //Settings { id: projSettings; property alias epsgCode: epsg_code.text }
     id: inputDialog
     closePolicy: Popup.CloseOnEscape // prevents the drawer closing while moving canvas
     x: (parent.width - width) / 2
     y: (parent.height - height) / 2
     width: parent.width
-    height: job_column.implicitHeight + 120
+    height: job_column.implicitHeight + 150
     // didn't work: onOpened: inputDialog.textField = ""
     title: qsTr("New Project")
     standardButtons: Dialog.Ok | Dialog.Cancel
+
     Column{
         id: job_column
         topPadding: 7
@@ -39,7 +40,8 @@ FluidControls.AlertDialog {
                 width: 150
             }
         }
-        
+    }
+        /*
         Row{
             spacing: 10
             SText{
@@ -62,13 +64,13 @@ FluidControls.AlertDialog {
             wrapMode: Label.Wrap
             width: parent.width
         }
-    }
+    }*/
     onAccepted:{
         // warn user if input is empty
         if(projectName.text===""){
             snack.open("Please enter a project name.")
         }
-        else if( __projectsModel.addNewProject( projectName.text, epsg_code.text ) === "ok") {
+        else if( __projectsModel.addNewProject( projectName.text) === "ok" ) {
 
             __loader.load("")
             mapView.activeProjectIndex = -1
@@ -78,11 +80,11 @@ FluidControls.AlertDialog {
             //mapView.activeProjectIndexChanged()
             snack.open("Project added: " + projectName.text)
         }
-        else if( __projectsModel.addNewProject(projectName.text, epsg_code.text ) === "crs_not_found") {
+        else if( __projectsModel.addNewProject(projectName.text) === "crs_not_found" ) {
             epsg_error.open()
-            epsg_code.text = ""
+            //epsg_code.text = ""
         }
-        else if( __projectsModel.addNewProject(projectName.text, epsg_code.text ) === "fileExists") {
+        else if( __projectsModel.addNewProject(projectName.text) === "fileExists" ) {
             snack.open(projectName.text + " already exists. Please try a different name.")
         }
     }
