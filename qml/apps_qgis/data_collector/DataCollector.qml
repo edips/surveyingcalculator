@@ -159,8 +159,6 @@ FluidControls.Page{
         }
 
 
-
-
         // For Line
         // Length item
         function lengthItem() {
@@ -611,10 +609,10 @@ FluidControls.Page{
             id:gpsAction
             icon.color: {
                 if(__appSettings.autoCenterMapChecked){
-                    return "orange"
+                    return Universal.color( Universal.Orange )
                 }
                 else{
-                    return "white"
+                    return __appSettings.theme === 0 ? "black" : "white"
                 }
             }
             onTriggered:{
