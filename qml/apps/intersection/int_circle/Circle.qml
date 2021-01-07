@@ -108,7 +108,7 @@ Item{
                 }
             }
             //Hesap Form
-            Hesap{
+            Hesapla {
                 id: hesap_btn
                 anchors.horizontalCenter: parent.horizontalCenter
                 // Calculate the result

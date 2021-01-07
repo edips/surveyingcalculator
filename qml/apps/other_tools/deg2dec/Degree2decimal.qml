@@ -131,7 +131,7 @@ Item{
                 id: input_field
                 input: true
             }
-            Hesap{
+            Hesapla {
                 id: hesaplak
                 row_spacing: 50
                 anchors.horizontalCenter: parent.horizontalCenter

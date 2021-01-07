@@ -184,11 +184,11 @@ Item{
                         }
                     }
                     // UTM result
-                    NorthEast{id:utm; readonly: false; utm_exists: true; visible: Hesap.utm_latlong_viz(); }
+                    NorthEast { id:utm; readonly: false; utm_exists: true; visible: Hesap.utm_latlong_viz(); }
                 }
             }
             //Hesap Form
-            Hesap{
+            Hesapla {
                 id: hesap_btn
                 decimalCheck: true
                 anchors.horizontalCenter: parent.horizontalCenter
