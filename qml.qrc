@@ -1,24 +1,6 @@
 <RCC>
     <qresource prefix="/">
-        <file>qml/apps/basic_surveying/basic_first/first.js</file>
-        <file>qml/apps/basic_surveying/basic_first/First.qml</file>
-        <file>qml/apps/basic_surveying/basic_first/First2.qml</file>
-        <file>qml/apps/basic_surveying/basic_four/four.js</file>
-        <file>qml/apps/basic_surveying/basic_four/Four.qml</file>
-        <file>qml/apps/basic_surveying/basic_four/Four2.qml</file>
-        <file>qml/apps/basic_surveying/basic_second/second.js</file>
-        <file>qml/apps/basic_surveying/basic_second/Second.qml</file>
-        <file>qml/apps/basic_surveying/basic_second/Second2.qml</file>
-        <file>qml/apps/basic_surveying/basic_third/third.js</file>
-        <file>qml/apps/basic_surveying/basic_third/Third.qml</file>
-        <file>qml/apps/basic_surveying/basic_third/Third2.qml</file>
-        <file>qml/apps/basic_surveying/latlong_calc/latlongcalc.js</file>
-        <file>qml/apps/basic_surveying/latlong_calc/latlongcalc.qml</file>
-        <file>qml/apps/basic_surveying/latlong_calc/latlongcalc2.qml</file>
         <file>qml/apps/basic_surveying/BasicSurveying.qml</file>
-        <file>qml/apps/distance/distance.js</file>
-        <file>qml/apps/distance/Distance.qml</file>
-        <file>qml/apps/distance/Distance2.qml</file>
         <file>qml/apps/intersection/int_back/backazimuth.js</file>
         <file>qml/apps/intersection/int_back/Backazimuth.qml</file>
         <file>qml/apps/intersection/int_back/Backazimuth2.qml</file>
@@ -48,9 +30,6 @@
         <file>qml/apps/other_tools/deg2dec/degdec.js</file>
         <file>qml/apps/other_tools/deg2dec/Degree2decimal.qml</file>
         <file>qml/apps/other_tools/deg2dec/Degree2decimal2.qml</file>
-        <file>qml/apps/other_tools/error_parcel/tecviz.js</file>
-        <file>qml/apps/other_tools/error_parcel/tecviz.qml</file>
-        <file>qml/apps/other_tools/error_parcel/Tecviz2.qml</file>
         <file>qml/apps/other_tools/helmert/helmert.js</file>
         <file>qml/apps/other_tools/helmert/Helmert.qml</file>
         <file>qml/apps/other_tools/helmert/Helmert2.qml</file>
@@ -60,9 +39,6 @@
         <file>qml/apps/other_tools/libs/geographiclib.js</file>
         <file>qml/apps/other_tools/libs/index.js</file>
         <file>qml/apps/other_tools/libs/proj4.js</file>
-        <file>qml/apps/other_tools/linear_interpolation/linear.js</file>
-        <file>qml/apps/other_tools/linear_interpolation/Linear.qml</file>
-        <file>qml/apps/other_tools/linear_interpolation/Linear2.qml</file>
         <file>qml/apps/other_tools/mapscale/mapscale.js</file>
         <file>qml/apps/other_tools/mapscale/MapScale.qml</file>
         <file>qml/apps/other_tools/mapscale/MapScale2.qml</file>
@@ -89,22 +65,18 @@
         <file>qml/help/AreaXYHelp.qml</file>
         <file>qml/help/BackazimuthHelp.qml</file>
         <file>qml/help/CircleHelp.qml</file>
-        <file>qml/help/CosinusHelp.qml</file>
         <file>qml/help/Deg2DecHelp.qml</file>
         <file>qml/help/DistanceHelp.qml</file>
         <file>qml/help/FirstHelp.qml</file>
         <file>qml/help/ForwardHelp.qml</file>
         <file>qml/help/FourHelp.qml</file>
         <file>qml/help/HelmertHelp.qml</file>
-        <file>qml/help/LinearHelp.qml</file>
         <file>qml/help/LineHelp.qml</file>
         <file>qml/help/MapScaleHelp.qml</file>
         <file>qml/help/MapViewerHelp.qml</file>
         <file>qml/help/MylocationHelp.qml</file>
-        <file>qml/help/ParcelHelp.qml</file>
         <file>qml/help/RoadHelp.qml</file>
         <file>qml/help/SecondHelp.qml</file>
-        <file>qml/help/SineHelp.qml</file>
         <file>qml/help/ThirdHelp.qml</file>
         <file>qml/help/WgsHelp.qml</file>
         <file>qml/MainMenu.qml</file>
@@ -140,7 +112,7 @@
         <file>qml/components/common/TopSheet.qml</file>
         <file>qml/components/common/STextField2.qml</file>
         <file>qml/components/common/LatLong.qml</file>
-        <file>qml/components/common/Hesap.qml</file>
+        <file>qml/components/common/Hesapla.qml</file>
         <file>qml/components/common/SColumn.qml</file>
         <file>qml/components/common/NorthEast.qml</file>
         <file>qml/apps/other_tools/deg2dec/DegreeDecimal.qml</file>
@@ -187,5 +159,22 @@
         <file>qml/components/gis/CoordSelect.qml</file>
         <file>qml/components/gis/CoordinateList.qml</file>
         <file>qml/components/common/LatLongHeader.qml</file>
+        <file>qml/apps/basic_surveying/HDist.qml</file>
+        <file>qml/apps/basic_surveying/LatLongCalc.qml</file>
+        <file>qml/apps/basic_surveying/LatLongDist.qml</file>
+        <file>qml/apps/basic_surveying/SlopedDist.qml</file>
+        <file>qml/apps/basic_surveying/XYCalc.qml</file>
+        <file>qml/apps/basic_surveying/js/dist2d.js</file>
+        <file>qml/apps/basic_surveying/js/dist3d.js</file>
+        <file>qml/apps/basic_surveying/js/distance.js</file>
+        <file>qml/apps/basic_surveying/js/latlongcalc.js</file>
+        <file>qml/apps/basic_surveying/js/latlongdist.js</file>
+        <file>qml/apps/basic_surveying/js/xycalc.js</file>
+        <file>qml/apps/basic_surveying/ComboMenu.qml</file>
+        <file>qml/components/common/NorthEastZ.qml</file>
+        <file>qml/apps/basic_surveying/InteriorAngle.qml</file>
+        <file>qml/apps/basic_surveying/BearingCalc.qml</file>
+        <file>qml/apps/basic_surveying/js/interiorAngle.js</file>
+        <file>qml/apps/basic_surveying/js/bearingCalc.js</file>
     </qresource>
 </RCC>
