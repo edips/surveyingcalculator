@@ -49,7 +49,7 @@ class ProjectModel : public QAbstractListModel
     Q_INVOKABLE void showProj();
 
     // Add a new project to project manager
-    Q_INVOKABLE QString addNewProject( QString projectName, QString epsgcode );
+    Q_INVOKABLE QString addNewProject( QString projectName );
     Q_INVOKABLE static void copy_survey_project(QString name);
 
     QHash<int, QByteArray> roleNames() const override;

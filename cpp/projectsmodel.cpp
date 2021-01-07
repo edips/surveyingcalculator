@@ -349,13 +349,13 @@ QString ProjectModel::addNewProject(QString name, QString epsgcode )
 }*/
 
 
-QString ProjectModel::addNewProject(QString name, QString epsgcode )
+QString ProjectModel::addNewProject( QString name )
 {
     // set crs
-    QgsCoordinateReferenceSystem my_crs = QgsCoordinateReferenceSystem( "EPSG:" + epsgcode );
+    /*QgsCoordinateReferenceSystem my_crs = QgsCoordinateReferenceSystem( "EPSG:" + epsgcode );
     if ( !(my_crs.isValid()) ) {
         return "crs_not_found";
-    }
+    }*/
 
     // new project folder path name
     QString new_path = dataDir() + "/" + name;
@@ -364,22 +364,18 @@ QString ProjectModel::addNewProject(QString name, QString epsgcode )
     // folder path name to directory
     QDir dir( new_path );
 
-
-
     if ( !(dir.exists()) ) {
         copy_survey_project( name );
 
-        QString projectName = new_path + "/" + name + ".qgs";
+        //QString projectName = new_path + "/" + name + ".qgs";
 
-        qDebug() << "project name is " << projectName;
+        //qDebug() << "project name is " << projectName;
 
-        QByteArray fileData;
+        //QByteArray fileData;
 
-        QFile data(projectName);
+        //QFile data(projectName);
 
-        data.open(QIODevice::Text | QIODevice::ReadWrite); // open for read and write
-
-
+        //data.open(QIODevice::Text | QIODevice::ReadWrite); // open for read and write
         /*
         * Todo: delete lat long coordinates fields and also delete unnecessary tables from gpkg, only point name, description, photo and date can be there
         */
@@ -397,21 +393,29 @@ QString ProjectModel::addNewProject(QString name, QString epsgcode )
         newData.close();
         */
 
-
+        /*
         mProject = QgsProject::instance();
-        mProject->clear();
+        QgsProject::instance()->clear();
 
-        mProject->read( projectName );
+        QgsProject::instance()->read( projectName );
         qDebug() << "project path is " << projectName;
 
-        QgsMapLayer *myLayer = mProject->mapLayersByName("survey")[0];
+        QgsMapLayer *myLayer = QgsProject::instance()->mapLayersByName("survey")[0];
 
         if( myLayer && myLayer->isValid() ){
             qDebug() << "map layer is valid";
-            myLayer->setCrs( my_crs );
-            mProject->write( projectName );
-            mProject->clear();
+            QgsVectorLayer *vectorLayer = qobject_cast<QgsVectorLayer *>( myLayer );
+
+
+
+            vectorLayer->setCrs( my_crs );
+            vectorLayer->triggerRepaint();
+            vectorLayer->commitChanges();
+
+            QgsProject::instance()->write( projectName );
+            QgsProject::instance()->clear();
         }
+        */
         return "ok";
     }
     else{
