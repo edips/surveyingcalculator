@@ -13,7 +13,7 @@ Rectangle {
     color: Universal.background
     id: collect_pane
     width: parent.width
-    height: data_column.implicitHeight + 15
+    height: __activeLayer.layerName === "" ? 0 : data_column.implicitHeight + 15
     anchors.bottom: parent.bottom
     z: 3
     Column{
