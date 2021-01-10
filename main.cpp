@@ -293,12 +293,8 @@ int main(int argc, char *argv[])
 
     qDebug() << "Built with QGIS version " << VERSION_INT;
     // Add fonts to fontDatabase
-    QFontDatabase::addApplicationFont(":/assets/fonts/OpenSans-Regular.ttf");
-    QFontDatabase::addApplicationFont(":/assets/fonts/PT_Sans-Web-Regular.ttf");
-    QFontDatabase::addApplicationFont(":/assets/fonts/PT_Serif-Web-Regular.ttf");
-    QFontDatabase::addApplicationFont(":/assets/fonts/UbuntuMono-R.ttf");
-    QFontDatabase::addApplicationFont(":/assets/fonts/Ubuntu-Regular.ttf");
-    QFontDatabase::addApplicationFont(":/assets/fonts/Roboto-Regular.ttf");
+    QFontDatabase::addApplicationFont(":/assets/fonts/Lato-Regular.ttf");
+    QFontDatabase::addApplicationFont(":/assets/fonts/Lato-Bold.ttf");
 
     // Require permissions before accessing data folder
 #ifdef ANDROID
