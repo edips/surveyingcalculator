@@ -1,6 +1,156 @@
+// 1
+// Displaying coordinates for Data Collector
+//* TODO: isValid must be added to QML in order to check projected or geographic coordinates, we should set default to geographic if it isn't valid, means WGS84
+function datacollector_coord() {
+    if( __activeLayer.layerName != "" ) {
+        if( __loader.isLayerGeographic() ) {
+            if(__appSettings.latlongDisplay === "display_dms") {
+                return coord_DMS()
+            }
+            else if( __appSettings.latlongDisplay === "display_dec" ) {
+                return coord_decimal()
+            }
+        }
+        else{
+            return coord_XY()
+        }
+    }
+    else {
+        return ""
+    }
+}
+
+// 2
+// coordinate order for Decimal Lat Lon
+function coord_decimal(){
+    if(__appSettings.autoCenterMapChecked) {
+        return gps_decimal()
+    } else {
+        return cursorTextDeg()
+    }
+}
+
+// 3
+// coordinate order for DMS Lat Lon
+function coord_DMS(){
+    if(__appSettings.autoCenterMapChecked) {
+        return gps_DMS()
+    } else {
+        return cursorTextDMS()
+    }
+}
+
+// Functions to display GPS or cursor coordinates
+// 4
+function coord_XY(){
+    if(__appSettings.autoCenterMapChecked) {
+        return gps_XY()
+    } else {
+        return cursorTextProjected()
+    }
+}
+
+// 4.2
+// Projected coordinate
+function cursorTextProjected() {
+    var coords = __loader.coordTransformer( projectCoord(),
+                                           mapView.canvasMapSettings.transformContext(), epsgID, layerEPSG )
+    if( __appSettings.xyOrder === "ne" ) {
+        return "<b>" + textN() + ":</b> " + ( coords[1] ).toFixed(2) + "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"  + "<b>" + textE() + ":</b> " + ( coords[0] ).toFixed(2)
+    }
+    else if( __appSettings.xyOrder === "en" ) {
+        return "<b>" + textE() + ":</b> " + ( coords[0] ).toFixed(2) + "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"  + "<b>" + textN() + ":</b> " + ( coords[1] ).toFixed(2)
+    }
+}
+
+// 3.2
+// Geographic coordinate (DMS)
+// Coordinate order of Cursor for DMS
+function cursorTextDMS() {
+    var coords = __loader.coordTransformer( projectCoord(),
+                                           mapView.canvasMapSettings.transformContext(), epsgID, layerEPSG )
+    var coords2;
+    if(__appSettings.latlongFormat === "format_included") {
+        coords2 = (__surveyingUtils.formatPoint_dms( coords[0], coords[1], "included"  )).split(",")
+    } else {
+        coords2 = (__surveyingUtils.formatPoint_dms( coords[0], coords[1], "not_included"  )).split(",")
+    }
+    if(__appSettings.latlongOrder === "order_latlong") {
+        return "<b>" + "Lat" + ":</b> " + coords2[1] + "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"  + "<b>" + "Long" + ":</b> " + coords2[0]
+    }
+    else if(__appSettings.latlongOrder === "order_longlat") {
+        return "<b>" + "Long" + ":</b> " + coords2[0] + "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"  + "<b>" + "Lat" + ":</b> " + coords2[1]
+    }
+}
+// Geographic coordinate (Decimal)
+// Coordinate order of Cursor for Decimal Lat/Long
+function cursorTextDeg() {
+    var coords = __loader.coordTransformer( projectCoord(),
+                                           mapView.canvasMapSettings.transformContext(), epsgID, layerEPSG )
+    var coords2;
+    if (__appSettings.latlongFormat === "format_included") {
+        coords2 = (__surveyingUtils.formatPoint_decimal( coords[0], coords[1], "included"  )).split(",")
+    } else {
+        coords2 = (__surveyingUtils.formatPoint_decimal( coords[0], coords[1], "not_included"  )).split(",")
+    }
+    if ( __appSettings.latlongOrder === "order_latlong" ) {
+        return "<b>" + "Lat" + ":</b> " + coords2[1] + "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"  + "<b>" + "Long" + ":</b> " + coords2[0]
+    }
+    else if( __appSettings.latlongOrder === "order_longlat" ) {
+        return "<b>" + "Long" + ":</b> " + coords2[0] + "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"  + "<b>" + "Lat" + ":</b> " + coords2[1]
+    }
+}
+
+
+
+// GPSSS
+// 1- GPS cartesien crs
+function gps_XY() {
+    var coords = coords_gps
+    if(__appSettings.xyOrder === "ne") {
+        return "<b>" + textN() + ":</b> " + coords[1].toFixed(2) + "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"  + "<b>" + textE() + ":</b> " + coords[0].toFixed(2)
+    }
+    else if(__appSettings.xyOrder === "en") {
+        return "<b>" + textE() + ":</b> " + coords[0].toFixed(2) + "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"  + "<b>" + textN() + ":</b> " + coords[1].toFixed(2)
+    }
+}
+// 2- GPS Degree decimal
+function gps_decimal(){
+    var coords = coords_gps
+    if(__appSettings.latlongFormat === "format_included"){
+        coords = (__surveyingUtils.formatPoint_decimal( coords[0], coords[1], "included"  )).split(",")
+    }else{
+        coords = (__surveyingUtils.formatPoint_decimal( coords[0], coords[1], "not_included"  )).split(",")
+    }
+    if(__appSettings.latlongOrder === "order_latlong"){
+        return "<b>" + "Lat" + ":</b> " + coords[1] + "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"  + "<b>" + "Long" + ":</b> " + coords[0]
+    }
+    else if(__appSettings.latlongOrder === "order_longlat"){
+        return "<b>" + "Long" + ":</b> " + coords[0] + "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"  + "<b>" + "Lat" + ":</b> " + coords[1]
+    }
+}
+
+// 3- GPS DMS
+function gps_DMS() {
+    var coords = coords_gps
+    if( __appSettings.latlongFormat === "format_included" ) {
+        coords = ( __surveyingUtils.formatPoint_dms( coords[0], coords[1], "included"  )).split(",")
+    } else {
+        coords = ( __surveyingUtils.formatPoint_dms( coords[0], coords[1], "not_included"  )).split(",")
+    }
+    if( __appSettings.latlongOrder === "order_latlong" ) {
+        return "<b>" + "Lat" + ":</b> " + coords[1] + "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"  + "<b>" + "Long" + ":</b> " + coords[0]
+    }
+    else if( __appSettings.latlongOrder === "order_longlat" ) {
+        return "<b>" + "Long" + ":</b> " + coords[0] + "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"  + "<b>" + "Lat" + ":</b> " + coords[1]
+    }
+}
+
+
+
 // area unit conversion from meter to other units
 function areaUnits( area, area_metric ) {
-    if ( __appSettings.lenUnit === 0){
+    if ( __appSettings.lenUnit === 0 ){
         area.text = ( area_metric ).toFixed( 2 ) + " m²"
     }
     // km2
@@ -207,7 +357,7 @@ function getLetterDesignator(lat) {
 function add_point() {
     var en1;
     var boy1;
-    if( __appSettings.latlongDisplay === "display_dms" && __loader.isGeographic() ) {
+    if( __appSettings.latlongDisplay === "display_dms" && __loader.isLayerGeographic() ) {
         if(latdeg.text==="" || latmin.text==="" || latsec.text==="" || londeg.text==="" || lonmin.text==="" || lonsec.text===""){
             snack.open("Cannot add point. Please check the cordinates.")
         }
@@ -228,20 +378,33 @@ function add_point() {
                 if ( lon_deg < 0 ) {
                     boy1=-boy1.toString()
                 }
-                // addFeatureSurvey only requires x and y coordinates
-                var newpoint = __layersModel.addFeatureSurvey( en1, boy1 )
-                //set the point to mapcanvas's map settings in order to zoom the point, convert it from CRS to screen coordinates
+
+                // addFeatureSurvey: QgsPoint; only requires x and y coordinates
+                var coords_degree = __layersModel.addFeatureSurvey( en1, boy1 )
+
+                // transform point from layer CRS to project's CRS in order to catch pixel coordinate from map settings
+                var coords = __loader.coordTransformer( coords_degree,
+                                                       mapView.canvasMapSettings.transformContext(), layerEPSG, epsgID )
+
+                // create the transformed QgsPoint
+                var newpoint = __layersModel.addFeatureSurvey( coords[1], coords[0] )
+
+                // Set the point to mapcanvas's map settings in order to zoom the point, convert it from CRS to screen coordinates
                 var newqpoint = mapView.canvasMapSettings.coordinateToScreen( newpoint )
-                // zoom_to_point zooms to point to open feature form to record the point. It requires mapsettings of map canvas and screen point
+
+                // Zoom_to_point zooms to point to open feature form to record the point. It requires mapsettings of map canvas and screen point
                 __loader.zoom_to_point( mapView.canvasMapSettings, newqpoint )
+
                 // After zooming, screenX and screenY are set half of hight and width, it will be the new recorded coordinate
-                var screenX = mapView.mapCanvas.width/2
-                var screenY = mapView.mapCanvas.height/2
+                var screenX = mapView.mapCanvas.width / 2
+                var screenY = mapView.mapCanvas.height / 2
+
                 // Record feature, open feature form panel and record the point
                 dataCollector.recordFeature( screenX, screenY )
             }
             else {
-                error_dialog.error = "Coordinate system of the layer is not the same with coordinate system of the project. Layer and project coordinate systems must be the same before adding coordinates."
+                error_dialog.error = "Coordinate system unit of active layer isn't in degree."
+                console.log("layer crs is valid? ", __loader.layerProjectCrs() )
                 error_dialog.open()
             }
         }
@@ -259,20 +422,32 @@ function add_point() {
         // If active layer is point, convert coordinates to pixel coordinates and open the record panel for this
         else if ( digitizing.hasPointGeometry( activeLayerPanel.activeVectorLayer ) ) {
             if( __loader.layerProjectCrs() ) {
-                // addFeatureSurvey only requires x and y coordinates
-                var newpoint2 = __layersModel.addFeatureSurvey( en1, boy1 )
-                //set the point to mapcanvas's map settings in order to zoom the point, convert it from CRS to screen coordinates
+
+                // addFeatureSurvey: QgsPoint; only requires x and y coordinates
+                var coords_degree2 = __layersModel.addFeatureSurvey( en1, boy1 )
+
+                // transform point from layer CRS to project's CRS in order to catch pixel coordinate from map settings
+                var coords2 = __loader.coordTransformer( coords_degree2,
+                                                       mapView.canvasMapSettings.transformContext(), layerEPSG, epsgID )
+                // create the transformed QgsPoint
+                var newpoint2
+                newpoint2 = __layersModel.addFeatureSurvey( coords2[1], coords2[0] )
+
+                // set the point to mapcanvas's map settings in order to zoom the point, convert it from CRS to screen coordinates
                 var newqpoint2 = mapView.canvasMapSettings.coordinateToScreen( newpoint2 )
+
                 // zoom_to_point zooms to point to open feature form to record the point. It requires mapsettings of map canvas and screen point
                 __loader.zoom_to_point( mapView.canvasMapSettings, newqpoint2 )
+
                 // After zooming, screenX and screenY are set half of hight and width, it will be the new recorded coordinate
                 var screenX_2 = mapView.mapCanvas.width / 2
                 var screenY_2 = mapView.mapCanvas.height / 2
+
                 // Record feature, open feature form panel and record the point
                 dataCollector.recordFeature( screenX_2, screenY_2 )
             }
             else {
-                error_dialog.error = "Coordinate system of the layer is not the same with coordinate system of the project. Layer and project coordinate systems must be the same before adding coordinates."
+                error_dialog.error = "Coordinate system unit of active layer isn't in metric."
                 error_dialog.open()
             }
         }
@@ -344,10 +519,10 @@ function coord_order_latlon(){
 */
 
 // Order of [North East Lat Long] for QGIS coordinate input
-function coord_order(){
+function coord_order() {
     //console.log("__loader.isGeographic() in func: ", __loader.isGeographic(), "__loader.crsValid() ", __loader.crsValid())
     // is geographic or srs is undefined
-    if(__loader.isGeographic()){
+    if( isLayerGeographic ) {
         // latitude before longitude
         if(__appSettings.latlongOrder === "order_latlong"){
             return "latlon"
@@ -356,7 +531,7 @@ function coord_order(){
             return "lonlat"
         }
     }// is projected
-    else{
+    else {
         if(__appSettings.xyOrder === "ne"){
             return "ne"
         }
@@ -372,25 +547,6 @@ function coord_order_latlon() {
     }// Longitude before latitude
     else if(__appSettings.latlongOrder === "order_longlat"){
         return "lonlat"
-    }
-}
-
-// Lat North Long East for QGIS inputs:
-// Latitude or North
-function lat_north(){
-    if(__loader.isGeographic() || !__loader.crsValid()){
-        return "Latitude"
-    }else{
-        return textN()
-    }
-}
-
-// Longitude or East
-function lon_east(){
-    if(__loader.isGeographic() || !__loader.crsValid()){
-        return "Longitude"
-    }else{
-        return textE()
     }
 }
 
@@ -468,139 +624,6 @@ function xyOrder( coords ) {
         return "<b>" + textE() + ":</b> " + coords[0] + "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"  + "<b>" + textN() + ":</b> " + coords[1]
     }
 }
-// Functions to display GPS or cursor coordinates
-//---------------------------------------------------
-// Projected coordinate
-function cursorTextProjected() {
-    var screenPoint = Qt.point( mapView.mapCanvas.width/2, mapView.mapCanvas.height/2 )
-    var centerPoint = mapView.canvasMapSettings.screenToCoordinate( screenPoint )
-    var coords = (QgsQuick.Utils.formatPoint( centerPoint )).split(",")
-    if(__appSettings.xyOrder === "ne"){
-        return "<b>" + textN() + ":</b> " + coords[1] + "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"  + "<b>" + textE() + ":</b> " + coords[0]
-    }
-    else if(__appSettings.xyOrder === "en"){
-        return "<b>" + textE() + ":</b> " + coords[0] + "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"  + "<b>" + textN() + ":</b> " + coords[1]
-    }
-}
-
-function gps_XY(){
-    var coords = (QgsQuick.Utils.formatPoint( coordinateTransformer.projectedPosition )).split(",")
-    if(__appSettings.xyOrder === "ne"){
-        return "<b>" + textN() + ":</b> " + coords[1] + "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"  + "<b>" + textE() + ":</b> " + coords[0]
-    }
-    else if(__appSettings.xyOrder === "en"){
-        return "<b>" + textE() + ":</b> " + coords[0] + "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"  + "<b>" + textN() + ":</b> " + coords[1]
-    }
-}
-
-function coord_XY(){
-    if(__appSettings.autoCenterMapChecked) {
-        return gps_XY()
-    } else {
-        return cursorTextProjected()
-    }
-}
-//---------------------------------------------------
-// Geographic coordinate (DMS)
-// Coordinate order of Cursor for DMS
-function cursorTextDMS() {
-    var screenPoint = Qt.point( mapView.mapCanvas.width/2, mapView.mapCanvas.height/2 )
-    var centerPoint = mapView.canvasMapSettings.screenToCoordinate( screenPoint )
-    var coords;
-    if(__appSettings.latlongFormat === "format_included") {
-        coords = (__surveyingUtils.formatPoint_dms( centerPoint, "included"  )).split(",")
-    } else {
-        coords = (__surveyingUtils.formatPoint_dms( centerPoint, "not_included"  )).split(",")
-    }
-    if(__appSettings.latlongOrder === "order_latlong") {
-        return "<b>" + "Lat" + ":</b> " + coords[1] + "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"  + "<b>" + "Long" + ":</b> " + coords[0]
-    }
-    else if(__appSettings.latlongOrder === "order_longlat") {
-        return "<b>" + "Long" + ":</b> " + coords[0] + "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"  + "<b>" + "Lat" + ":</b> " + coords[1]
-    }
-}
-// GPS coordinate order for DMS Lat Lon
-function gps_DMS(){
-    var coords;
-    if(__appSettings.latlongFormat === "format_included") {
-        coords = (__surveyingUtils.formatPoint_dms( coordinateTransformer.projectedPosition, "included"  )).split(",")
-    } else {
-        coords = (__surveyingUtils.formatPoint_dms( coordinateTransformer.projectedPosition, "not_included"  )).split(",")
-    }
-    if(__appSettings.latlongOrder === "order_latlong") {
-        return "<b>" + "Lat" + ":</b> " + coords[1] + "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"  + "<b>" + "Long" + ":</b> " + coords[0]
-    }
-    else if(__appSettings.latlongOrder === "order_longlat") {
-        return "<b>" + "Long" + ":</b> " + coords[0] + "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"  + "<b>" + "Lat" + ":</b> " + coords[1]
-    }
-}
-// coordinate order for DMS Lat Lon
-function coord_DMS(){
-    if(__appSettings.autoCenterMapChecked) {
-        return gps_DMS()
-    } else {
-        return cursorTextDMS()
-    }
-}
-//---------------------------------------------------
-// Geographic coordinate (Decimal)
-// Coordinate order of Cursor for Decimal Lat/Long
-function cursorTextDeg() {
-    var screenPoint = Qt.point( mapView.mapCanvas.width/2, mapView.mapCanvas.height/2 )
-    var centerPoint = mapView.canvasMapSettings.screenToCoordinate( screenPoint )
-    var coords;
-    if(__appSettings.latlongFormat === "format_included"){
-        coords = (__surveyingUtils.formatPoint_decimal( centerPoint, "included"  )).split(",")
-    }else{
-        coords = (__surveyingUtils.formatPoint_decimal( centerPoint, "not_included"  )).split(",")
-    }
-    if(__appSettings.latlongOrder === "order_latlong"){
-        return "<b>" + "Lat" + ":</b> " + coords[1] + "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"  + "<b>" + "Long" + ":</b> " + coords[0]
-    }
-    else if(__appSettings.latlongOrder === "order_longlat"){
-        return "<b>" + "Long" + ":</b> " + coords[0] + "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"  + "<b>" + "Lat" + ":</b> " + coords[1]
-    }
-}
-// coordinate order for Decimal Lat Lon
-function gps_decimal(){
-    var coords;
-    if(__appSettings.latlongFormat === "format_included"){
-        coords = (__surveyingUtils.formatPoint_decimal( coordinateTransformer.projectedPosition, "included"  )).split(",")
-    }else{
-        coords = (__surveyingUtils.formatPoint_decimal( coordinateTransformer.projectedPosition, "not_included"  )).split(",")
-    }
-    if(__appSettings.latlongOrder === "order_latlong"){
-        return "<b>" + "Lat" + ":</b> " + coords[1] + "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"  + "<b>" + "Long" + ":</b> " + coords[0]
-    }
-    else if(__appSettings.latlongOrder === "order_longlat"){
-        return "<b>" + "Long" + ":</b> " + coords[0] + "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"  + "<b>" + "Lat" + ":</b> " + coords[1]
-    }
-}
-// coordinate order for Decimal Lat Lon
-function coord_decimal(){
-    if(__appSettings.autoCenterMapChecked) {
-        return "9999"//gps_decimal()
-    } else {
-        return cursorTextDeg()
-    }
-}
-//-------------------------------------------------------------------------------------
-// Displaying coordinates for Data Collector
-//* TODO: isValid must be added to QML in order to check projected or geographic coordinates, we should set default to geographic if it isn't valid, means WGS84
-function datacollector_coord() {
-    if( __loader.isGeographic() ) {
-        if(__appSettings.latlongDisplay === "display_dms") {
-            return coord_DMS()
-        }
-        else if( __appSettings.latlongDisplay === "display_dec" ) {
-            return coord_decimal()
-        }
-    }
-    else{
-        return coord_XY()
-    }
-}
-
 // Keyboard type keyboard_settings
 function keyboard_display(){
     if(__appSettings.keyboard === 0){
