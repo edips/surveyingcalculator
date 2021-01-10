@@ -20,21 +20,34 @@ import "../../components/common/script.js" as Util
 import "data_collector.js" as JS
 import "../../help"
 
+import QtLocation 5.6
+import QtPositioning 5.6
+
 
 FluidControls.Page{
     property color materialcolor: Universal.accent
     // counter for full screen round button for mapcanvas
     property int count_full: 0;
-    // // Project's EPSG ID:
+    // // Project's EPSG ID for transforming from project crs to active layer's crs cursor coordinate system
+    // Project's EPSG ID
     property int epsgID;
+    // Active Layer's EPSG ID
+    property int layerEPSG;
     // Project's Ccoordinate System Name
     property string epsgName;
     // qgis file Path
     property string filePath;
     // is geographic
     property bool isGeographic;
+    property bool isLayerGeographic;
     // screen point coordinates when clicking on map canvas
     property var screenPoint;
+
+    // (Array) GPS coordinate
+    property var coords_gps;
+
+    property var projectedPosition;
+    property bool projectPositionValid: false
     // You can change UI based on the display mode
     //property bool portaitMode: Screen.desktopAvailableHeight > Screen.desktopAvailableWidth
     title:qsTr("")
@@ -42,6 +55,78 @@ FluidControls.Page{
     anchors.fill: parent
     id:dataCollector
     visible: true
+
+    // PositionSource to get currrent GPS coordinates
+    PositionSource {
+        id: src
+        updateInterval: 1000
+        // Active when the button is pressed
+        active: __appSettings.autoCenterMapChecked
+        QQ.Component.onCompleted: epsgID = __loader.epsg_code()
+        onPositionChanged: {
+            if( layerEPSG !== 0 && epsgID !== 0 && src.valid ) {
+                // Converting Latitude and Longitude to active layer's coordinate system
+
+                // (array) Get GPS's lat and long
+                var currentPosition = src.position.coordinate
+
+                // (QgsPoint) convert GPS coordinate string to QgsPoint
+                var coord_qgs = __layersModel.addFeatureSurvey( currentPosition.latitude, currentPosition.longitude )
+
+                // (array) Convert coordinate from GPS's lat long to Active Layer's CRS
+                var coords = __loader.coordTransformer( coord_qgs,
+                                                       mapView.canvasMapSettings.transformContext(), 4326, layerEPSG )
+
+                // (array) Assign active layer's coords_gps to coords for javascript, then display on coordinate panel
+                coords_gps = coords
+
+                // update EPSG code of QGIS project
+                epsgID = __loader.epsg_code()
+
+                // (array) Convert GPS coordinate to Project's CRS for marker location
+                var coords_pr = __loader.coordTransformer( coord_qgs,
+                                                          mapView.canvasMapSettings.transformContext(), 4326, epsgID )
+
+                // (QgsPoint) Convert coordinate of Project's CRS for marker's location on map canvas
+                var newpoint = __layersModel.addFeatureSurvey( coords_pr[1], coords_pr[0] )
+
+
+                // set marker to center of the position when position is changed
+                if( !__layersModel.pointIsEmpty( newpoint ) ) {
+                    mapView.mapCanvas.mapSettings.setCenter( newpoint );
+                    projectPositionValid = true
+                    projectedPosition = newpoint
+                } else {
+                    projectPositionValid = false
+                }
+
+            }
+        }
+    }
+
+
+
+    // project's CRS cursor coordinate
+    function projectCoord() {
+        var screenPoint = Qt.point( mapView.mapCanvas.width/2, mapView.mapCanvas.height/2 )
+        var centerPoint = mapView.canvasMapSettings.screenToCoordinate( screenPoint )
+        return centerPoint
+    }
+
+    // Cursor coordinate connection
+    QQ.Connections {
+        target: mapView.canvasMapSettings
+        onExtentChanged: {
+            if( __activeLayer.layerName != "" ) {
+                collect_pane.coordinateText = (Util.datacollector_coord()).toString()
+            }
+
+            if( __appSettings.autoCenterMapChecked && projectPositionValid === true ) {
+                // set marker to center of the position when moving the map canvas
+                mapView.mapCanvas.mapSettings.setCenter( projectedPosition );
+            }
+        }
+    }
 
     // Edit feature function, it opens feature form to edit, save or delete the feature
     function editFeature(pair) {
@@ -134,8 +219,14 @@ FluidControls.Page{
             We use mProject, but which project? QGIS confuses about it so it crash
             It is important to initialize project before running QGIS related projects
             */
-            epsgID = !(__loader.epsg_code()) ? 4326 : __loader.epsg_code()
-            epsgName = __loader.epsg_name()
+
+            epsgID = __loader.epsg_code()
+            if( __activeLayer.layerName != "" ) {
+                isLayerGeographic = __loader.isLayerGeographic()
+                layerEPSG = __loader.activeLayerCRS()
+
+                epsgName = __loader.epsg_name()
+            }
         }
     }
 
@@ -199,17 +290,16 @@ FluidControls.Page{
             }
         }
         // Get Coordinates
-        // For Point --------------------------------
-        // Get Coordinate item
+        // Get Coordinate from point
         function getCoordItem() {
-            featureMenu.addItem(get_coord.createObject(featureMenu, { text: "Get Coordinate" }))
+            featureMenu.addItem( get_coord.createObject(featureMenu, { text: "Get Coordinate" }) )
         }
         QQ.Component {
             id: get_coord
             MenuItem {
                 onTriggered: {
                     var res = identifyKit.identifyOne(screenPoint);
-                    var pointCoord = __surveyingUtils.qgsFeature2Coord(res)
+                    var pointCoord = __surveyingUtils.qgsFeature2Coord( res, __appSettings.latlongOrder, __appSettings.xyOrder )
                     coordList.editor.text = ""
                     coordList.editor.text = String( pointCoord )
                     coordList.open()
@@ -278,7 +368,7 @@ FluidControls.Page{
         }
     }
 
-    // area and length dialog
+    // area dialog
     SErrorDialog {
         id: area_dialog
         property alias areaValue: area_value
@@ -553,8 +643,8 @@ FluidControls.Page{
                 if( __loader.activeLayerValid() ) {
                     addpoint_loader.active = true
 
-                    addpoint_loader.item.xText = __loader.isGeographic() || !__loader.crsValid() ? "Latitude"+ ":  " : Util.textN() + ":  ";
-                    addpoint_loader.item.yText = __loader.isGeographic() || !__loader.crsValid() ? "Longitude" + ":  " : Util.textE() + ":  ";
+                    addpoint_loader.item.xText = __loader.isLayerGeographic() || !__loader.crsValid() ? "Latitude"+ ":  " : Util.textN() + ":  ";
+                    addpoint_loader.item.yText = __loader.isLayerGeographic() || !__loader.crsValid() ? "Longitude" + ":  " : Util.textE() + ":  ";
 
                     addpoint_loader.item.coord_row1.anchors.top = Util.coord_order() === "en" || Util.coord_order() === "lonlat" ? addpoint_loader.item.coord_row2.bottom : parent.top
                     addpoint_loader.item.coord_row2.anchors.top = Util.coord_order() === "en" || Util.coord_order() === "lonlat" ? parent.top : addpoint_loader.item.coord_row1.bottom
@@ -563,6 +653,10 @@ FluidControls.Page{
 
                     console.log("n_txt: ", addpoint_loader.item.xText)
                     console.log("e_txt: ", addpoint_loader.item.yText)
+
+                    if( __activeLayer.layerName != "" ) {
+                        isLayerGeographic = __loader.isLayerGeographic()
+                    }
 
                     addpoint_loader.item.open()
                 }
@@ -643,7 +737,7 @@ FluidControls.Page{
                 if(__appSettings.autoCenterMapChecked){
                     __appSettings.autoCenterMapChecked =!__appSettings.autoCenterMapChecked
                 }
-                __loader.zoomToProject(mapView.canvasMapSettings)
+                __loader.zoomToProject( mapView.canvasMapSettings )
             }
         },
         // Menu
@@ -670,14 +764,23 @@ FluidControls.Page{
     }
 
     // extracted coordinates from active layer dialog
+    /*
+    TODO:
+    this will be for coordinate header, elsewhere coordinate output works well
+    - (optional) create another CoordinateList, another one will catch coordinate according to project's coordinate system, so it will use isGeographic
+    - Default one will extract active layer and isGeographic will be isLayerGeographic
+
+    another way: get headers from c++ based on feature's crs or active layer's crs
+    */
     CoordinateList {
         id: coordList
-        isGeographic: dataCollector.isGeographic
+        isGeographic: dataCollector.isLayerGeographic
         onClosed: coordList.editor.text = ""
     }
     // ScaleBar in metric or imperial units
     ScaleBar {
         id: scaleBar
+        visible: settingsDialog.scaleVisible
         height: 30
         anchors.bottom: collect_pane.top
         anchors.bottomMargin: 10
@@ -725,13 +828,7 @@ FluidControls.Page{
             sourceSize.height: 65
         }
     }
-    // Cursor coordinate connection
-    QQ.Connections {
-        target: mapView.canvasMapSettings
-        onExtentChanged: {
-            collect_pane.coordinateText = (Util.datacollector_coord()).toString()
-        }
-    }
+
 }
 /** Coordinate transformater */
 /*
