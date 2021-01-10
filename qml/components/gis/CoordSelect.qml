@@ -6,8 +6,11 @@ import lc 1.0
 - Add zoom button left size of the tool bar
 */
 TopSheet {
+    property string xy_feature_error: "Coordinate system of the point is not in metric unit."
+    property string latlong_feature_error: "Coordinate system of the point is not in degree unit."
     property string coordName;
     property bool isGeographic: false
+    property string error_txt;
     property string xCoord; // easting
     property string yCoord; // northing
     // when selected true, it means user chose a point from map canvas. if it is false, close button pressed, and coords aren't selected
@@ -34,16 +37,25 @@ TopSheet {
             // set selected true to set coordX and coordY
             mapCanvas.forceActiveFocus()
             var screenPoint = Qt.point( mouse.x, mouse.y );
-            var res = identifyKit.identifyOne(screenPoint);
-            if (res.valid && __surveyingUtils.featureIsPoint(res)) {
-                var pointCoord = __surveyingUtils.qgsPoint2String(res, __loader.isGeographic())
-                xCoord = pointCoord[0] // easting
-                yCoord = pointCoord[1] // northing
-                selected = true
-                // close the dialog after selecting a point
-                map_dialog.close()
+            var res = identifyKit.identifyOne( screenPoint );
+            if ( res.valid && __surveyingUtils.featureIsPoint( res ) ) {
+                if( isGeographic === __surveyingUtils.isfeatureGeographic( res ) ) {
+                    var pointCoord = __surveyingUtils.qgsPoint2String( res )
+                    xCoord = pointCoord[0] // easting
+                    yCoord = pointCoord[1] // northing
+                    selected = true
+                    // close the dialog after selecting a point
+                    map_dialog.close()
+                }
+                else {
+                    errDialog.text = error_txt
+                    errDialog.open()
+                }
             }
         }
+    }
+    SErrorDialog {
+        id: errDialog
     }
     // FeaturePanel to choose features
     QgsQuick.IdentifyKit {
