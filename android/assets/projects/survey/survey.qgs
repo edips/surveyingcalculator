@@ -1,5 +1,5 @@
 <!DOCTYPE qgis PUBLIC 'http://mrcc.com/qgis.dtd' 'SYSTEM'>
-<qgis version="3.16.2-Hannover" saveUserFull="Edip" saveUser="edip" saveDateTime="2021-01-07T03:55:29" projectname="">
+<qgis saveUser="edip" saveUserFull="Edip" version="3.16.2-Hannover" saveDateTime="2021-01-10T15:45:19" projectname="">
   <homePath path=""/>
   <title></title>
   <autotransaction active="0"/>
@@ -20,25 +20,25 @@
   </projectCrs>
   <layer-tree-group>
     <customproperties/>
-    <layer-tree-layer id="survey_e31e43a2_9053_446b_b751_a1d5ab578828" legend_exp="" providerKey="ogr" checked="Qt::Checked" expanded="1" name="survey" legend_split_behavior="0" patch_size="0,0" source="./survey.gpkg|layername=survey">
+    <layer-tree-layer name="survey" providerKey="ogr" checked="Qt::Checked" patch_size="0,0" source="./survey.gpkg|layername=survey" expanded="1" legend_exp="" id="survey_e31e43a2_9053_446b_b751_a1d5ab578828" legend_split_behavior="0">
       <customproperties/>
     </layer-tree-layer>
-    <layer-tree-layer id="OSM_Standard_e41a0c75_a2d8_47cb_a6af_557a36509b8a" legend_exp="" providerKey="wms" checked="Qt::Checked" expanded="1" name="OSM Standard" legend_split_behavior="0" patch_size="0,0" source="crs=EPSG:3857&amp;format&amp;type=xyz&amp;url=http://tile.openstreetmap.org/%7Bz%7D/%7Bx%7D/%7By%7D.png&amp;zmax=19&amp;zmin=0">
+    <layer-tree-layer name="OSM Standard" providerKey="wms" checked="Qt::Checked" patch_size="0,0" source="crs=EPSG:3857&amp;format&amp;type=xyz&amp;url=http://tile.openstreetmap.org/%7Bz%7D/%7Bx%7D/%7By%7D.png&amp;zmax=19&amp;zmin=0" expanded="1" legend_exp="" id="OSM_Standard_e41a0c75_a2d8_47cb_a6af_557a36509b8a" legend_split_behavior="0">
       <customproperties/>
     </layer-tree-layer>
-    <layer-tree-layer id="ESRI_Satellite__ArcGIS_World_Imagery__46ab935c_d7dd_47d4_a720_7b6964c98f46" legend_exp="" providerKey="wms" checked="Qt::Unchecked" expanded="1" name="ESRI Satellite" legend_split_behavior="0" patch_size="0,0" source="crs=EPSG:3857&amp;format&amp;type=xyz&amp;url=https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/%7Bz%7D/%7By%7D/%7Bx%7D&amp;zmax=19&amp;zmin=0">
+    <layer-tree-layer name="ESRI Satellite" providerKey="wms" checked="Qt::Unchecked" patch_size="0,0" source="crs=EPSG:3857&amp;format&amp;type=xyz&amp;url=https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/%7Bz%7D/%7By%7D/%7Bx%7D&amp;zmax=19&amp;zmin=0" expanded="1" legend_exp="" id="ESRI_Satellite__ArcGIS_World_Imagery__46ab935c_d7dd_47d4_a720_7b6964c98f46" legend_split_behavior="0">
       <customproperties/>
     </layer-tree-layer>
-    <layer-tree-layer id="ESRI_World_Topo_ced64c0a_ef7a_4f8f_a14c_e97e488a9273" legend_exp="" providerKey="wms" checked="Qt::Unchecked" expanded="1" name="ESRI World Topo" legend_split_behavior="0" patch_size="0,0" source="crs=EPSG:3857&amp;format&amp;type=xyz&amp;url=http://services.arcgisonline.com/ArcGIS/rest/services/World_Topo_Map/MapServer/tile/%7Bz%7D/%7By%7D/%7Bx%7D&amp;zmax=20&amp;zmin=0">
+    <layer-tree-layer name="ESRI World Topo" providerKey="wms" checked="Qt::Unchecked" patch_size="0,0" source="crs=EPSG:3857&amp;format&amp;type=xyz&amp;url=http://services.arcgisonline.com/ArcGIS/rest/services/World_Topo_Map/MapServer/tile/%7Bz%7D/%7By%7D/%7Bx%7D&amp;zmax=20&amp;zmin=0" expanded="1" legend_exp="" id="ESRI_World_Topo_ced64c0a_ef7a_4f8f_a14c_e97e488a9273" legend_split_behavior="0">
       <customproperties/>
     </layer-tree-layer>
-    <layer-tree-layer id="Yandex_Satellite_3af6a2e2_d541_400c_be7d_206e2e928cd3" legend_exp="" providerKey="wms" checked="Qt::Unchecked" expanded="1" name="Yandex Satellite" legend_split_behavior="0" patch_size="0,0" source="crs=EPSG:3395&amp;format&amp;type=xyz&amp;url=https://core-sat.maps.yandex.net/tiles?l%3Dsat%26v%3D3.564.0%26x%3D%7Bx%7D%26y%3D%7By%7D%26z%3D%7Bz%7D%26scale%3D1%26lang%3Dru_RU&amp;zmax=19&amp;zmin=0">
+    <layer-tree-layer name="Yandex Satellite" providerKey="wms" checked="Qt::Unchecked" patch_size="0,0" source="crs=EPSG:3395&amp;format&amp;type=xyz&amp;url=https://core-sat.maps.yandex.net/tiles?l%3Dsat%26v%3D3.564.0%26x%3D%7Bx%7D%26y%3D%7By%7D%26z%3D%7Bz%7D%26scale%3D1%26lang%3Dru_RU&amp;zmax=19&amp;zmin=0" expanded="1" legend_exp="" id="Yandex_Satellite_3af6a2e2_d541_400c_be7d_206e2e928cd3" legend_split_behavior="0">
       <customproperties/>
     </layer-tree-layer>
-    <layer-tree-layer id="Google_Terrain_Hybrid_91635e9c_c4cb_4310_a302_eee393c99e5c" legend_exp="" providerKey="wms" checked="Qt::Unchecked" expanded="1" name="Google Terrain Hybrid" legend_split_behavior="0" patch_size="0,0" source="crs=EPSG:3857&amp;format&amp;type=xyz&amp;url=https://mt1.google.com/vt/lyrs%3Dp%26x%3D%7Bx%7D%26y%3D%7By%7D%26z%3D%7Bz%7D&amp;zmax=19&amp;zmin=0">
+    <layer-tree-layer name="Google Terrain Hybrid" providerKey="wms" checked="Qt::Unchecked" patch_size="0,0" source="crs=EPSG:3857&amp;format&amp;type=xyz&amp;url=https://mt1.google.com/vt/lyrs%3Dp%26x%3D%7Bx%7D%26y%3D%7By%7D%26z%3D%7Bz%7D&amp;zmax=19&amp;zmin=0" expanded="1" legend_exp="" id="Google_Terrain_Hybrid_91635e9c_c4cb_4310_a302_eee393c99e5c" legend_split_behavior="0">
       <customproperties/>
     </layer-tree-layer>
-    <layer-tree-layer id="Google_Satellite_Hybrid_921f4555_2ebb_4acf_9931_530c961bcc61" legend_exp="" providerKey="wms" checked="Qt::Unchecked" expanded="1" name="Google Satellite Hybrid" legend_split_behavior="0" patch_size="0,0" source="crs=EPSG:3857&amp;format&amp;type=xyz&amp;url=https://mt1.google.com/vt/lyrs%3Dy%26x%3D%7Bx%7D%26y%3D%7By%7D%26z%3D%7Bz%7D&amp;zmax=19&amp;zmin=0">
+    <layer-tree-layer name="Google Satellite Hybrid" providerKey="wms" checked="Qt::Unchecked" patch_size="0,0" source="crs=EPSG:3857&amp;format&amp;type=xyz&amp;url=https://mt1.google.com/vt/lyrs%3Dy%26x%3D%7Bx%7D%26y%3D%7By%7D%26z%3D%7Bz%7D&amp;zmax=19&amp;zmin=0" expanded="1" legend_exp="" id="Google_Satellite_Hybrid_921f4555_2ebb_4acf_9931_530c961bcc61" legend_split_behavior="0">
       <customproperties/>
     </layer-tree-layer>
     <custom-order enabled="0">
@@ -51,19 +51,19 @@
       <item>Google_Satellite_Hybrid_921f4555_2ebb_4acf_9931_530c961bcc61</item>
     </custom-order>
   </layer-tree-group>
-  <snapping-settings mode="2" unit="1" self-snapping="0" enabled="0" intersection-snapping="0" tolerance="12" type="1" scaleDependencyMode="0" minScale="0" maxScale="0">
+  <snapping-settings tolerance="12" mode="2" maxScale="0" enabled="0" self-snapping="0" scaleDependencyMode="0" minScale="0" type="1" unit="1" intersection-snapping="0">
     <individual-layer-settings>
-      <layer-setting id="survey_e31e43a2_9053_446b_b751_a1d5ab578828" enabled="0" tolerance="12" units="1" type="1" minScale="0" maxScale="0"/>
+      <layer-setting tolerance="12" maxScale="0" enabled="0" minScale="0" type="1" id="survey_e31e43a2_9053_446b_b751_a1d5ab578828" units="1"/>
     </individual-layer-settings>
   </snapping-settings>
   <relations/>
-  <mapcanvas annotationsVisible="1" name="theMapCanvas">
+  <mapcanvas name="theMapCanvas" annotationsVisible="1">
     <units>meters</units>
     <extent>
-      <xmin>-5962213.26039842516183853</xmin>
-      <ymin>-7591570.95768091082572937</ymin>
-      <xmax>15077170.49936719983816147</xmax>
-      <ymax>13447812.80208471417427063</ymax>
+      <xmin>-9247766.83451652713119984</xmin>
+      <ymin>-7384891.02937215752899647</ymin>
+      <xmax>11791616.92524910531938076</xmax>
+      <ymax>13654492.73039346747100353</ymax>
     </extent>
     <rotation>0</rotation>
     <destinationsrs>
@@ -84,45 +84,45 @@
   </mapcanvas>
   <projectModels/>
   <legend updateDrawingOrder="true">
-    <legendlayer drawingOrder="-1" checked="Qt::Checked" showFeatureCount="0" name="survey" open="true">
+    <legendlayer name="survey" drawingOrder="-1" checked="Qt::Checked" open="true" showFeatureCount="0">
       <filegroup hidden="false" open="true">
-        <legendlayerfile isInOverview="0" visible="1" layerid="survey_e31e43a2_9053_446b_b751_a1d5ab578828"/>
+        <legendlayerfile layerid="survey_e31e43a2_9053_446b_b751_a1d5ab578828" isInOverview="0" visible="1"/>
       </filegroup>
     </legendlayer>
-    <legendlayer drawingOrder="-1" checked="Qt::Checked" showFeatureCount="0" name="OSM Standard" open="true">
+    <legendlayer name="OSM Standard" drawingOrder="-1" checked="Qt::Checked" open="true" showFeatureCount="0">
       <filegroup hidden="false" open="true">
-        <legendlayerfile isInOverview="0" visible="1" layerid="OSM_Standard_e41a0c75_a2d8_47cb_a6af_557a36509b8a"/>
+        <legendlayerfile layerid="OSM_Standard_e41a0c75_a2d8_47cb_a6af_557a36509b8a" isInOverview="0" visible="1"/>
       </filegroup>
     </legendlayer>
-    <legendlayer drawingOrder="-1" checked="Qt::Unchecked" showFeatureCount="0" name="ESRI Satellite" open="true">
+    <legendlayer name="ESRI Satellite" drawingOrder="-1" checked="Qt::Unchecked" open="true" showFeatureCount="0">
       <filegroup hidden="false" open="true">
-        <legendlayerfile isInOverview="0" visible="0" layerid="ESRI_Satellite__ArcGIS_World_Imagery__46ab935c_d7dd_47d4_a720_7b6964c98f46"/>
+        <legendlayerfile layerid="ESRI_Satellite__ArcGIS_World_Imagery__46ab935c_d7dd_47d4_a720_7b6964c98f46" isInOverview="0" visible="0"/>
       </filegroup>
     </legendlayer>
-    <legendlayer drawingOrder="-1" checked="Qt::Unchecked" showFeatureCount="0" name="ESRI World Topo" open="true">
+    <legendlayer name="ESRI World Topo" drawingOrder="-1" checked="Qt::Unchecked" open="true" showFeatureCount="0">
       <filegroup hidden="false" open="true">
-        <legendlayerfile isInOverview="0" visible="0" layerid="ESRI_World_Topo_ced64c0a_ef7a_4f8f_a14c_e97e488a9273"/>
+        <legendlayerfile layerid="ESRI_World_Topo_ced64c0a_ef7a_4f8f_a14c_e97e488a9273" isInOverview="0" visible="0"/>
       </filegroup>
     </legendlayer>
-    <legendlayer drawingOrder="-1" checked="Qt::Unchecked" showFeatureCount="0" name="Yandex Satellite" open="true">
+    <legendlayer name="Yandex Satellite" drawingOrder="-1" checked="Qt::Unchecked" open="true" showFeatureCount="0">
       <filegroup hidden="false" open="true">
-        <legendlayerfile isInOverview="0" visible="0" layerid="Yandex_Satellite_3af6a2e2_d541_400c_be7d_206e2e928cd3"/>
+        <legendlayerfile layerid="Yandex_Satellite_3af6a2e2_d541_400c_be7d_206e2e928cd3" isInOverview="0" visible="0"/>
       </filegroup>
     </legendlayer>
-    <legendlayer drawingOrder="-1" checked="Qt::Unchecked" showFeatureCount="0" name="Google Terrain Hybrid" open="true">
+    <legendlayer name="Google Terrain Hybrid" drawingOrder="-1" checked="Qt::Unchecked" open="true" showFeatureCount="0">
       <filegroup hidden="false" open="true">
-        <legendlayerfile isInOverview="0" visible="0" layerid="Google_Terrain_Hybrid_91635e9c_c4cb_4310_a302_eee393c99e5c"/>
+        <legendlayerfile layerid="Google_Terrain_Hybrid_91635e9c_c4cb_4310_a302_eee393c99e5c" isInOverview="0" visible="0"/>
       </filegroup>
     </legendlayer>
-    <legendlayer drawingOrder="-1" checked="Qt::Unchecked" showFeatureCount="0" name="Google Satellite Hybrid" open="true">
+    <legendlayer name="Google Satellite Hybrid" drawingOrder="-1" checked="Qt::Unchecked" open="true" showFeatureCount="0">
       <filegroup hidden="false" open="true">
-        <legendlayerfile isInOverview="0" visible="0" layerid="Google_Satellite_Hybrid_921f4555_2ebb_4acf_9931_530c961bcc61"/>
+        <legendlayerfile layerid="Google_Satellite_Hybrid_921f4555_2ebb_4acf_9931_530c961bcc61" isInOverview="0" visible="0"/>
       </filegroup>
     </legendlayer>
   </legend>
   <mapViewDocks/>
   <mapViewDocks3D/>
-  <main-annotation-layer refreshOnNotifyEnabled="0" autoRefreshEnabled="0" refreshOnNotifyMessage="" autoRefreshTime="0" type="annotation">
+  <main-annotation-layer refreshOnNotifyMessage="" autoRefreshEnabled="0" type="annotation" refreshOnNotifyEnabled="0" autoRefreshTime="0">
     <id>Annotations_9489c8a3_24ec_43ee_97a0_ca1cdeefc375</id>
     <datasource></datasource>
     <keywordList>
@@ -139,7 +139,7 @@
         <description></description>
         <projectionacronym></projectionacronym>
         <ellipsoidacronym></ellipsoidacronym>
-        <geographicflag>false</geographicflag>
+        <geographicflag>true</geographicflag>
       </spatialrefsys>
     </srs>
     <resourceMetadata>
@@ -162,7 +162,7 @@
           <description></description>
           <projectionacronym></projectionacronym>
           <ellipsoidacronym></ellipsoidacronym>
-          <geographicflag>false</geographicflag>
+          <geographicflag>true</geographicflag>
         </spatialrefsys>
       </crs>
       <extent/>
@@ -171,7 +171,7 @@
     <layerOpacity>1</layerOpacity>
   </main-annotation-layer>
   <projectlayers>
-    <maplayer hasScaleBasedVisibilityFlag="0" refreshOnNotifyEnabled="0" autoRefreshEnabled="0" refreshOnNotifyMessage="" autoRefreshTime="0" type="raster" styleCategories="AllStyleCategories" maxScale="0" minScale="1e+08">
+    <maplayer refreshOnNotifyMessage="" maxScale="0" autoRefreshEnabled="0" hasScaleBasedVisibilityFlag="0" styleCategories="AllStyleCategories" minScale="1e+08" type="raster" refreshOnNotifyEnabled="0" autoRefreshTime="0">
       <extent>
         <xmin>-20037508.34278924390673637</xmin>
         <ymin>-20037508.34278925508260727</ymin>
@@ -217,14 +217,14 @@
             <description></description>
             <projectionacronym></projectionacronym>
             <ellipsoidacronym></ellipsoidacronym>
-            <geographicflag>false</geographicflag>
+            <geographicflag>true</geographicflag>
           </spatialrefsys>
         </crs>
         <extent/>
       </resourceMetadata>
       <provider>wms</provider>
       <noData>
-        <noDataList bandNo="1" useSrcNoData="0"/>
+        <noDataList useSrcNoData="0" bandNo="1"/>
       </noData>
       <map-layer-style-manager current="default">
         <map-layer-style name="default"/>
@@ -234,7 +234,7 @@
         <Removable>1</Removable>
         <Searchable>1</Searchable>
       </flags>
-      <temporal mode="0" enabled="0" fetchMode="0">
+      <temporal fetchMode="0" mode="0" enabled="0">
         <fixedRange>
           <start></start>
           <end></end>
@@ -245,9 +245,9 @@
       </customproperties>
       <pipe>
         <provider>
-          <resampling zoomedInResamplingMethod="nearestNeighbour" enabled="false" maxOversampling="2" zoomedOutResamplingMethod="nearestNeighbour"/>
+          <resampling zoomedOutResamplingMethod="nearestNeighbour" enabled="false" zoomedInResamplingMethod="nearestNeighbour" maxOversampling="2"/>
         </provider>
-        <rasterrenderer opacity="1" alphaBand="-1" nodataColor="" band="1" type="singlebandcolordata">
+        <rasterrenderer band="1" type="singlebandcolordata" opacity="1" alphaBand="-1" nodataColor="">
           <rasterTransparency/>
           <minMaxOrigin>
             <limits>None</limits>
@@ -258,14 +258,14 @@
             <stdDevFactor>2</stdDevFactor>
           </minMaxOrigin>
         </rasterrenderer>
-        <brightnesscontrast gamma="1" contrast="0" brightness="0"/>
-        <huesaturation colorizeOn="0" grayscaleMode="0" colorizeBlue="128" colorizeStrength="100" colorizeGreen="128" saturation="0" colorizeRed="255"/>
+        <brightnesscontrast gamma="1" brightness="0" contrast="0"/>
+        <huesaturation grayscaleMode="0" colorizeRed="255" colorizeBlue="128" colorizeGreen="128" colorizeStrength="100" saturation="0" colorizeOn="0"/>
         <rasterresampler maxOversampling="2"/>
         <resamplingStage>resamplingFilter</resamplingStage>
       </pipe>
       <blendMode>0</blendMode>
     </maplayer>
-    <maplayer hasScaleBasedVisibilityFlag="0" refreshOnNotifyEnabled="0" autoRefreshEnabled="0" refreshOnNotifyMessage="" autoRefreshTime="0" type="raster" styleCategories="AllStyleCategories" maxScale="0" minScale="1e+08">
+    <maplayer refreshOnNotifyMessage="" maxScale="0" autoRefreshEnabled="0" hasScaleBasedVisibilityFlag="0" styleCategories="AllStyleCategories" minScale="1e+08" type="raster" refreshOnNotifyEnabled="0" autoRefreshTime="0">
       <extent>
         <xmin>-20037508.34278924390673637</xmin>
         <ymin>-20037508.34278925508260727</ymin>
@@ -311,14 +311,14 @@
             <description></description>
             <projectionacronym></projectionacronym>
             <ellipsoidacronym></ellipsoidacronym>
-            <geographicflag>false</geographicflag>
+            <geographicflag>true</geographicflag>
           </spatialrefsys>
         </crs>
         <extent/>
       </resourceMetadata>
       <provider>wms</provider>
       <noData>
-        <noDataList bandNo="1" useSrcNoData="0"/>
+        <noDataList useSrcNoData="0" bandNo="1"/>
       </noData>
       <map-layer-style-manager current="default">
         <map-layer-style name="default"/>
@@ -328,7 +328,7 @@
         <Removable>1</Removable>
         <Searchable>1</Searchable>
       </flags>
-      <temporal mode="0" enabled="0" fetchMode="0">
+      <temporal fetchMode="0" mode="0" enabled="0">
         <fixedRange>
           <start></start>
           <end></end>
@@ -339,9 +339,9 @@
       </customproperties>
       <pipe>
         <provider>
-          <resampling zoomedInResamplingMethod="nearestNeighbour" enabled="false" maxOversampling="2" zoomedOutResamplingMethod="nearestNeighbour"/>
+          <resampling zoomedOutResamplingMethod="nearestNeighbour" enabled="false" zoomedInResamplingMethod="nearestNeighbour" maxOversampling="2"/>
         </provider>
-        <rasterrenderer opacity="1" alphaBand="-1" nodataColor="" band="1" type="singlebandcolordata">
+        <rasterrenderer band="1" type="singlebandcolordata" opacity="1" alphaBand="-1" nodataColor="">
           <rasterTransparency/>
           <minMaxOrigin>
             <limits>None</limits>
@@ -352,14 +352,14 @@
             <stdDevFactor>2</stdDevFactor>
           </minMaxOrigin>
         </rasterrenderer>
-        <brightnesscontrast gamma="1" contrast="0" brightness="0"/>
-        <huesaturation colorizeOn="0" grayscaleMode="0" colorizeBlue="128" colorizeStrength="100" colorizeGreen="128" saturation="0" colorizeRed="255"/>
+        <brightnesscontrast gamma="1" brightness="0" contrast="0"/>
+        <huesaturation grayscaleMode="0" colorizeRed="255" colorizeBlue="128" colorizeGreen="128" colorizeStrength="100" saturation="0" colorizeOn="0"/>
         <rasterresampler maxOversampling="2"/>
         <resamplingStage>resamplingFilter</resamplingStage>
       </pipe>
       <blendMode>0</blendMode>
     </maplayer>
-    <maplayer hasScaleBasedVisibilityFlag="0" refreshOnNotifyEnabled="0" autoRefreshEnabled="0" refreshOnNotifyMessage="" autoRefreshTime="0" type="raster" styleCategories="AllStyleCategories" maxScale="0" minScale="1e+08">
+    <maplayer refreshOnNotifyMessage="" maxScale="0" autoRefreshEnabled="0" hasScaleBasedVisibilityFlag="0" styleCategories="AllStyleCategories" minScale="1e+08" type="raster" refreshOnNotifyEnabled="0" autoRefreshTime="0">
       <extent>
         <xmin>-20037508.34278924390673637</xmin>
         <ymin>-20037508.34278925508260727</ymin>
@@ -405,14 +405,14 @@
             <description></description>
             <projectionacronym></projectionacronym>
             <ellipsoidacronym></ellipsoidacronym>
-            <geographicflag>false</geographicflag>
+            <geographicflag>true</geographicflag>
           </spatialrefsys>
         </crs>
         <extent/>
       </resourceMetadata>
       <provider>wms</provider>
       <noData>
-        <noDataList bandNo="1" useSrcNoData="0"/>
+        <noDataList useSrcNoData="0" bandNo="1"/>
       </noData>
       <map-layer-style-manager current="default">
         <map-layer-style name="default"/>
@@ -422,7 +422,7 @@
         <Removable>1</Removable>
         <Searchable>1</Searchable>
       </flags>
-      <temporal mode="0" enabled="0" fetchMode="0">
+      <temporal fetchMode="0" mode="0" enabled="0">
         <fixedRange>
           <start></start>
           <end></end>
@@ -433,9 +433,9 @@
       </customproperties>
       <pipe>
         <provider>
-          <resampling zoomedInResamplingMethod="nearestNeighbour" enabled="false" maxOversampling="2" zoomedOutResamplingMethod="nearestNeighbour"/>
+          <resampling zoomedOutResamplingMethod="nearestNeighbour" enabled="false" zoomedInResamplingMethod="nearestNeighbour" maxOversampling="2"/>
         </provider>
-        <rasterrenderer opacity="1" alphaBand="-1" nodataColor="" band="1" type="singlebandcolordata">
+        <rasterrenderer band="1" type="singlebandcolordata" opacity="1" alphaBand="-1" nodataColor="">
           <rasterTransparency/>
           <minMaxOrigin>
             <limits>None</limits>
@@ -446,14 +446,14 @@
             <stdDevFactor>2</stdDevFactor>
           </minMaxOrigin>
         </rasterrenderer>
-        <brightnesscontrast gamma="1" contrast="0" brightness="0"/>
-        <huesaturation colorizeOn="0" grayscaleMode="0" colorizeBlue="128" colorizeStrength="100" colorizeGreen="128" saturation="0" colorizeRed="255"/>
+        <brightnesscontrast gamma="1" brightness="0" contrast="0"/>
+        <huesaturation grayscaleMode="0" colorizeRed="255" colorizeBlue="128" colorizeGreen="128" colorizeStrength="100" saturation="0" colorizeOn="0"/>
         <rasterresampler maxOversampling="2"/>
         <resamplingStage>resamplingFilter</resamplingStage>
       </pipe>
       <blendMode>0</blendMode>
     </maplayer>
-    <maplayer hasScaleBasedVisibilityFlag="0" refreshOnNotifyEnabled="0" autoRefreshEnabled="0" refreshOnNotifyMessage="" autoRefreshTime="0" type="raster" styleCategories="AllStyleCategories" maxScale="0" minScale="1e+08">
+    <maplayer refreshOnNotifyMessage="" maxScale="0" autoRefreshEnabled="0" hasScaleBasedVisibilityFlag="0" styleCategories="AllStyleCategories" minScale="1e+08" type="raster" refreshOnNotifyEnabled="0" autoRefreshTime="0">
       <extent>
         <xmin>-20037508.34278924390673637</xmin>
         <ymin>-20037508.34278925508260727</ymin>
@@ -499,14 +499,14 @@
             <description></description>
             <projectionacronym></projectionacronym>
             <ellipsoidacronym></ellipsoidacronym>
-            <geographicflag>false</geographicflag>
+            <geographicflag>true</geographicflag>
           </spatialrefsys>
         </crs>
         <extent/>
       </resourceMetadata>
       <provider>wms</provider>
       <noData>
-        <noDataList bandNo="1" useSrcNoData="0"/>
+        <noDataList useSrcNoData="0" bandNo="1"/>
       </noData>
       <map-layer-style-manager current="default">
         <map-layer-style name="default"/>
@@ -516,7 +516,7 @@
         <Removable>1</Removable>
         <Searchable>1</Searchable>
       </flags>
-      <temporal mode="0" enabled="0" fetchMode="0">
+      <temporal fetchMode="0" mode="0" enabled="0">
         <fixedRange>
           <start></start>
           <end></end>
@@ -527,9 +527,9 @@
       </customproperties>
       <pipe>
         <provider>
-          <resampling zoomedInResamplingMethod="nearestNeighbour" enabled="false" maxOversampling="2" zoomedOutResamplingMethod="nearestNeighbour"/>
+          <resampling zoomedOutResamplingMethod="nearestNeighbour" enabled="false" zoomedInResamplingMethod="nearestNeighbour" maxOversampling="2"/>
         </provider>
-        <rasterrenderer opacity="1" alphaBand="-1" nodataColor="" band="1" type="singlebandcolordata">
+        <rasterrenderer band="1" type="singlebandcolordata" opacity="1" alphaBand="-1" nodataColor="">
           <rasterTransparency/>
           <minMaxOrigin>
             <limits>None</limits>
@@ -540,14 +540,14 @@
             <stdDevFactor>2</stdDevFactor>
           </minMaxOrigin>
         </rasterrenderer>
-        <brightnesscontrast gamma="1" contrast="0" brightness="0"/>
-        <huesaturation colorizeOn="0" grayscaleMode="0" colorizeBlue="128" colorizeStrength="100" colorizeGreen="128" saturation="0" colorizeRed="255"/>
+        <brightnesscontrast gamma="1" brightness="0" contrast="0"/>
+        <huesaturation grayscaleMode="0" colorizeRed="255" colorizeBlue="128" colorizeGreen="128" colorizeStrength="100" saturation="0" colorizeOn="0"/>
         <rasterresampler maxOversampling="2"/>
         <resamplingStage>resamplingFilter</resamplingStage>
       </pipe>
       <blendMode>0</blendMode>
     </maplayer>
-    <maplayer hasScaleBasedVisibilityFlag="0" refreshOnNotifyEnabled="0" autoRefreshEnabled="0" refreshOnNotifyMessage="" autoRefreshTime="0" type="raster" styleCategories="AllStyleCategories" maxScale="0" minScale="1e+08">
+    <maplayer refreshOnNotifyMessage="" maxScale="0" autoRefreshEnabled="0" hasScaleBasedVisibilityFlag="0" styleCategories="AllStyleCategories" minScale="1e+08" type="raster" refreshOnNotifyEnabled="0" autoRefreshTime="0">
       <extent>
         <xmin>-20037508.34278924390673637</xmin>
         <ymin>-20037508.34278925508260727</ymin>
@@ -594,14 +594,14 @@
             <description></description>
             <projectionacronym></projectionacronym>
             <ellipsoidacronym></ellipsoidacronym>
-            <geographicflag>false</geographicflag>
+            <geographicflag>true</geographicflag>
           </spatialrefsys>
         </crs>
         <extent/>
       </resourceMetadata>
       <provider>wms</provider>
       <noData>
-        <noDataList bandNo="1" useSrcNoData="0"/>
+        <noDataList useSrcNoData="0" bandNo="1"/>
       </noData>
       <map-layer-style-manager current="default">
         <map-layer-style name="default"/>
@@ -611,7 +611,7 @@
         <Removable>1</Removable>
         <Searchable>0</Searchable>
       </flags>
-      <temporal mode="0" enabled="0" fetchMode="0">
+      <temporal fetchMode="0" mode="0" enabled="0">
         <fixedRange>
           <start></start>
           <end></end>
@@ -622,9 +622,9 @@
       </customproperties>
       <pipe>
         <provider>
-          <resampling zoomedInResamplingMethod="nearestNeighbour" enabled="false" maxOversampling="2" zoomedOutResamplingMethod="nearestNeighbour"/>
+          <resampling zoomedOutResamplingMethod="nearestNeighbour" enabled="false" zoomedInResamplingMethod="nearestNeighbour" maxOversampling="2"/>
         </provider>
-        <rasterrenderer opacity="1" alphaBand="-1" nodataColor="" band="1" type="singlebandcolordata">
+        <rasterrenderer band="1" type="singlebandcolordata" opacity="1" alphaBand="-1" nodataColor="">
           <rasterTransparency/>
           <minMaxOrigin>
             <limits>None</limits>
@@ -635,14 +635,14 @@
             <stdDevFactor>2</stdDevFactor>
           </minMaxOrigin>
         </rasterrenderer>
-        <brightnesscontrast gamma="1" contrast="0" brightness="0"/>
-        <huesaturation colorizeOn="0" grayscaleMode="0" colorizeBlue="128" colorizeStrength="100" colorizeGreen="128" saturation="0" colorizeRed="255"/>
+        <brightnesscontrast gamma="1" brightness="0" contrast="0"/>
+        <huesaturation grayscaleMode="0" colorizeRed="255" colorizeBlue="128" colorizeGreen="128" colorizeStrength="100" saturation="0" colorizeOn="0"/>
         <rasterresampler maxOversampling="2"/>
         <resamplingStage>resamplingFilter</resamplingStage>
       </pipe>
       <blendMode>0</blendMode>
     </maplayer>
-    <maplayer hasScaleBasedVisibilityFlag="0" refreshOnNotifyEnabled="0" autoRefreshEnabled="0" refreshOnNotifyMessage="" autoRefreshTime="0" type="raster" styleCategories="AllStyleCategories" maxScale="0" minScale="1e+08">
+    <maplayer refreshOnNotifyMessage="" maxScale="0" autoRefreshEnabled="0" hasScaleBasedVisibilityFlag="0" styleCategories="AllStyleCategories" minScale="1e+08" type="raster" refreshOnNotifyEnabled="0" autoRefreshTime="0">
       <extent>
         <xmin>-20037508.34278924390673637</xmin>
         <ymin>-20037508.34278925508260727</ymin>
@@ -689,14 +689,14 @@
             <description></description>
             <projectionacronym></projectionacronym>
             <ellipsoidacronym></ellipsoidacronym>
-            <geographicflag>false</geographicflag>
+            <geographicflag>true</geographicflag>
           </spatialrefsys>
         </crs>
         <extent/>
       </resourceMetadata>
       <provider>wms</provider>
       <noData>
-        <noDataList bandNo="1" useSrcNoData="0"/>
+        <noDataList useSrcNoData="0" bandNo="1"/>
       </noData>
       <map-layer-style-manager current="default">
         <map-layer-style name="default"/>
@@ -706,7 +706,7 @@
         <Removable>1</Removable>
         <Searchable>1</Searchable>
       </flags>
-      <temporal mode="0" enabled="0" fetchMode="0">
+      <temporal fetchMode="0" mode="0" enabled="0">
         <fixedRange>
           <start></start>
           <end></end>
@@ -717,9 +717,9 @@
       </customproperties>
       <pipe>
         <provider>
-          <resampling zoomedInResamplingMethod="nearestNeighbour" enabled="false" maxOversampling="2" zoomedOutResamplingMethod="nearestNeighbour"/>
+          <resampling zoomedOutResamplingMethod="nearestNeighbour" enabled="false" zoomedInResamplingMethod="nearestNeighbour" maxOversampling="2"/>
         </provider>
-        <rasterrenderer opacity="1" alphaBand="-1" nodataColor="" band="1" type="singlebandcolordata">
+        <rasterrenderer band="1" type="singlebandcolordata" opacity="1" alphaBand="-1" nodataColor="">
           <rasterTransparency/>
           <minMaxOrigin>
             <limits>None</limits>
@@ -730,14 +730,14 @@
             <stdDevFactor>2</stdDevFactor>
           </minMaxOrigin>
         </rasterrenderer>
-        <brightnesscontrast gamma="1" contrast="0" brightness="0"/>
-        <huesaturation colorizeOn="0" grayscaleMode="0" colorizeBlue="128" colorizeStrength="100" colorizeGreen="128" saturation="0" colorizeRed="255"/>
+        <brightnesscontrast gamma="1" brightness="0" contrast="0"/>
+        <huesaturation grayscaleMode="0" colorizeRed="255" colorizeBlue="128" colorizeGreen="128" colorizeStrength="100" saturation="0" colorizeOn="0"/>
         <rasterresampler maxOversampling="2"/>
         <resamplingStage>resamplingFilter</resamplingStage>
       </pipe>
       <blendMode>0</blendMode>
     </maplayer>
-    <maplayer refreshOnNotifyEnabled="0" autoRefreshEnabled="0" readOnly="0" autoRefreshTime="0" minScale="100000000" simplifyDrawingTol="1" geometry="Point" simplifyAlgorithm="0" maxScale="0" wkbType="PointZ" simplifyMaxScale="1" refreshOnNotifyMessage="" styleCategories="AllStyleCategories" type="vector" simplifyDrawingHints="0" labelsEnabled="1" hasScaleBasedVisibilityFlag="0" simplifyLocal="1">
+    <maplayer labelsEnabled="1" refreshOnNotifyMessage="" wkbType="PointZ" hasScaleBasedVisibilityFlag="0" simplifyMaxScale="1" type="vector" autoRefreshEnabled="0" styleCategories="AllStyleCategories" simplifyDrawingTol="1" readOnly="0" refreshOnNotifyEnabled="0" maxScale="0" simplifyAlgorithm="0" autoRefreshTime="0" minScale="100000000" geometry="Point" simplifyLocal="1" simplifyDrawingHints="0">
       <extent>
         <xmin>29.19800627480140065</xmin>
         <ymin>34.1453149425073974</ymin>
@@ -792,11 +792,11 @@
             <description></description>
             <projectionacronym></projectionacronym>
             <ellipsoidacronym></ellipsoidacronym>
-            <geographicflag>false</geographicflag>
+            <geographicflag>true</geographicflag>
           </spatialrefsys>
         </crs>
         <extent>
-          <spatial miny="0" maxz="0" crs="" maxx="0" maxy="0" minx="0" dimensions="2" minz="0"/>
+          <spatial minz="0" miny="0" maxy="0" maxx="0" maxz="0" crs="" minx="0" dimensions="2"/>
           <temporal>
             <period>
               <start></start>
@@ -819,16 +819,16 @@
         <Removable>1</Removable>
         <Searchable>1</Searchable>
       </flags>
-      <temporal endExpression="" mode="0" startField="" startExpression="" enabled="0" durationUnit="min" fixedDuration="0" endField="" durationField="" accumulate="0">
+      <temporal startField="" endExpression="" mode="0" accumulate="0" fixedDuration="0" enabled="0" startExpression="" endField="" durationField="" durationUnit="min">
         <fixedRange>
           <start></start>
           <end></end>
         </fixedRange>
       </temporal>
-      <renderer-v2 forceraster="0" enableorderby="0" symbollevels="0" type="singleSymbol">
+      <renderer-v2 symbollevels="0" forceraster="0" type="singleSymbol" enableorderby="0">
         <symbols>
-          <symbol alpha="1" clip_to_extent="1" name="0" force_rhr="0" type="marker">
-            <layer enabled="1" class="SimpleMarker" locked="0" pass="0">
+          <symbol force_rhr="0" name="0" clip_to_extent="1" alpha="1" type="marker">
+            <layer enabled="1" pass="0" class="SimpleMarker" locked="0">
               <prop k="angle" v="0"/>
               <prop k="color" v="255,255,0,255"/>
               <prop k="horizontal_anchor_point" v="1"/>
@@ -862,12 +862,12 @@
       </renderer-v2>
       <labeling type="simple">
         <settings calloutType="simple">
-          <text-style namedStyle="Regular" fieldName="Name" capitalization="0" fontWeight="50" multilineHeight="1" textOpacity="1" fontKerning="1" fontWordSpacing="0" fontUnderline="0" fontItalic="0" textOrientation="horizontal" isExpression="0" useSubstitutions="0" textColor="0,0,0,255" previewBkgrdColor="255,255,255,255" fontLetterSpacing="0" fontStrikeout="0" fontFamily="Open Sans" allowHtml="0" fontSizeUnit="Point" fontSize="8" fontSizeMapUnitScale="3x:0,0,0,0,0,0" blendMode="0">
-            <text-buffer bufferColor="255,255,255,255" bufferDraw="1" bufferBlendMode="0" bufferOpacity="1" bufferSize="0.40000000000000002" bufferSizeUnits="MM" bufferSizeMapUnitScale="3x:0,0,0,0,0,0" bufferJoinStyle="128" bufferNoFill="1"/>
-            <text-mask maskSizeUnits="MM" maskEnabled="0" maskSize="0" maskJoinStyle="128" maskedSymbolLayers="" maskType="0" maskOpacity="1" maskSizeMapUnitScale="3x:0,0,0,0,0,0"/>
-            <background shapeRotationType="0" shapeSizeY="0" shapeOffsetMapUnitScale="3x:0,0,0,0,0,0" shapeType="2" shapeOffsetUnit="MM" shapeOpacity="1" shapeRadiiX="0" shapeFillColor="255,255,255,255" shapeBlendMode="0" shapeRotation="0" shapeBorderWidthUnit="MM" shapeRadiiY="0" shapeOffsetY="0" shapeJoinStyle="64" shapeSizeMapUnitScale="3x:0,0,0,0,0,0" shapeBorderWidth="0" shapeOffsetX="0" shapeSizeType="0" shapeRadiiUnit="MM" shapeSizeUnit="MM" shapeRadiiMapUnitScale="3x:0,0,0,0,0,0" shapeDraw="0" shapeSVGFile="" shapeBorderWidthMapUnitScale="3x:0,0,0,0,0,0" shapeSizeX="0" shapeBorderColor="128,128,128,255">
-              <symbol alpha="1" clip_to_extent="1" name="markerSymbol" force_rhr="0" type="marker">
-                <layer enabled="1" class="SimpleMarker" locked="0" pass="0">
+          <text-style fontSize="8" namedStyle="Regular" blendMode="0" fontKerning="1" multilineHeight="1" fontLetterSpacing="0" fontSizeMapUnitScale="3x:0,0,0,0,0,0" fontWeight="50" fontUnderline="0" fieldName="Name" textOpacity="1" textColor="0,0,0,255" fontStrikeout="0" allowHtml="0" useSubstitutions="0" fontItalic="0" fontFamily="Open Sans" fontWordSpacing="0" isExpression="0" previewBkgrdColor="255,255,255,255" fontSizeUnit="Point" textOrientation="horizontal" capitalization="0">
+            <text-buffer bufferJoinStyle="128" bufferSizeUnits="MM" bufferColor="255,255,255,255" bufferBlendMode="0" bufferSize="0.40000000000000002" bufferSizeMapUnitScale="3x:0,0,0,0,0,0" bufferDraw="1" bufferNoFill="1" bufferOpacity="1"/>
+            <text-mask maskedSymbolLayers="" maskSize="0" maskSizeUnits="MM" maskSizeMapUnitScale="3x:0,0,0,0,0,0" maskOpacity="1" maskType="0" maskJoinStyle="128" maskEnabled="0"/>
+            <background shapeRotationType="0" shapeBorderWidth="0" shapeSizeUnit="MM" shapeDraw="0" shapeRadiiY="0" shapeSizeType="0" shapeOffsetMapUnitScale="3x:0,0,0,0,0,0" shapeType="2" shapeSizeX="0" shapeFillColor="255,255,255,255" shapeOffsetY="0" shapeBorderWidthMapUnitScale="3x:0,0,0,0,0,0" shapeBlendMode="0" shapeSVGFile="" shapeRadiiUnit="MM" shapeRadiiX="0" shapeRadiiMapUnitScale="3x:0,0,0,0,0,0" shapeRotation="0" shapeSizeY="0" shapeSizeMapUnitScale="3x:0,0,0,0,0,0" shapeOffsetX="0" shapeJoinStyle="64" shapeOpacity="1" shapeOffsetUnit="MM" shapeBorderColor="128,128,128,255" shapeBorderWidthUnit="MM">
+              <symbol force_rhr="0" name="markerSymbol" clip_to_extent="1" alpha="1" type="marker">
+                <layer enabled="1" pass="0" class="SimpleMarker" locked="0">
                   <prop k="angle" v="0"/>
                   <prop k="color" v="229,182,54,255"/>
                   <prop k="horizontal_anchor_point" v="1"/>
@@ -896,7 +896,7 @@
                 </layer>
               </symbol>
             </background>
-            <shadow shadowOffsetAngle="135" shadowOpacity="0.69999999999999996" shadowDraw="0" shadowOffsetUnit="MM" shadowColor="0,0,0,255" shadowRadiusAlphaOnly="0" shadowScale="100" shadowRadiusMapUnitScale="3x:0,0,0,0,0,0" shadowBlendMode="6" shadowOffsetDist="1" shadowRadius="1.5" shadowUnder="0" shadowRadiusUnit="MM" shadowOffsetGlobal="1" shadowOffsetMapUnitScale="3x:0,0,0,0,0,0"/>
+            <shadow shadowOffsetMapUnitScale="3x:0,0,0,0,0,0" shadowRadiusUnit="MM" shadowRadiusMapUnitScale="3x:0,0,0,0,0,0" shadowBlendMode="6" shadowRadiusAlphaOnly="0" shadowRadius="1.5" shadowOffsetUnit="MM" shadowColor="0,0,0,255" shadowUnder="0" shadowScale="100" shadowDraw="0" shadowOffsetAngle="135" shadowOffsetDist="1" shadowOffsetGlobal="1" shadowOpacity="0.69999999999999996"/>
             <dd_properties>
               <Option type="Map">
                 <Option name="name" type="QString" value=""/>
@@ -906,9 +906,9 @@
             </dd_properties>
             <substitutions/>
           </text-style>
-          <text-format autoWrapLength="0" multilineAlign="3" leftDirectionSymbol="&lt;" placeDirectionSymbol="0" decimals="3" useMaxLineLengthForAutoWrap="1" formatNumbers="0" addDirectionSymbol="0" wrapChar="" rightDirectionSymbol=">" reverseDirectionSymbol="0" plussign="0"/>
-          <placement distMapUnitScale="3x:0,0,0,0,0,0" placement="0" overrunDistanceUnit="MM" labelOffsetMapUnitScale="3x:0,0,0,0,0,0" repeatDistance="0" priority="5" centroidInside="0" overrunDistanceMapUnitScale="3x:0,0,0,0,0,0" polygonPlacementFlags="2" yOffset="0" predefinedPositionOrder="TR,TL,BR,BL,R,L,TSR,BSR" lineAnchorPercent="0.5" offsetType="0" offsetUnits="MM" centroidWhole="0" repeatDistanceUnits="MM" geometryGeneratorEnabled="0" overrunDistance="0" placementFlags="10" fitInPolygonOnly="0" geometryGenerator="" layerType="PointGeometry" distUnits="MM" preserveRotation="1" rotationAngle="0" xOffset="0" maxCurvedCharAngleIn="25" repeatDistanceMapUnitScale="3x:0,0,0,0,0,0" dist="0.5" lineAnchorType="0" geometryGeneratorType="PointGeometry" quadOffset="4" maxCurvedCharAngleOut="-25"/>
-          <rendering obstacleType="0" fontMinPixelSize="3" obstacle="1" displayAll="0" obstacleFactor="1" minFeatureSize="0" labelPerPart="0" limitNumLabels="0" zIndex="0" upsidedownLabels="0" fontLimitPixelSize="0" scaleMin="0" drawLabels="1" maxNumLabels="2000" mergeLines="0" fontMaxPixelSize="10000" scaleVisibility="0" scaleMax="0"/>
+          <text-format rightDirectionSymbol=">" autoWrapLength="0" addDirectionSymbol="0" reverseDirectionSymbol="0" leftDirectionSymbol="&lt;" wrapChar="" multilineAlign="3" decimals="3" placeDirectionSymbol="0" formatNumbers="0" plussign="0" useMaxLineLengthForAutoWrap="1"/>
+          <placement yOffset="0" preserveRotation="1" dist="0.5" placementFlags="10" xOffset="0" centroidWhole="0" labelOffsetMapUnitScale="3x:0,0,0,0,0,0" maxCurvedCharAngleOut="-25" repeatDistance="0" quadOffset="4" geometryGeneratorType="PointGeometry" polygonPlacementFlags="2" repeatDistanceMapUnitScale="3x:0,0,0,0,0,0" geometryGenerator="" placement="0" distMapUnitScale="3x:0,0,0,0,0,0" predefinedPositionOrder="TR,TL,BR,BL,R,L,TSR,BSR" priority="5" distUnits="MM" lineAnchorType="0" centroidInside="0" geometryGeneratorEnabled="0" layerType="PointGeometry" fitInPolygonOnly="0" lineAnchorPercent="0.5" repeatDistanceUnits="MM" overrunDistanceUnit="MM" offsetType="0" rotationAngle="0" offsetUnits="MM" overrunDistance="0" overrunDistanceMapUnitScale="3x:0,0,0,0,0,0" maxCurvedCharAngleIn="25"/>
+          <rendering limitNumLabels="0" fontMinPixelSize="3" zIndex="0" fontMaxPixelSize="10000" mergeLines="0" obstacleType="0" maxNumLabels="2000" scaleVisibility="0" scaleMin="0" labelPerPart="0" upsidedownLabels="0" drawLabels="1" fontLimitPixelSize="0" minFeatureSize="0" scaleMax="0" displayAll="0" obstacleFactor="1" obstacle="1"/>
           <dd_properties>
             <Option type="Map">
               <Option name="name" type="QString" value=""/>
@@ -927,7 +927,7 @@
               <Option name="drawToAllParts" type="bool" value="false"/>
               <Option name="enabled" type="QString" value="0"/>
               <Option name="labelAnchorPoint" type="QString" value="point_on_exterior"/>
-              <Option name="lineSymbol" type="QString" value="&lt;symbol alpha=&quot;1&quot; clip_to_extent=&quot;1&quot; name=&quot;symbol&quot; force_rhr=&quot;0&quot; type=&quot;line&quot;>&lt;layer enabled=&quot;1&quot; class=&quot;SimpleLine&quot; locked=&quot;0&quot; pass=&quot;0&quot;>&lt;prop k=&quot;align_dash_pattern&quot; v=&quot;0&quot;/>&lt;prop k=&quot;capstyle&quot; v=&quot;square&quot;/>&lt;prop k=&quot;customdash&quot; v=&quot;5;2&quot;/>&lt;prop k=&quot;customdash_map_unit_scale&quot; v=&quot;3x:0,0,0,0,0,0&quot;/>&lt;prop k=&quot;customdash_unit&quot; v=&quot;MM&quot;/>&lt;prop k=&quot;dash_pattern_offset&quot; v=&quot;0&quot;/>&lt;prop k=&quot;dash_pattern_offset_map_unit_scale&quot; v=&quot;3x:0,0,0,0,0,0&quot;/>&lt;prop k=&quot;dash_pattern_offset_unit&quot; v=&quot;MM&quot;/>&lt;prop k=&quot;draw_inside_polygon&quot; v=&quot;0&quot;/>&lt;prop k=&quot;joinstyle&quot; v=&quot;bevel&quot;/>&lt;prop k=&quot;line_color&quot; v=&quot;60,60,60,255&quot;/>&lt;prop k=&quot;line_style&quot; v=&quot;solid&quot;/>&lt;prop k=&quot;line_width&quot; v=&quot;0.3&quot;/>&lt;prop k=&quot;line_width_unit&quot; v=&quot;MM&quot;/>&lt;prop k=&quot;offset&quot; v=&quot;0&quot;/>&lt;prop k=&quot;offset_map_unit_scale&quot; v=&quot;3x:0,0,0,0,0,0&quot;/>&lt;prop k=&quot;offset_unit&quot; v=&quot;MM&quot;/>&lt;prop k=&quot;ring_filter&quot; v=&quot;0&quot;/>&lt;prop k=&quot;tweak_dash_pattern_on_corners&quot; v=&quot;0&quot;/>&lt;prop k=&quot;use_custom_dash&quot; v=&quot;0&quot;/>&lt;prop k=&quot;width_map_unit_scale&quot; v=&quot;3x:0,0,0,0,0,0&quot;/>&lt;data_defined_properties>&lt;Option type=&quot;Map&quot;>&lt;Option name=&quot;name&quot; type=&quot;QString&quot; value=&quot;&quot;/>&lt;Option name=&quot;properties&quot;/>&lt;Option name=&quot;type&quot; type=&quot;QString&quot; value=&quot;collection&quot;/>&lt;/Option>&lt;/data_defined_properties>&lt;/layer>&lt;/symbol>"/>
+              <Option name="lineSymbol" type="QString" value="&lt;symbol force_rhr=&quot;0&quot; name=&quot;symbol&quot; clip_to_extent=&quot;1&quot; alpha=&quot;1&quot; type=&quot;line&quot;>&lt;layer enabled=&quot;1&quot; pass=&quot;0&quot; class=&quot;SimpleLine&quot; locked=&quot;0&quot;>&lt;prop k=&quot;align_dash_pattern&quot; v=&quot;0&quot;/>&lt;prop k=&quot;capstyle&quot; v=&quot;square&quot;/>&lt;prop k=&quot;customdash&quot; v=&quot;5;2&quot;/>&lt;prop k=&quot;customdash_map_unit_scale&quot; v=&quot;3x:0,0,0,0,0,0&quot;/>&lt;prop k=&quot;customdash_unit&quot; v=&quot;MM&quot;/>&lt;prop k=&quot;dash_pattern_offset&quot; v=&quot;0&quot;/>&lt;prop k=&quot;dash_pattern_offset_map_unit_scale&quot; v=&quot;3x:0,0,0,0,0,0&quot;/>&lt;prop k=&quot;dash_pattern_offset_unit&quot; v=&quot;MM&quot;/>&lt;prop k=&quot;draw_inside_polygon&quot; v=&quot;0&quot;/>&lt;prop k=&quot;joinstyle&quot; v=&quot;bevel&quot;/>&lt;prop k=&quot;line_color&quot; v=&quot;60,60,60,255&quot;/>&lt;prop k=&quot;line_style&quot; v=&quot;solid&quot;/>&lt;prop k=&quot;line_width&quot; v=&quot;0.3&quot;/>&lt;prop k=&quot;line_width_unit&quot; v=&quot;MM&quot;/>&lt;prop k=&quot;offset&quot; v=&quot;0&quot;/>&lt;prop k=&quot;offset_map_unit_scale&quot; v=&quot;3x:0,0,0,0,0,0&quot;/>&lt;prop k=&quot;offset_unit&quot; v=&quot;MM&quot;/>&lt;prop k=&quot;ring_filter&quot; v=&quot;0&quot;/>&lt;prop k=&quot;tweak_dash_pattern_on_corners&quot; v=&quot;0&quot;/>&lt;prop k=&quot;use_custom_dash&quot; v=&quot;0&quot;/>&lt;prop k=&quot;width_map_unit_scale&quot; v=&quot;3x:0,0,0,0,0,0&quot;/>&lt;data_defined_properties>&lt;Option type=&quot;Map&quot;>&lt;Option name=&quot;name&quot; type=&quot;QString&quot; value=&quot;&quot;/>&lt;Option name=&quot;properties&quot;/>&lt;Option name=&quot;type&quot; type=&quot;QString&quot; value=&quot;collection&quot;/>&lt;/Option>&lt;/data_defined_properties>&lt;/layer>&lt;/symbol>"/>
               <Option name="minLength" type="double" value="0"/>
               <Option name="minLengthMapUnitScale" type="QString" value="3x:0,0,0,0,0,0"/>
               <Option name="minLengthUnit" type="QString" value="MM"/>
@@ -950,13 +950,13 @@
       <blendMode>0</blendMode>
       <featureBlendMode>0</featureBlendMode>
       <layerOpacity>1</layerOpacity>
-      <SingleCategoryDiagramRenderer attributeLegend="1" diagramType="Histogram">
-        <DiagramCategory sizeScale="3x:0,0,0,0,0,0" barWidth="5" backgroundColor="#ffffff" backgroundAlpha="255" scaleBasedVisibility="0" maxScaleDenominator="1e+08" sizeType="MM" lineSizeScale="3x:0,0,0,0,0,0" labelPlacementMethod="XHeight" rotationOffset="270" opacity="1" spacing="0" penWidth="0" height="15" spacingUnitScale="3x:0,0,0,0,0,0" penAlpha="255" scaleDependency="Area" penColor="#000000" showAxis="0" lineSizeType="MM" width="15" minScaleDenominator="0" minimumSize="0" spacingUnit="MM" direction="1" diagramOrientation="Up" enabled="0">
+      <SingleCategoryDiagramRenderer diagramType="Histogram" attributeLegend="1">
+        <DiagramCategory spacingUnitScale="3x:0,0,0,0,0,0" sizeType="MM" diagramOrientation="Up" scaleBasedVisibility="0" sizeScale="3x:0,0,0,0,0,0" backgroundColor="#ffffff" spacing="0" showAxis="0" minimumSize="0" backgroundAlpha="255" enabled="0" scaleDependency="Area" spacingUnit="MM" barWidth="5" labelPlacementMethod="XHeight" penWidth="0" minScaleDenominator="0" opacity="1" lineSizeType="MM" direction="1" penColor="#000000" lineSizeScale="3x:0,0,0,0,0,0" maxScaleDenominator="1e+08" height="15" penAlpha="255" width="15" rotationOffset="270">
           <fontProperties style="Regular" description="Noto Sans,10,-1,0,50,0,0,0,0,0,Regular"/>
-          <attribute color="#000000" label="" field=""/>
+          <attribute color="#000000" field="" label=""/>
           <axisSymbol>
-            <symbol alpha="1" clip_to_extent="1" name="" force_rhr="0" type="line">
-              <layer enabled="1" class="SimpleLine" locked="0" pass="0">
+            <symbol force_rhr="0" name="" clip_to_extent="1" alpha="1" type="line">
+              <layer enabled="1" pass="0" class="SimpleLine" locked="0">
                 <prop k="align_dash_pattern" v="0"/>
                 <prop k="capstyle" v="square"/>
                 <prop k="customdash" v="5;2"/>
@@ -990,7 +990,7 @@
           </axisSymbol>
         </DiagramCategory>
       </SingleCategoryDiagramRenderer>
-      <DiagramLayerSettings obstacle="0" linePlacementFlags="18" priority="0" dist="0" zIndex="0" placement="0" showAll="1">
+      <DiagramLayerSettings obstacle="0" linePlacementFlags="18" dist="0" priority="0" showAll="1" zIndex="0" placement="0">
         <properties>
           <Option type="Map">
             <Option name="name" type="QString" value=""/>
@@ -1028,7 +1028,7 @@
                 <Option name="FileWidgetFilter" type="QString" value=""/>
                 <Option name="PropertyCollection" type="Map">
                   <Option name="name" type="QString" value=""/>
-                  <Option name="properties" type="invalid"/>
+                  <Option name="properties"/>
                   <Option name="type" type="QString" value="collection"/>
                 </Option>
                 <Option name="RelativeStorage" type="int" value="1"/>
@@ -1037,40 +1037,7 @@
             </config>
           </editWidget>
         </field>
-        <field name="DateTime" configurationFlags="None">
-          <editWidget type="DateTime">
-            <config>
-              <Option type="Map">
-                <Option name="allow_null" type="bool" value="true"/>
-                <Option name="calendar_popup" type="bool" value="true"/>
-                <Option name="display_format" type="QString" value="yyyy-MM-dd"/>
-                <Option name="field_format" type="QString" value="yyyy-MM-dd"/>
-                <Option name="field_iso_format" type="bool" value="false"/>
-              </Option>
-            </config>
-          </editWidget>
-        </field>
         <field name="Name" configurationFlags="None">
-          <editWidget type="TextEdit">
-            <config>
-              <Option type="Map">
-                <Option name="IsMultiline" type="bool" value="false"/>
-                <Option name="UseHtml" type="bool" value="false"/>
-              </Option>
-            </config>
-          </editWidget>
-        </field>
-        <field name="x" configurationFlags="None">
-          <editWidget type="TextEdit">
-            <config>
-              <Option type="Map">
-                <Option name="IsMultiline" type="bool" value="false"/>
-                <Option name="UseHtml" type="bool" value="false"/>
-              </Option>
-            </config>
-          </editWidget>
-        </field>
-        <field name="y" configurationFlags="None">
           <editWidget type="TextEdit">
             <config>
               <Option type="Map">
@@ -1092,55 +1059,40 @@
         </field>
       </fieldConfiguration>
       <aliases>
-        <alias index="0" field="fid" name=""/>
-        <alias index="1" field="photo" name=""/>
-        <alias index="2" field="DateTime" name=""/>
-        <alias index="3" field="Name" name=""/>
-        <alias index="4" field="x" name="Longitude X"/>
-        <alias index="5" field="y" name="Latitude Y"/>
-        <alias index="6" field="Description" name=""/>
+        <alias name="" field="fid" index="0"/>
+        <alias name="" field="photo" index="1"/>
+        <alias name="" field="Name" index="2"/>
+        <alias name="" field="Description" index="3"/>
       </aliases>
       <defaults>
-        <default expression="" field="fid" applyOnUpdate="0"/>
-        <default expression="" field="photo" applyOnUpdate="0"/>
-        <default expression="now()" field="DateTime" applyOnUpdate="1"/>
-        <default expression="" field="Name" applyOnUpdate="0"/>
-        <default expression="x( transform( $geometry, 'EPSG:3857', 'EPSG:4326'))" field="x" applyOnUpdate="1"/>
-        <default expression="y( transform( $geometry, 'EPSG:3857', 'EPSG:4326'))" field="y" applyOnUpdate="0"/>
-        <default expression="" field="Description" applyOnUpdate="0"/>
+        <default applyOnUpdate="0" expression="" field="fid"/>
+        <default applyOnUpdate="0" expression="" field="photo"/>
+        <default applyOnUpdate="0" expression="" field="Name"/>
+        <default applyOnUpdate="0" expression="" field="Description"/>
       </defaults>
       <constraints>
-        <constraint notnull_strength="1" exp_strength="0" constraints="3" field="fid" unique_strength="1"/>
-        <constraint notnull_strength="0" exp_strength="0" constraints="0" field="photo" unique_strength="0"/>
-        <constraint notnull_strength="0" exp_strength="0" constraints="0" field="DateTime" unique_strength="0"/>
-        <constraint notnull_strength="0" exp_strength="0" constraints="0" field="Name" unique_strength="0"/>
-        <constraint notnull_strength="0" exp_strength="0" constraints="0" field="x" unique_strength="0"/>
-        <constraint notnull_strength="0" exp_strength="0" constraints="0" field="y" unique_strength="0"/>
-        <constraint notnull_strength="0" exp_strength="0" constraints="0" field="Description" unique_strength="0"/>
+        <constraint notnull_strength="1" field="fid" constraints="3" exp_strength="0" unique_strength="1"/>
+        <constraint notnull_strength="0" field="photo" constraints="0" exp_strength="0" unique_strength="0"/>
+        <constraint notnull_strength="0" field="Name" constraints="0" exp_strength="0" unique_strength="0"/>
+        <constraint notnull_strength="0" field="Description" constraints="0" exp_strength="0" unique_strength="0"/>
       </constraints>
       <constraintExpressions>
         <constraint desc="" exp="" field="fid"/>
         <constraint desc="" exp="" field="photo"/>
-        <constraint desc="" exp="" field="DateTime"/>
         <constraint desc="" exp="" field="Name"/>
-        <constraint desc="" exp="" field="x"/>
-        <constraint desc="" exp="" field="y"/>
         <constraint desc="" exp="" field="Description"/>
       </constraintExpressions>
       <expressionfields/>
       <attributeactions>
         <defaultAction value="{00000000-0000-0000-0000-000000000000}" key="Canvas"/>
       </attributeactions>
-      <attributetableconfig sortExpression="" sortOrder="0" actionWidgetStyle="dropDown">
+      <attributetableconfig sortExpression="" actionWidgetStyle="dropDown" sortOrder="0">
         <columns>
-          <column hidden="0" name="fid" type="field" width="-1"/>
-          <column hidden="0" name="photo" type="field" width="-1"/>
-          <column hidden="1" type="actions" width="-1"/>
-          <column hidden="0" name="DateTime" type="field" width="-1"/>
-          <column hidden="0" name="x" type="field" width="-1"/>
-          <column hidden="0" name="y" type="field" width="-1"/>
-          <column hidden="0" name="Name" type="field" width="199"/>
-          <column hidden="0" name="Description" type="field" width="-1"/>
+          <column name="fid" hidden="0" width="-1" type="field"/>
+          <column name="photo" hidden="0" width="-1" type="field"/>
+          <column hidden="1" width="-1" type="actions"/>
+          <column name="Name" hidden="0" width="199" type="field"/>
+          <column name="Description" hidden="0" width="-1" type="field"/>
         </columns>
       </attributetableconfig>
       <conditionalstyles>
@@ -1172,29 +1124,26 @@ def my_form_open(dialog, layer, feature):
       <featformsuppress>0</featformsuppress>
       <editorlayout>tablayout</editorlayout>
       <attributeEditorForm>
-        <attributeEditorContainer showLabel="1" visibilityExpression="" columnCount="1" visibilityExpressionEnabled="0" groupBox="0" name="Information">
-          <attributeEditorField showLabel="1" index="3" name="Name"/>
-          <attributeEditorField showLabel="1" index="6" name="Description"/>
-          <attributeEditorField showLabel="1" index="4" name="x"/>
-          <attributeEditorField showLabel="1" index="5" name="y"/>
-          <attributeEditorField showLabel="1" index="1" name="photo"/>
-          <attributeEditorField showLabel="1" index="2" name="DateTime"/>
+        <attributeEditorContainer columnCount="1" groupBox="0" visibilityExpressionEnabled="0" name="Information" visibilityExpression="" showLabel="1">
+          <attributeEditorField name="Name" showLabel="1" index="2"/>
+          <attributeEditorField name="Description" showLabel="1" index="3"/>
+          <attributeEditorField name="photo" showLabel="1" index="1"/>
         </attributeEditorContainer>
       </attributeEditorForm>
       <editable>
-        <field editable="1" name="DateTime"/>
-        <field editable="1" name="Description"/>
-        <field editable="1" name="Name"/>
-        <field editable="1" name="fid"/>
-        <field editable="1" name="habitat"/>
-        <field editable="1" name="number"/>
-        <field editable="1" name="photo"/>
-        <field editable="1" name="sub-type"/>
-        <field editable="1" name="survey"/>
-        <field editable="1" name="surveyor"/>
-        <field editable="1" name="type"/>
-        <field editable="1" name="x"/>
-        <field editable="1" name="y"/>
+        <field name="DateTime" editable="1"/>
+        <field name="Description" editable="1"/>
+        <field name="Name" editable="1"/>
+        <field name="fid" editable="1"/>
+        <field name="habitat" editable="1"/>
+        <field name="number" editable="1"/>
+        <field name="photo" editable="1"/>
+        <field name="sub-type" editable="1"/>
+        <field name="survey" editable="1"/>
+        <field name="surveyor" editable="1"/>
+        <field name="type" editable="1"/>
+        <field name="x" editable="1"/>
+        <field name="y" editable="1"/>
       </editable>
       <labelOnTop>
         <field labelOnTop="0" name="DateTime"/>
@@ -1365,7 +1314,7 @@ def my_form_open(dialog, layer, feature):
   </dataDefinedServerProperties>
   <visibility-presets/>
   <transformContext>
-    <srcDest coordinateOp="+proj=pipeline +step +inv +proj=webmerc +lat_0=0 +lon_0=0 +x_0=0 +y_0=0 +ellps=WGS84 +step +inv +proj=hgridshift +grids=OSTN15_NTv2_OSGBtoETRS.gsb +step +proj=tmerc +lat_0=49 +lon_0=-2 +k=0.9996012717 +x_0=400000 +y_0=-100000 +ellps=airy" allowFallback="1">
+    <srcDest allowFallback="1" coordinateOp="+proj=pipeline +step +inv +proj=webmerc +lat_0=0 +lon_0=0 +x_0=0 +y_0=0 +ellps=WGS84 +step +inv +proj=hgridshift +grids=OSTN15_NTv2_OSGBtoETRS.gsb +step +proj=tmerc +lat_0=49 +lon_0=-2 +k=0.9996012717 +x_0=400000 +y_0=-100000 +ellps=airy">
       <src>
         <spatialrefsys>
           <wkt>PROJCRS["WGS 84 / Pseudo-Mercator",BASEGEOGCRS["WGS 84",DATUM["World Geodetic System 1984",ELLIPSOID["WGS 84",6378137,298.257223563,LENGTHUNIT["metre",1]]],PRIMEM["Greenwich",0,ANGLEUNIT["degree",0.0174532925199433]],ID["EPSG",4326]],CONVERSION["Popular Visualisation Pseudo-Mercator",METHOD["Popular Visualisation Pseudo Mercator",ID["EPSG",1024]],PARAMETER["Latitude of natural origin",0,ANGLEUNIT["degree",0.0174532925199433],ID["EPSG",8801]],PARAMETER["Longitude of natural origin",0,ANGLEUNIT["degree",0.0174532925199433],ID["EPSG",8802]],PARAMETER["False easting",0,LENGTHUNIT["metre",1],ID["EPSG",8806]],PARAMETER["False northing",0,LENGTHUNIT["metre",1],ID["EPSG",8807]]],CS[Cartesian,2],AXIS["easting (X)",east,ORDER[1],LENGTHUNIT["metre",1]],AXIS["northing (Y)",north,ORDER[2],LENGTHUNIT["metre",1]],USAGE[SCOPE["unknown"],AREA["World - 85°S to 85°N"],BBOX[-85.06,-180,85.06,180]],ID["EPSG",3857]]</wkt>
@@ -1393,7 +1342,7 @@ def my_form_open(dialog, layer, feature):
         </spatialrefsys>
       </dest>
     </srcDest>
-    <srcDest coordinateOp="+proj=pipeline +step +proj=unitconvert +xy_in=deg +xy_out=rad +step +proj=utm +zone=11 +ellps=GRS80" allowFallback="1">
+    <srcDest allowFallback="1" coordinateOp="+proj=pipeline +step +proj=unitconvert +xy_in=deg +xy_out=rad +step +proj=utm +zone=11 +ellps=GRS80">
       <src>
         <spatialrefsys>
           <wkt>GEOGCRS["WGS 84",DATUM["World Geodetic System 1984",ELLIPSOID["WGS 84",6378137,298.257223563,LENGTHUNIT["metre",1]]],PRIMEM["Greenwich",0,ANGLEUNIT["degree",0.0174532925199433]],CS[ellipsoidal,2],AXIS["geodetic latitude (Lat)",north,ORDER[1],ANGLEUNIT["degree",0.0174532925199433]],AXIS["geodetic longitude (Lon)",east,ORDER[2],ANGLEUNIT["degree",0.0174532925199433]],USAGE[SCOPE["unknown"],AREA["World"],BBOX[-90,-180,90,180]],ID["EPSG",4326]]</wkt>
@@ -1421,7 +1370,7 @@ def my_form_open(dialog, layer, feature):
         </spatialrefsys>
       </dest>
     </srcDest>
-    <srcDest coordinateOp="+proj=pipeline +step +proj=unitconvert +xy_in=deg +xy_out=rad +step +inv +proj=hgridshift +grids=OSTN15_NTv2_OSGBtoETRS.gsb +step +proj=tmerc +lat_0=49 +lon_0=-2 +k=0.9996012717 +x_0=400000 +y_0=-100000 +ellps=airy" allowFallback="1">
+    <srcDest allowFallback="1" coordinateOp="+proj=pipeline +step +proj=unitconvert +xy_in=deg +xy_out=rad +step +inv +proj=hgridshift +grids=OSTN15_NTv2_OSGBtoETRS.gsb +step +proj=tmerc +lat_0=49 +lon_0=-2 +k=0.9996012717 +x_0=400000 +y_0=-100000 +ellps=airy">
       <src>
         <spatialrefsys>
           <wkt>GEOGCRS["WGS 84",DATUM["World Geodetic System 1984",ELLIPSOID["WGS 84",6378137,298.257223563,LENGTHUNIT["metre",1]]],PRIMEM["Greenwich",0,ANGLEUNIT["degree",0.0174532925199433]],CS[ellipsoidal,2],AXIS["geodetic latitude (Lat)",north,ORDER[1],ANGLEUNIT["degree",0.0174532925199433]],AXIS["geodetic longitude (Lon)",east,ORDER[2],ANGLEUNIT["degree",0.0174532925199433]],USAGE[SCOPE["unknown"],AREA["World"],BBOX[-90,-180,90,180]],ID["EPSG",4326]]</wkt>
@@ -1475,7 +1424,7 @@ def my_form_open(dialog, layer, feature):
   <Bookmarks/>
   <ProjectViewSettings UseProjectScales="0">
     <Scales/>
-    <DefaultViewExtent xmax="23116508.48814020305871964" ymin="-7591570.95768091082572937" ymax="13447812.80208471417427063" xmin="-14001551.2491714283823967">
+    <DefaultViewExtent ymin="-7384891.02937215752899647" xmin="-17287104.82328952848911285" xmax="19830954.91402210295200348" ymax="13654492.73039346747100353">
       <spatialrefsys>
         <wkt>PROJCRS["WGS 84 / Pseudo-Mercator",BASEGEOGCRS["WGS 84",DATUM["World Geodetic System 1984",ELLIPSOID["WGS 84",6378137,298.257223563,LENGTHUNIT["metre",1]]],PRIMEM["Greenwich",0,ANGLEUNIT["degree",0.0174532925199433]],ID["EPSG",4326]],CONVERSION["Popular Visualisation Pseudo-Mercator",METHOD["Popular Visualisation Pseudo Mercator",ID["EPSG",1024]],PARAMETER["Latitude of natural origin",0,ANGLEUNIT["degree",0.0174532925199433],ID["EPSG",8801]],PARAMETER["Longitude of natural origin",0,ANGLEUNIT["degree",0.0174532925199433],ID["EPSG",8802]],PARAMETER["False easting",0,LENGTHUNIT["metre",1],ID["EPSG",8806]],PARAMETER["False northing",0,LENGTHUNIT["metre",1],ID["EPSG",8807]]],CS[Cartesian,2],AXIS["easting (X)",east,ORDER[1],LENGTHUNIT["metre",1]],AXIS["northing (Y)",north,ORDER[2],LENGTHUNIT["metre",1]],USAGE[SCOPE["unknown"],AREA["World - 85°S to 85°N"],BBOX[-85.06,-180,85.06,180]],ID["EPSG",3857]]</wkt>
         <proj4>+proj=merc +a=6378137 +b=6378137 +lat_ts=0 +lon_0=0 +x_0=0 +y_0=0 +k=1 +units=m +nadgrids=@null +wktext +no_defs</proj4>
@@ -1489,7 +1438,7 @@ def my_form_open(dialog, layer, feature):
       </spatialrefsys>
     </DefaultViewExtent>
   </ProjectViewSettings>
-  <ProjectTimeSettings timeStepUnit="h" timeStep="1" cumulativeTemporalRange="0" frameRate="1"/>
+  <ProjectTimeSettings timeStep="1" timeStepUnit="h" frameRate="1" cumulativeTemporalRange="0"/>
   <ProjectDisplaySettings>
     <BearingFormat id="bearing">
       <Option type="Map">
