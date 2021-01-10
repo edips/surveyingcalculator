@@ -6,6 +6,7 @@
 #include "qgsquickmapsettings.h"
 #include "projectsmodel.h"
 #include "qgsquickfeaturelayerpair.h"
+#include "cpp/appsettings.h"
 
 class SurveyingUtils: public QObject
 {
@@ -22,9 +23,9 @@ public:
     Q_INVOKABLE static void copy_survey_project();
 
     // Decimal Lat Lon
-    Q_INVOKABLE static QString formatPoint_decimal(const QgsPoint point, QString format);
+    Q_INVOKABLE static QString formatPoint_decimal( QString x, QString y, QString format);
     // DMS Lat Lon
-    Q_INVOKABLE static QString formatPoint_dms(const QgsPoint point, QString format);
+    Q_INVOKABLE static QString formatPoint_dms( QString x, QString y, QString format);
     Q_INVOKABLE QList<QString> project_details();
     // Transfornm CRS, used in CoordinateConvertor app
     Q_INVOKABLE QString transformer(QString x, QString y, QString src, QString dst);
@@ -38,13 +39,14 @@ public:
     Q_INVOKABLE bool no_project();
     Q_INVOKABLE void setActiveLayer2Point();
     Q_INVOKABLE void addLayerIfNotExists();
-    Q_INVOKABLE QStringList qgsPoint2String( QgsQuickFeatureLayerPair p, bool isGeographic );
-    Q_INVOKABLE QString qgsFeature2Coord( QgsQuickFeatureLayerPair p );
+    Q_INVOKABLE QStringList qgsPoint2String( QgsQuickFeatureLayerPair p );
+    Q_INVOKABLE QString qgsFeature2Coord(  QgsQuickFeatureLayerPair p, QString latlonOrder, QString xyOrder );
     Q_INVOKABLE bool featureIsPoint( QgsQuickFeatureLayerPair p );
     Q_INVOKABLE bool featureIsLine( QgsQuickFeatureLayerPair p );
     Q_INVOKABLE bool featureIsPolygon( QgsQuickFeatureLayerPair p );
     Q_INVOKABLE QString getArea( QgsQuickFeatureLayerPair p );
     Q_INVOKABLE QString getLength( QgsQuickFeatureLayerPair p);
+    Q_INVOKABLE bool isfeatureGeographic( QgsQuickFeatureLayerPair p );
     
 
 private:

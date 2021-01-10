@@ -69,8 +69,6 @@ void SurveyingUtils::copy_survey_project()
 long SurveyingUtils::epsg_code()
 {
     /*
-        qDebug() << "mProject->crs().isGeographic::::::::::::" << mProject->crs().isGeographic();
-        // they gives epsg code----------------------------------------------------------------
         // srsid givers wrong epsg id for many coordinate systems. Class reference also mentions to use PostgissrsID :createFromId	(long id, CrsType type = PostgisCrsId )
         qDebug() << "mProject->crs().srsid::::::::::::" << mProject->crs().srsid();
         // this works for wgs84 utm whick srsid didn't work
@@ -97,10 +95,10 @@ QString SurveyingUtils::epsg_name()
 
 bool SurveyingUtils::isGeographic()
 {
-    if(mProject->crs().isGeographic()){
+    if ( mProject->crs().isGeographic() ){
         return true;
     }
-    else{
+    else {
         return false;
     }
 }
@@ -122,8 +120,9 @@ QString SurveyingUtils::homePath()
     return maProj->homePath();
 }
 
-QString SurveyingUtils::formatPoint_decimal(const QgsPoint point, QString format)
+QString SurveyingUtils::formatPoint_decimal( QString x, QString y, QString format)
 {
+    QgsPoint point = QgsPoint( x.toDouble(), y.toDouble() );
     if(format == "included"){
         return QgsQuickUtils::formatPoint(point,QgsCoordinateFormatter::FormatDecimalDegrees,7, QgsCoordinateFormatter::FlagDegreesUseStringSuffix);
     }else{
@@ -131,8 +130,9 @@ QString SurveyingUtils::formatPoint_decimal(const QgsPoint point, QString format
     }
 }
 
-QString SurveyingUtils::formatPoint_dms(const QgsPoint point, QString format)
+QString SurveyingUtils::formatPoint_dms( QString x, QString y, QString format)
 {
+    QgsPoint point = QgsPoint( x.toDouble(), y.toDouble() );
     if(format == "included"){
         return QgsQuickUtils::formatPoint(point,QgsCoordinateFormatter::FormatDegreesMinutesSeconds, 5, QgsCoordinateFormatter::FlagDegreesUseStringSuffix);
     }else{
@@ -189,12 +189,15 @@ QString SurveyingUtils::transformer(QString x, QString y, QString src, QString d
     }
     // srcPoint from double values, type is QgsPointXY
     QgsPoint srcPoint = QgsPoint( x.toDouble(), y.toDouble(), 0);
+    qDebug() << "debug transform 1";
     QString coords;
 
     QgsCoordinateTransformContext context;
     if ( mMapSettings )
         context = mMapSettings->transformContext();
+    qDebug() << "debug transform 2";
     QgsCoordinateTransform mTransform(source, destination, context);
+    qDebug() << "debug transform 3";
     // Transform coordinate and assign it to pt variable
     mTransform.transform( srcPoint );
     coords = mTransform.transform( srcPoint ).toString(8);
@@ -552,11 +555,11 @@ void SurveyingUtils::addLayerIfNotExists()
 }
 
 // QgsPoint to coordinate array function. x: Easting, y: Northing
-QStringList SurveyingUtils::qgsPoint2String(QgsQuickFeatureLayerPair p, bool isGeographic)
+QStringList SurveyingUtils::qgsPoint2String( QgsQuickFeatureLayerPair p )
 {
     QStringList coords;
     QgsPointXY point = p.feature().geometry().asPoint();
-    if( isGeographic ) {
+    if( p.layer()->crs().isGeographic() ) {
         coords << QString::number( point.x(), 'f', 7 );
         coords << QString::number( point.y(), 'f', 7 );
     } else {
@@ -582,35 +585,85 @@ qDebug() << "wkb tye: " << QgsWkbTypes::displayString( p.feature().geometry().wk
 */
 
 // Get Feature coordinates
-QString SurveyingUtils::qgsFeature2Coord( QgsQuickFeatureLayerPair p )
+//! TODO: code clear, create a few functions or create a class
+QString SurveyingUtils::qgsFeature2Coord( QgsQuickFeatureLayerPair p, QString latlonOrder, QString xyOrder )
 {
     QString coords_str {""};
     QTextStream coords(&coords_str);
     int precision = p.layer()->crs().isGeographic() ? 7 : 2;
 
+    QgsMapLayer *layer = p.layer();
+
     if( featureIsPoint(p) ) {
         qDebug() << "it is point";
         QgsPointXY point = p.feature().geometry().asPoint();
-        coords << QString::number( point.x(), 'f', precision ) << "   " << QString::number( point.y(), 'f', precision ) << "\n";
+        QString coord_str;
+        if( layer->crs().isGeographic() ) {
+            if( latlonOrder == "order_latlong") {
+                coords << QString::number( point.y(), 'f', precision ) << "   " <<  QString::number( point.x(), 'f', precision ) << "\n";
+            } else {
+                coords << QString::number( point.x(), 'f', precision ) << "   " << QString::number( point.y(), 'f', precision ) << "\n";
+            }
+        }
+        else {
+            if( xyOrder == "en" ) {
+                coords << QString::number( point.x(), 'f', precision ) << "   " << QString::number( point.y(), 'f', precision ) << "\n";
+            } else {
+                coords << QString::number( point.y(), 'f', precision ) << "   " << QString::number( point.x(), 'f', precision ) << "\n";
+            }
+        }
     }
     else if( featureIsLine( p ) ) {
         qDebug() << "it is line";
         bool geomSingleType = QgsWkbTypes::isSingleType( p.feature().geometry().wkbType() );
+        // single line
         if( geomSingleType ) {
             QgsPolylineXY vertices = p.feature().geometry().asPolyline();
-            for( auto point : vertices ) {
-                coords << QString::number( point.x(), 'f', precision ) << "   " << QString::number( point.y(), 'f', precision ) << "\n";
+            if( layer->crs().isGeographic() ) {
+                for( auto point : vertices ) {
+                    if( latlonOrder == "order_latlong") {
+                        coords << QString::number( point.y(), 'f', precision ) << "   " <<  QString::number( point.x(), 'f', precision ) << "\n";
+                    } else {
+                        coords << QString::number( point.x(), 'f', precision ) << "   " << QString::number( point.y(), 'f', precision ) << "\n";
+                    }
+                }
+            }
+            else {
+                for( auto point : vertices ) {
+                    if( xyOrder == "en" ) {
+                        coords << QString::number( point.x(), 'f', precision ) << "   " << QString::number( point.y(), 'f', precision ) << "\n";
+                    } else {
+                        coords << QString::number( point.y(), 'f', precision ) << "   " << QString::number( point.x(), 'f', precision ) << "\n";
+                    }
+                }
             }
             qDebug() << "Single Line";
         }
+        // multi line
         else {
             QgsMultiPolylineXY vertices = p.feature().geometry().asMultiPolyline();
             for( auto part : vertices ) {
-                for (auto point : part ) {
-                    coords << QString::number( point.x(), 'f', precision ) << "   " << QString::number( point.y(), 'f', precision ) << "\n";
+
+                if( layer->crs().isGeographic() ) {
+                    for( auto point : part ) {
+                        if( latlonOrder == "order_latlong") {
+                            coords << QString::number( point.y(), 'f', precision ) << "   " <<  QString::number( point.x(), 'f', precision ) << "\n";
+                        } else {
+                            coords << QString::number( point.x(), 'f', precision ) << "   " << QString::number( point.y(), 'f', precision ) << "\n";
+                        }
+                    }
                 }
+                else {
+                    for( auto point : part ) {
+                        if( xyOrder == "en" ) {
+                            coords << QString::number( point.x(), 'f', precision ) << "   " << QString::number( point.y(), 'f', precision ) << "\n";
+                        } else {
+                            coords << QString::number( point.y(), 'f', precision ) << "   " << QString::number( point.x(), 'f', precision ) << "\n";
+                        }
+                    }
+                }
+                qDebug() << "Multi Line";
             }
-            qDebug() << "Multi Line";
         }
     }
     else if ( featureIsPolygon(p) ) {
@@ -619,14 +672,32 @@ QString SurveyingUtils::qgsFeature2Coord( QgsQuickFeatureLayerPair p )
         const QgsPolylineXY pline = poly.at( 0 );
         qDebug() << "polygon size: " << poly.size();
         qDebug() << "polyline size: " << pline.size();
-        for( auto point : pline ) {
-            coords << QString::number( point.x(), 'f', precision ) << "   " << QString::number( point.y(), 'f', precision ) << "\n";
+
+        if( layer->crs().isGeographic() ) {
+            for( auto point : pline ) {
+                if( latlonOrder == "order_latlong") {
+                    coords << QString::number( point.y(), 'f', precision ) << "   " <<  QString::number( point.x(), 'f', precision ) << "\n";
+                } else {
+                    coords << QString::number( point.x(), 'f', precision ) << "   " << QString::number( point.y(), 'f', precision ) << "\n";
+                }
+            }
+        }
+        else {
+            for( auto point : pline ) {
+                if( xyOrder == "en" ) {
+                    coords << QString::number( point.x(), 'f', precision ) << "   " << QString::number( point.y(), 'f', precision ) << "\n";
+                } else {
+                    coords << QString::number( point.y(), 'f', precision ) << "   " << QString::number( point.x(), 'f', precision ) << "\n";
+                }
+            }
         }
         qDebug() << "it is polygon";
     }
     coords_str = coords.readAll();
     return coords_str;
 }
+
+
 
 bool SurveyingUtils::featureIsPoint(QgsQuickFeatureLayerPair p)
 {
@@ -680,4 +751,9 @@ QString SurveyingUtils::getLength(QgsQuickFeatureLayerPair p)
         }
     }
     return length_str;
+}
+
+bool SurveyingUtils::isfeatureGeographic( QgsQuickFeatureLayerPair p )
+{
+    return p.layer()->crs().isGeographic();
 }
