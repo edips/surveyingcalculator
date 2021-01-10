@@ -33,8 +33,8 @@ Item {
     // Active layer panel and chooser-----------------------------------------
     Button {
         id: extraPanel
-        height: extraPanelHeight
         width: parent.width
+        height: 40
         highlighted: true
 
         visible: extraPanelVisible
@@ -72,8 +72,6 @@ Item {
                     source: root.activeLayerIcon
                     fillMode: Image.PreserveAspectFit
                 }
-
-
             }
             Label {
                 id: label_layer
