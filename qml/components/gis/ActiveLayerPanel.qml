@@ -9,7 +9,7 @@ import QgsQuick 0.1 as QgsQuick
 import "../common"
 import "../common/script.js" as Util
 
-TopSheet{
+TopSheet {
     title: "Select Point Layer"
     // new
     property string activeLayerId: __activeLayer.layerId
@@ -63,6 +63,11 @@ TopSheet{
                 highlighted: layerId === activeLayerId
                 onClicked: {
                     activeLayerChangeRequested( layerId )
+                    // Update isGeographic and CRS of active layer
+                    isLayerGeographic = __loader.isLayerGeographic()
+                    layerEPSG = __loader.activeLayerCRS()
+                    // Update active layer's crs name
+                    epsgName = __loader.epsg_name()
                     layerPanel.visible = false
                 }
             }
