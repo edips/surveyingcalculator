@@ -83,7 +83,6 @@ FluidControls.Page {
         FluidControls.BottomSheetList {
             id: jobMenu
             title: visible ? project_name : ""
-            Universal.theme: Universal.Dark
             actions: [
                 // select project action
                 FluidControls.Action {
