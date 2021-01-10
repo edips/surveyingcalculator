@@ -19,7 +19,7 @@ FluidControls.ApplicationWindow {
     title: "Surveying Calculator"
     visibility: Window.AutomaticVisibility
     // font loader
-    font.family : "Roboto"
+    font.family : "Lato"
     width: 480
     height: 720
     // Count of the app action icons
@@ -31,7 +31,6 @@ FluidControls.ApplicationWindow {
     // snack bar
     FluidControls.SnackBar { id: snack }
     QQ.Component.onCompleted: {
-        //console.log( "__loader.isGeographic() in func: ", __loader.isGeographic() )
         // banner makes the app slow, is there any way to load it asyncroniously? for example the app opens on Galaxy a5 in 2.5 secons
         // without banner2.show the start up time is 2.0 seconds
         //banner2.show();

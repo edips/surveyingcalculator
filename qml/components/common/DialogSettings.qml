@@ -93,7 +93,7 @@ TopSheet {
                 }
                 SText{
                     id:coord_display_txt
-                    text:qsTr("Coordinate Settings")
+                    text:qsTr( "Coordinate Settings" )
                     font.pixelSize: 16
                     font.bold: true
                 }
@@ -102,6 +102,72 @@ TopSheet {
                     height: 1
                     color: __appSettings.theme === 0 ? "#d5d5c3" : "#505050"
                 }
+            }
+            // Display of Latitude and Longitude
+            QQC2.Button{
+                implicitWidth: settingsDialog.width
+                implicitHeight: 80
+                flat: true
+                contentItem: ColumnLayout{
+                    SText{
+                        font.pixelSize: 15
+                        text:qsTr(" Latitude and Longitude Display")
+                        font.bold: true
+                    }
+                    SText{
+                        text:{
+                            rd_lat_dec.checked ? "Decimal" : "Degree Minute Second"
+                        }
+                        font.bold: false
+                        font.italic: true
+                        color: __appSettings.theme === 0 ? "gray" : "#BDBDBD"
+                    }
+                }
+                onClicked: latlon_display_dialog.open()
+            }
+
+            // Fornmat of Latitude and Longitude
+            QQC2.Button{
+                implicitWidth: settingsDialog.width
+                implicitHeight: 80
+                flat: true
+                contentItem: ColumnLayout{
+                    SText{
+                        font.pixelSize: 15
+                        text:qsTr("Latitude and Longitude Format")
+                        font.bold: true
+                    }
+                    SText{
+                        text:{
+                            rd_lat_format1.checked ? rd_lat_format1.text : rd_lat_format2.text
+                        }
+                        font.bold: false
+                        font.italic: true
+                        color: __appSettings.theme === 0 ? "gray" : "#BDBDBD"
+                    }
+                }
+                onClicked: latlon_format_dialog.open()
+            }
+            // Order of Latitude and Longitude
+            QQC2.Button {
+                implicitWidth: settingsDialog.width
+                implicitHeight: 80
+                flat: true
+                contentItem: ColumnLayout{
+                    SText{
+                        id: order_text
+                        font.pixelSize: 15
+                        text:qsTr("Latitude and Longitude Order")
+                        font.bold: true
+                    }
+                    SText{
+                        text:rd_lat1.checked ? rd_lat1.text : rd_lat2.text
+                        font.bold: false
+                        font.italic: true
+                        color: __appSettings.theme === 0 ? "gray" : "#BDBDBD"
+                    }
+                }
+                onClicked: latlon_dialog.open()
             }
             // Order of Northing and Easting
             QQC2.Button {
@@ -112,36 +178,18 @@ TopSheet {
                 contentItem: ColumnLayout{
                     SText{
                         font.pixelSize: 15
-                        text:qsTr("Order of Northing and Easting")
-                        font.bold: false
+                        text:qsTr("Northing and Easting Order")
+                        font.bold: true
                     }
                     SText{
                         id: latlon_order_txt
                         text:rd_NE_order.checked ? "Northing before Easting" : "Easting before Northing"
                         font.bold: false
+                        font.italic: true
+                        color: __appSettings.theme === 0 ? "gray" : "#BDBDBD"
                     }
                 }
                 onClicked: xy_order_dialog.open()
-            }
-
-            // Order of Latitude and Longitude
-            QQC2.Button{
-                implicitWidth: settingsDialog.width
-                implicitHeight: 80
-                flat: true
-                contentItem: ColumnLayout{
-                    SText{
-                        id: order_text
-                        font.pixelSize: 15
-                        text:qsTr("Order of Latitude and Longitude")
-                        font.bold: false
-                    }
-                    SText{
-                        text:rd_lat1.checked ? rd_lat1.text : rd_lat2.text
-                        font.bold: false
-                    }
-                }
-                onClicked: latlon_dialog.open()
             }
 
 
@@ -149,8 +197,8 @@ TopSheet {
             ColumnLayout {
                 SText {
                     font.pixelSize: 15
-                    text:qsTr("Display of X,Y coordinates")
-                    font.bold: false
+                    text:qsTr("X,Y Display")
+                    font.bold: true
                     leftPadding: 5
                 }
 
@@ -216,50 +264,6 @@ TopSheet {
                     }
                 }
             }
-
-            // Display of Latitude and Longitude
-            QQC2.Button{
-                implicitWidth: settingsDialog.width
-                implicitHeight: 80
-                flat: true
-                contentItem: ColumnLayout{
-                    SText{
-                        font.pixelSize: 15
-                        text:qsTr("Display of Latitude and Longitude coordinates")
-                        font.bold: false
-                    }
-                    SText{
-                        text:{
-                            rd_lat_dec.checked ? "Decimal" : "Degree Minute Second"
-                        }
-                        font.bold: false
-                    }
-                }
-                onClicked: latlon_display_dialog.open()
-            }
-
-            // Fornmat of Latitude and Longitude
-            QQC2.Button{
-                implicitWidth: settingsDialog.width
-                implicitHeight: 80
-                flat: true
-                contentItem: ColumnLayout{
-                    SText{
-                        font.pixelSize: 15
-                        text:qsTr("Latitude and Longitude format")
-
-                        font.bold: false
-                    }
-                    SText{
-                        text:{
-                            rd_lat_format1.checked ? rd_lat_format1.text : rd_lat_format2.text
-                        }
-                        font.bold: false
-                    }
-                }
-                onClicked: latlon_format_dialog.open()
-            }
-
             // General settings
             ColumnLayout {
                 spacing: 10
@@ -326,7 +330,7 @@ TopSheet {
     // Latitude LOngitude order dialog
     QQC2.Dialog {
         id:latlon_dialog
-        title: "Order of Latitude and Longitude"
+        title: "Latitude and Longitude Order"
         modal: true
         focus: true
         x: (parent.width - width) / 2
@@ -357,7 +361,7 @@ TopSheet {
     // Order of Northing and Easting
     QQC2.Dialog {
         id:xy_order_dialog
-        title: "Order of Northing and Easting"
+        title: "Northing and Easting Order"
         modal: true
         focus: true
         x: (parent.width - width) / 2
