@@ -31,10 +31,10 @@ SFlickable {
             cellHeight: 140
             model: ListModel {
                 ListElement { title: qsTr("Project Manager"); source: "apps_qgis/ProjectManager/ProjectManager.qml"; imgsrc:"qrc:/assets/icons/projects.svg" }
-                ListElement { title: qsTr("Survey"); source: "apps_qgis/data_collector/DataCollector.qml"; imgsrc:"qrc:/assets/icons/point_data_collector.png" }
+                ListElement { title: qsTr("Survey"); source: "apps_qgis/data_collector/DataCollector.qml"; imgsrc:"qrc:/assets/icons/point_data_collector.svg" }
 
                 //ListElement { title: qsTr("Map Viewer"); source: "apps_qgis/mapviewer/MapViewer2.qml"; imgsrc:"qrc:/assets/icons/mapviewer.png" }
-                ListElement { title: qsTr("Distance, Bearing"); source: "apps/basic_surveying/BasicSurveying.qml" ; imgsrc:"qrc:/assets/icons/basic_surveying.png" }
+                ListElement { title: qsTr("Distance, Bearing"); source: "apps/basic_surveying/BasicSurveying.qml" ; imgsrc:"qrc:/assets/icons/basic_surveying.svg" }
                 ListElement { title: qsTr("Intersection Methods"); source: "apps/intersection/Intersection.qml" ; imgsrc:"qrc:/assets/icons/intersection.png" }
                 ListElement { title: qsTr("Lat/Long UTM"); source: "apps/wgs84/Wgs842.qml" ; imgsrc:"qrc:/assets/icons/utm_latlon.png" }
                 ListElement { title: qsTr("Degree Decimal"); source: "apps/other_tools/deg2dec/Degree2decimal2.qml" ; imgsrc:"qrc:/assets/icons/degree_decimal.png" }
