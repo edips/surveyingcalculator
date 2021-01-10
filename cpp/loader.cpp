@@ -6,6 +6,7 @@
 #include "qgslayertreegroup.h"
 #include "qgsmapthemecollection.h"
 #include "qgsquickmapcanvasmap.h"
+#include "qgsquickmapsettings.h"
 
 
 #include "layersmodel.h"
@@ -408,35 +409,29 @@ QString Loader::iconFromGeometry( const QgsWkbTypes::GeometryType &geometry )
 // By Edip
 long Loader::epsg_code()
 {
-    /*
-    qDebug() << "mProject->crs().isGeographic::::::::::::" << mProject->crs().isGeographic();
-    // they gives epsg code----------------------------------------------------------------
-    // srsid givers wrong epsg id for many coordinate systems. Class reference also mentions to use PostgissrsID :createFromId	(long id, CrsType type = PostgisCrsId )
-    qDebug() << "mProject->crs().srsid::::::::::::" << mProject->crs().srsid();
-    // this works for wgs84 utm whick srsid didn't work
-    qDebug() << "mProject->crs().postgisSrid::::::::::::" << mProject->crs().postgisSrid();
-    //------------------------------------------------------------------------------------
-    // mapUnits output is: QgsUnitTypes::DistanceMeters
-    qDebug() << "mProject->crs().mapUnits::::::::::::" << mProject->crs().mapUnits();
-    // name of EPSG coordinate system
-    qDebug() << "mProject->crs().srsid::::::::::::" << mProject->crs().description();
-*/
     return mProject->crs().postgisSrid();
 }
 
 QString Loader::epsg_name()
 {
-    if(mProject->crs().postgisSrid()){
-
-        return mProject->crs().description();
+    if( mActiveLayer.layer()->crs().postgisSrid() ){
+        return mActiveLayer.layer()->crs().description();
     }else{
-        return "WGS84";
+        return "Invalid Coordinate System";
     }
 }
 
 bool Loader::isGeographic()
 {
-    if(mProject->crs().isGeographic()){
+    if( mProject->crs().isGeographic() ){
+        return true;
+    }
+    return false;
+}
+
+bool Loader::isLayerGeographic()
+{
+    if( mActiveLayer.layer()->crs().isGeographic() ) {
         return true;
     }
     return false;
@@ -691,6 +686,7 @@ QStringList Loader::getFields( )
     return fieldList;
 }
 
+// remove duplicated
 bool Loader::isActiveLayerGeographic()
 {
     if( mActiveLayer.layer()->crs().isGeographic() ){
@@ -710,10 +706,54 @@ bool Loader::activeLayerValid()
 
 bool Loader::layerProjectCrs() const
 {
-    mProject->instance();
-    if( mActiveLayer.layer()->crs() == mProject->crs() ) {
+    if( mActiveLayer.layer()->crs().isValid() ) {
         return true;
     } else {
         return false;
     }
 }
+
+// Project coordinates to layer's coordinates
+long Loader::activeLayerCRS( )
+{
+    return mActiveLayer.layer()->crs().postgisSrid();
+}
+
+
+QVector<qreal> Loader::coordTransformer( QgsPoint sourceP, QgsCoordinateTransformContext context, QString sourceEPSG, QString destinationEPSG )
+{
+    double x = sourceP.x();
+    double y = sourceP.y();
+    double z = sourceP.z();
+
+    // If Z is NaN, coordinate transformation (proj4) will
+    // also set X and Y to NaN. But we also want to get projected
+    // coords if we do not have any Z coordinate.
+    if ( std::isnan( z ) )
+    {
+        z = 0;
+    }
+
+    QgsCoordinateTransform mCoordinateTransform;
+    mCoordinateTransform.setSourceCrs( QgsCoordinateReferenceSystem("EPSG:" + sourceEPSG ) );
+    mCoordinateTransform.setDestinationCrs( QgsCoordinateReferenceSystem("EPSG:" + destinationEPSG ) );
+    mCoordinateTransform.setContext( context );
+    try
+    {
+        mCoordinateTransform.transformInPlace( x, y, z );
+    }
+    catch ( const QgsCsException &exp )
+    {
+        qDebug() << exp.what();
+    }
+
+    QgsPoint mProjectedPosition = QgsPoint( x, y );
+    mProjectedPosition.addZValue( sourceP.z() );
+    QVector<qreal> coords;
+    coords << mProjectedPosition.x() << mProjectedPosition.y();
+    return coords;
+}
+
+
+
+

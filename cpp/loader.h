@@ -45,6 +45,11 @@ class Loader: public QObject
 
     Q_INVOKABLE QString extractCoordinates( QString pointName );
 
+    // Project's coordinates to layer's coordinates
+    Q_INVOKABLE long activeLayerCRS( );
+    // Coordinate transformer
+    Q_INVOKABLE QVector<qreal> coordTransformer( QgsPoint sourceP, QgsCoordinateTransformContext context, QString sourceEPSG, QString destinationEPSG );
+
     /**
      * Updates active map theme.
      * \param index Represents row number in the map theme model.
@@ -66,6 +71,7 @@ class Loader: public QObject
     Q_INVOKABLE long epsg_code();
     Q_INVOKABLE QString epsg_name();
     Q_INVOKABLE bool isGeographic();
+    Q_INVOKABLE bool isLayerGeographic();
     Q_INVOKABLE bool crsValid();
     Q_INVOKABLE QString homePath();
     Q_INVOKABLE void zoom_to_point(QgsQuickMapSettings *mapSettings, QPointF point);
