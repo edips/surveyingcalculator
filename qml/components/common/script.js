@@ -55,11 +55,13 @@ function coord_XY(){
 function cursorTextProjected() {
     var coords = __loader.coordTransformer( projectCoord(),
                                            mapView.canvasMapSettings.transformContext(), epsgID, layerEPSG )
-    if( __appSettings.xyOrder === "ne" ) {
-        return "<b>" + textN() + ":</b> " + ( coords[1] ).toFixed(2) + "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"  + "<b>" + textE() + ":</b> " + ( coords[0] ).toFixed(2)
-    }
-    else if( __appSettings.xyOrder === "en" ) {
-        return "<b>" + textE() + ":</b> " + ( coords[0] ).toFixed(2) + "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"  + "<b>" + textN() + ":</b> " + ( coords[1] ).toFixed(2)
+    if( coords.length === 2 ) {
+        if( __appSettings.xyOrder === "ne" ) {
+            return "<b>" + textN() + ":</b> " + ( coords[1] ).toFixed(2) + "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"  + "<b>" + textE() + ":</b> " + ( coords[0] ).toFixed(2)
+        }
+        else if( __appSettings.xyOrder === "en" ) {
+            return "<b>" + textE() + ":</b> " + ( coords[0] ).toFixed(2) + "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"  + "<b>" + textN() + ":</b> " + ( coords[1] ).toFixed(2)
+        }
     }
 }
 
@@ -70,16 +72,18 @@ function cursorTextDMS() {
     var coords = __loader.coordTransformer( projectCoord(),
                                            mapView.canvasMapSettings.transformContext(), epsgID, layerEPSG )
     var coords2;
-    if(__appSettings.latlongFormat === "format_included") {
-        coords2 = (__surveyingUtils.formatPoint_dms( coords[0], coords[1], "included"  )).split(",")
-    } else {
-        coords2 = (__surveyingUtils.formatPoint_dms( coords[0], coords[1], "not_included"  )).split(",")
-    }
-    if(__appSettings.latlongOrder === "order_latlong") {
-        return "<b>" + "Lat" + ":</b> " + coords2[1] + "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"  + "<b>" + "Long" + ":</b> " + coords2[0]
-    }
-    else if(__appSettings.latlongOrder === "order_longlat") {
-        return "<b>" + "Long" + ":</b> " + coords2[0] + "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"  + "<b>" + "Lat" + ":</b> " + coords2[1]
+    if( coords.length === 2 ) {
+        if(__appSettings.latlongFormat === "format_included") {
+            coords2 = (__surveyingUtils.formatPoint_dms( coords[0], coords[1], "included"  )).split(",")
+        } else {
+            coords2 = (__surveyingUtils.formatPoint_dms( coords[0], coords[1], "not_included"  )).split(",")
+        }
+        if(__appSettings.latlongOrder === "order_latlong") {
+            return "<b>" + "Lat" + ":</b> " + coords2[1] + "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"  + "<b>" + "Long" + ":</b> " + coords2[0]
+        }
+        else if(__appSettings.latlongOrder === "order_longlat") {
+            return "<b>" + "Long" + ":</b> " + coords2[0] + "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"  + "<b>" + "Lat" + ":</b> " + coords2[1]
+        }
     }
 }
 // Geographic coordinate (Decimal)
@@ -88,16 +92,18 @@ function cursorTextDeg() {
     var coords = __loader.coordTransformer( projectCoord(),
                                            mapView.canvasMapSettings.transformContext(), epsgID, layerEPSG )
     var coords2;
-    if (__appSettings.latlongFormat === "format_included") {
-        coords2 = (__surveyingUtils.formatPoint_decimal( coords[0], coords[1], "included"  )).split(",")
-    } else {
-        coords2 = (__surveyingUtils.formatPoint_decimal( coords[0], coords[1], "not_included"  )).split(",")
-    }
-    if ( __appSettings.latlongOrder === "order_latlong" ) {
-        return "<b>" + "Lat" + ":</b> " + coords2[1] + "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"  + "<b>" + "Long" + ":</b> " + coords2[0]
-    }
-    else if( __appSettings.latlongOrder === "order_longlat" ) {
-        return "<b>" + "Long" + ":</b> " + coords2[0] + "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"  + "<b>" + "Lat" + ":</b> " + coords2[1]
+    if( coords.length === 2 ) {
+        if (__appSettings.latlongFormat === "format_included") {
+            coords2 = (__surveyingUtils.formatPoint_decimal( coords[0], coords[1], "included"  )).split(",")
+        } else {
+            coords2 = (__surveyingUtils.formatPoint_decimal( coords[0], coords[1], "not_included"  )).split(",")
+        }
+        if ( __appSettings.latlongOrder === "order_latlong" ) {
+            return "<b>" + "Lat" + ":</b> " + coords2[1] + "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"  + "<b>" + "Long" + ":</b> " + coords2[0]
+        }
+        else if( __appSettings.latlongOrder === "order_longlat" ) {
+            return "<b>" + "Long" + ":</b> " + coords2[0] + "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"  + "<b>" + "Lat" + ":</b> " + coords2[1]
+        }
     }
 }
 
@@ -107,42 +113,48 @@ function cursorTextDeg() {
 // 1- GPS cartesien crs
 function gps_XY() {
     var coords = coords_gps
-    if(__appSettings.xyOrder === "ne") {
-        return "<b>" + textN() + ":</b> " + coords[1].toFixed(2) + "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"  + "<b>" + textE() + ":</b> " + coords[0].toFixed(2)
-    }
-    else if(__appSettings.xyOrder === "en") {
-        return "<b>" + textE() + ":</b> " + coords[0].toFixed(2) + "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"  + "<b>" + textN() + ":</b> " + coords[1].toFixed(2)
+    if( coords.length === 2 ) {
+        if(__appSettings.xyOrder === "ne") {
+            return "<b>" + textN() + ":</b> " + coords[1].toFixed(2) + "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"  + "<b>" + textE() + ":</b> " + coords[0].toFixed(2)
+        }
+        else if(__appSettings.xyOrder === "en") {
+            return "<b>" + textE() + ":</b> " + coords[0].toFixed(2) + "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"  + "<b>" + textN() + ":</b> " + coords[1].toFixed(2)
+        }
     }
 }
 // 2- GPS Degree decimal
 function gps_decimal(){
     var coords = coords_gps
-    if(__appSettings.latlongFormat === "format_included"){
-        coords = (__surveyingUtils.formatPoint_decimal( coords[0], coords[1], "included"  )).split(",")
-    }else{
-        coords = (__surveyingUtils.formatPoint_decimal( coords[0], coords[1], "not_included"  )).split(",")
-    }
-    if(__appSettings.latlongOrder === "order_latlong"){
-        return "<b>" + "Lat" + ":</b> " + coords[1] + "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"  + "<b>" + "Long" + ":</b> " + coords[0]
-    }
-    else if(__appSettings.latlongOrder === "order_longlat"){
-        return "<b>" + "Long" + ":</b> " + coords[0] + "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"  + "<b>" + "Lat" + ":</b> " + coords[1]
+    if( coords.length === 2 ) {
+        if(__appSettings.latlongFormat === "format_included"){
+            coords = (__surveyingUtils.formatPoint_decimal( coords[0], coords[1], "included"  )).split(",")
+        }else{
+            coords = (__surveyingUtils.formatPoint_decimal( coords[0], coords[1], "not_included"  )).split(",")
+        }
+        if(__appSettings.latlongOrder === "order_latlong"){
+            return "<b>" + "Lat" + ":</b> " + coords[1] + "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"  + "<b>" + "Long" + ":</b> " + coords[0]
+        }
+        else if(__appSettings.latlongOrder === "order_longlat"){
+            return "<b>" + "Long" + ":</b> " + coords[0] + "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"  + "<b>" + "Lat" + ":</b> " + coords[1]
+        }
     }
 }
 
 // 3- GPS DMS
 function gps_DMS() {
     var coords = coords_gps
-    if( __appSettings.latlongFormat === "format_included" ) {
-        coords = ( __surveyingUtils.formatPoint_dms( coords[0], coords[1], "included"  )).split(",")
-    } else {
-        coords = ( __surveyingUtils.formatPoint_dms( coords[0], coords[1], "not_included"  )).split(",")
-    }
-    if( __appSettings.latlongOrder === "order_latlong" ) {
-        return "<b>" + "Lat" + ":</b> " + coords[1] + "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"  + "<b>" + "Long" + ":</b> " + coords[0]
-    }
-    else if( __appSettings.latlongOrder === "order_longlat" ) {
-        return "<b>" + "Long" + ":</b> " + coords[0] + "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"  + "<b>" + "Lat" + ":</b> " + coords[1]
+    if( coords.length === 2 ) {
+        if( __appSettings.latlongFormat === "format_included" ) {
+            coords = ( __surveyingUtils.formatPoint_dms( coords[0], coords[1], "included"  )).split(",")
+        } else {
+            coords = ( __surveyingUtils.formatPoint_dms( coords[0], coords[1], "not_included"  )).split(",")
+        }
+        if( __appSettings.latlongOrder === "order_latlong" ) {
+            return "<b>" + "Lat" + ":</b> " + coords[1] + "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"  + "<b>" + "Long" + ":</b> " + coords[0]
+        }
+        else if( __appSettings.latlongOrder === "order_longlat" ) {
+            return "<b>" + "Long" + ":</b> " + coords[0] + "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"  + "<b>" + "Lat" + ":</b> " + coords[1]
+        }
     }
 }
 
@@ -428,7 +440,7 @@ function add_point() {
 
                 // transform point from layer CRS to project's CRS in order to catch pixel coordinate from map settings
                 var coords2 = __loader.coordTransformer( coords_degree2,
-                                                       mapView.canvasMapSettings.transformContext(), layerEPSG, epsgID )
+                                                        mapView.canvasMapSettings.transformContext(), layerEPSG, epsgID )
                 // create the transformed QgsPoint
                 var newpoint2
                 newpoint2 = __layersModel.addFeatureSurvey( coords2[1], coords2[0] )
