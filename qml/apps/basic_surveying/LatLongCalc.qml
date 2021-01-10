@@ -23,6 +23,8 @@ Column {
         id: macomponent
         CoordSelect {
             id: mapDialog
+            isGeographic: true
+            error_txt: latlong_feature_error
             onClosed: {
                 if ( selected && coordName === "rect_input" ) {
                     rect_input.lat_decimal.text = yCoord
@@ -31,11 +33,6 @@ Column {
                 }
             }
         }
-    }
-
-    SErrorDialog {
-        id: errDialog
-        parent: basic_surveying
     }
 
     Column {
@@ -82,7 +79,7 @@ Column {
                 // send property to mapView component to detect which button is clicked
                 loadComponent.active = true
                 loadComponent.item.coordName = "rect_input"
-                coordinateSelector( loadComponent.item, errDialog )
+                loadComponent.item.open()
             }
         }
         // distance bearing

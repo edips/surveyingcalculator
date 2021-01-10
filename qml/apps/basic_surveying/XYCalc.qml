@@ -21,6 +21,7 @@ Column {
         id: macomponent
         CoordSelect {
             id: mapDialog
+            error_txt: xy_feature_error
             onClosed: {
                 if( selected && coordName === "pt_a" ) {
                     pt_a.east.text = xCoord
@@ -29,11 +30,6 @@ Column {
                 } //else if(selected && coordName === "pt_b")
             }
         }
-    }
-
-    SErrorDialog {
-        id: errDialog
-        parent: basic_surveying
     }
 
 
@@ -64,7 +60,7 @@ Column {
                 // send property to mapView component to detect which button is clicked
                 loadComponent.active = true
                 loadComponent.item.coordName = "pt_a"
-                coordinateSelector( loadComponent.item, errDialog )
+                loadComponent.item.open()
             }
         }
         Column {

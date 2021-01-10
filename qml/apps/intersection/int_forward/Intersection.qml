@@ -55,6 +55,7 @@ Item{
             id: macomponent
             CoordSelect {
                 id: mapDialog
+                error_txt: xy_feature_error
                 onClosed: {
                     if( selected && coordName === "pt_1" ) {
                         pt_1.east.text = xCoord
@@ -68,9 +69,6 @@ Item{
                     }
                 }
             }
-        }
-        SErrorDialog {
-            id: errDialog
         }
 
         Column{
@@ -91,7 +89,7 @@ Item{
                     // send property to mapView component to detect which button is clicked
                     loadComponent.active = true
                     loadComponent.item.coordName = "pt_1"
-                    coordinateSelector( loadComponent.item, errDialog )
+                    loadComponent.item.open()
                 }
             }
             // Point 2
@@ -102,7 +100,7 @@ Item{
                     // send property to mapView component to detect which button is clicked
                     loadComponent.active = true
                     loadComponent.item.coordName = "pt_2"
-                    coordinateSelector( loadComponent.item, errDialog )
+                    loadComponent.item.open()
                 }
             }
             // angles alpha and beta

@@ -23,6 +23,7 @@ Column {
         id: macomponent
         CoordSelect {
             id: mapDialog
+            error_txt: xy_feature_error
             onClosed: {
                 if ( selected && coordName === "dist2d_1" ) {
                     dist2d_1.east.text = xCoord
@@ -36,11 +37,6 @@ Column {
                 }
             }
         }
-    }
-
-    SErrorDialog {
-        id: errDialog
-        parent: basic_surveying
     }
 
     Column {
@@ -72,7 +68,7 @@ Column {
                 // send property to mapView component to detect which button is clicked
                 loadComponent.active = true
                 loadComponent.item.coordName = "dist2d_1"
-                coordinateSelector( loadComponent.item, errDialog )
+                loadComponent.item.open()
             }
         }
         // Point B
@@ -83,7 +79,7 @@ Column {
                 // send property to mapView component to detect which button is clicked
                 loadComponent.active = true
                 loadComponent.item.coordName = "dist2d_2"
-                coordinateSelector( loadComponent.item, errDialog )
+                loadComponent.item.open()
             }
         }
         // Calculation

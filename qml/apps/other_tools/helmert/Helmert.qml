@@ -41,6 +41,7 @@ Item {
             id: macomponent
             CoordSelect {
                 id: mapDialog
+                error_txt: xy_feature_error
                 onClosed: {
                     if( selected && coordName === "pt_au" ) {
                         pt_au.east.text = xCoord
@@ -71,9 +72,6 @@ Item {
                 }
             }
         }
-        SErrorDialog {
-            id: errDialog
-        }
 
         Column{
             id:optionsColumn
@@ -93,7 +91,7 @@ Item {
                     // send property to mapView component to detect which button is clicked
                     loadComponent.active = true
                     loadComponent.item.coordName = "pt_au"
-                    coordinateSelector( loadComponent.item, errDialog )
+                    loadComponent.item.open()
                 }
             }
             // Point B pt_bu
@@ -104,7 +102,7 @@ Item {
                     // send property to mapView component to detect which button is clicked
                     loadComponent.active = true
                     loadComponent.item.coordName = "pt_bu"
-                    coordinateSelector( loadComponent.item, errDialog )
+                    loadComponent.item.open()
                 }
             }
             // Point P pt_pu
@@ -115,7 +113,7 @@ Item {
                     // send property to mapView component to detect which button is clicked
                     loadComponent.active = true
                     loadComponent.item.coordName = "pt_pu"
-                    coordinateSelector( loadComponent.item, errDialog )
+                    loadComponent.item.open()
                 }
             }
             // Point A' pt_a
@@ -126,7 +124,7 @@ Item {
                     // send property to mapView component to detect which button is clicked
                     loadComponent.active = true
                     loadComponent.item.coordName = "pt_a"
-                    coordinateSelector( loadComponent.item, errDialog )
+                    loadComponent.item.open()
                 }
             }
             // Point B' pt_b
@@ -137,7 +135,7 @@ Item {
                     // send property to mapView component to detect which button is clicked
                     loadComponent.active = true
                     loadComponent.item.coordName = "pt_b"
-                    coordinateSelector( loadComponent.item, errDialog )
+                    loadComponent.item.open()
                 }
             }
 

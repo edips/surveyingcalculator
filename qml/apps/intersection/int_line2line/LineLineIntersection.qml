@@ -41,6 +41,7 @@ Item{
             id: macomponent
             CoordSelect {
                 id: mapDialog
+                error_txt: xy_feature_error
                 onClosed: {
                     if( selected && coordName === "pt_a" ) {
                         pt_a.east.text = xCoord
@@ -65,10 +66,6 @@ Item{
                 }
             }
         }
-        SErrorDialog {
-            id: errDialog
-        }
-
 
         Column{
             id:optionsColumn
@@ -88,7 +85,7 @@ Item{
                     // send property to mapView component to detect which button is clicked
                     loadComponent.active = true
                     loadComponent.item.coordName = "pt_a"
-                    coordinateSelector( loadComponent.item, errDialog )
+                    loadComponent.item.open()
                 }
             }
             // Point A'
@@ -99,7 +96,7 @@ Item{
                     // send property to mapView component to detect which button is clicked
                     loadComponent.active = true
                     loadComponent.item.coordName = "pt_au"
-                    coordinateSelector( loadComponent.item, errDialog )
+                    loadComponent.item.open()
                 }
             }
             // Point B
@@ -110,7 +107,7 @@ Item{
                     // send property to mapView component to detect which button is clicked
                     loadComponent.active = true
                     loadComponent.item.coordName = "pt_b"
-                    coordinateSelector( loadComponent.item, errDialog )
+                    loadComponent.item.open()
                 }
             }
             // Point B'
@@ -121,7 +118,7 @@ Item{
                     // send property to mapView component to detect which button is clicked
                     loadComponent.active = true
                     loadComponent.item.coordName = "pt_bu"
-                    coordinateSelector( loadComponent.item, errDialog )
+                    loadComponent.item.open()
                 }
             }
             //Hesap Form

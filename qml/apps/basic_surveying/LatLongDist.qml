@@ -23,6 +23,8 @@ Column {
         id: macomponent
         CoordSelect {
             id: mapDialog
+            isGeographic: true
+            error_txt: latlong_feature_error
             onClosed: {
                 if ( selected && coordName === "dist_latlon1" ) {
                     dist_latlon1.lat_decimal.text = yCoord
@@ -37,12 +39,6 @@ Column {
             }
         }
     }
-
-    SErrorDialog {
-        id: errDialog
-        parent: basic_surveying
-    }
-
 
     Column {
         spacing: 15
@@ -84,7 +80,7 @@ Column {
                 // send property to mapView component to detect which button is clicked
                 loadComponent.active = true
                 loadComponent.item.coordName = "dist_latlon1"
-                coordinateSelector( loadComponent.item, errDialog )
+                loadComponent.item.open()
             }
         }
         // Lat Long 2
@@ -96,7 +92,7 @@ Column {
                 // send property to mapView component to detect which button is clicked
                 loadComponent.active = true
                 loadComponent.item.coordName = "dist_latlon2"
-                coordinateSelector( loadComponent.item, errDialog )
+                loadComponent.item.open()
             }
         }
         // Calculate

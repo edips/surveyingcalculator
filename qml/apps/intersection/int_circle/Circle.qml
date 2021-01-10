@@ -41,6 +41,7 @@ Item{
             id: macomponent
             CoordSelect {
                 id: mapDialog
+                error_txt: xy_feature_error
                 onClosed: {
                     if( selected && coordName === "pt_k" ) {
                         pt_k.east.text = xCoord
@@ -59,9 +60,6 @@ Item{
                     }
                 }
             }
-        }
-        SErrorDialog {
-            id: errDialog
         }
 
         Column{
@@ -82,7 +80,7 @@ Item{
                     // send property to mapView component to detect which button is clicked
                     loadComponent.active = true
                     loadComponent.item.coordName = "pt_k"
-                    coordinateSelector( loadComponent.item, errDialog )
+                    loadComponent.item.open()
                 }
             }
             // Point L
@@ -93,7 +91,7 @@ Item{
                     // send property to mapView component to detect which button is clicked
                     loadComponent.active = true
                     loadComponent.item.coordName = "pt_l"
-                    coordinateSelector( loadComponent.item, errDialog )
+                    loadComponent.item.open()
                 }
             }
             // Point M
@@ -104,7 +102,7 @@ Item{
                     // send property to mapView component to detect which button is clicked
                     loadComponent.active = true
                     loadComponent.item.coordName = "pt_m"
-                    coordinateSelector( loadComponent.item, errDialog )
+                    loadComponent.item.open()
                 }
             }
             //Hesap Form

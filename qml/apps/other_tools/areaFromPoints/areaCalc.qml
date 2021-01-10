@@ -19,16 +19,6 @@ Item{
         property alias area_result : area.text
     }
 
-    // This function is from NorthEastP component:
-    function coordinateSelector ( mapDialog, errDialog ) {
-        if(__loader.isGeographic()) {
-            errDialog.text = "Coordinate system of the current project is not in projected coordinate system."
-            errDialog.open()
-        } else {
-            mapDialog.open()
-        }
-    }
-
     // Coordinate select from map dialog
     Loader {
         id: loadComponent
@@ -43,6 +33,7 @@ Item{
         id: macomponent
         CoordSelect {
             id: mapDialog
+            error_txt: xy_feature_error
             onClosed: {
                 if( selected && coordName === "editor" ) {
                     editor.text += xCoord + " " + yCoord + "\n"
@@ -50,9 +41,6 @@ Item{
                 }
             }
         }
-    }
-    SErrorDialog {
-        id: errDialog
     }
 
     SFlickable {
@@ -86,8 +74,8 @@ Item{
                                 model: editor.lineCount
                                 STextTop {
                                     text: index + 1
-                                    color: 'gray'
                                     font.pixelSize: 19
+                                    color: "gray"
                                 }
                             }
                         }
@@ -101,10 +89,6 @@ Item{
                             inputMethodHints:  JS.keyboard_display()
                             font.pixelSize: 19
                             anchors.left: lineNumber.right
-                            background: Rectangle {
-                                color: "lightyellow"
-                                border.color:"#21be2b"
-                            }
                         }
                         ScrollBar.vertical: ScrollBar { }
                     }
@@ -140,7 +124,7 @@ Item{
                         // send property to mapView component to detect which button is clicked
                         loadComponent.active = true
                         loadComponent.item.coordName = "editor"
-                        coordinateSelector( loadComponent.item, errDialog )
+                        loadComponent.item.open()
                     }
                 }
             }
