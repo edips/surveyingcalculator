@@ -67,7 +67,7 @@ Popup {
             FluidControls.ToolButton {
                 id: editBtn
                 icon.source: "qrc:/assets/icons/material/editor/mode_edit.svg"
-                icon.color: checked ? "white" : "black"
+                //icon.color: checked ? "white" : "black"
                 checkable: true
                 onClicked: {
                     if( editBtn.checked ) {
@@ -106,7 +106,6 @@ Popup {
             anchors.horizontalCenter: parent.horizontalCenter
             NEHeader {id: coordHearder; topPadding: 15; visible: !isGeographic; }
             LatLongHeader { topPadding: 15; visible: isGeographic; }
-            Component.onCompleted: console.log( "__loader.isGeographic() in cordinate list: ", __loader.isGeographic())
             Row {
                 anchors.horizontalCenter: parent.horizontalCenter
                 Rectangle{
