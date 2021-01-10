@@ -1,13 +1,5 @@
 <RCC>
     <qresource prefix="/">
-        <file>assets/fonts/OpenSans-Regular.ttf</file>
-        <file>assets/fonts/PT_Sans-Web-Regular.ttf</file>
-        <file>assets/fonts/PT_Serif-Web-Regular.ttf</file>
-        <file>assets/fonts/PTM55FT.ttf</file>
-        <file>assets/fonts/Roboto-Regular.ttf</file>
-        <file>assets/fonts/RobotoMono-Regular.ttf</file>
-        <file>assets/fonts/Ubuntu-Regular.ttf</file>
-        <file>assets/fonts/UbuntuMono-R.ttf</file>
         <file>assets/icons/angle_conversion.png</file>
         <file>assets/icons/areaXY.png</file>
         <file>assets/icons/basic_surveying.svg</file>
