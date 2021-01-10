@@ -10,7 +10,7 @@
         <file>assets/fonts/UbuntuMono-R.ttf</file>
         <file>assets/icons/angle_conversion.png</file>
         <file>assets/icons/areaXY.png</file>
-        <file>assets/icons/basic_surveying.png</file>
+        <file>assets/icons/basic_surveying.svg</file>
         <file>assets/icons/coord_convert.png</file>
         <file>assets/icons/degree_decimal.png</file>
         <file>assets/icons/distance.png</file>
@@ -135,7 +135,7 @@
         <file>assets/images/compass.png</file>
         <file>assets/images/scale.png</file>
         <file>assets/images/scale_end.png</file>
-        <file>assets/icons/point_data_collector.png</file>
+        <file>assets/icons/point_data_collector.svg</file>
         <file>assets/icons/material/action/delete.svg</file>
         <file>assets/icons/material/action/delete_forever.svg</file>
         <file>assets/icons/material/action/done.svg</file>
