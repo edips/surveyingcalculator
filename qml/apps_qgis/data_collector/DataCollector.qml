@@ -44,7 +44,7 @@ FluidControls.Page{
     property var screenPoint;
 
     // (Array) GPS coordinate
-    property var coords_gps;
+    property var coords_gps: [];
 
     property var projectedPosition;
     property bool projectPositionValid: false
@@ -79,6 +79,7 @@ FluidControls.Page{
 
                 // (array) Assign active layer's coords_gps to coords for javascript, then display on coordinate panel
                 coords_gps = coords
+                collect_pane.coordinateText = Util.datacollector_coord()
 
                 // update EPSG code of QGIS project
                 epsgID = __loader.epsg_code()
@@ -118,7 +119,7 @@ FluidControls.Page{
         target: mapView.canvasMapSettings
         onExtentChanged: {
             if( __activeLayer.layerName != "" ) {
-                collect_pane.coordinateText = (Util.datacollector_coord()).toString()
+                collect_pane.coordinateText = Util.datacollector_coord()
             }
 
             if( __appSettings.autoCenterMapChecked && projectPositionValid === true ) {
