@@ -237,5 +237,7 @@
         <file>assets/icons/material/toggle/star_half.svg</file>
         <file>assets/icons/new_project.svg</file>
         <file>assets/icons/mIconTableLayer.svg</file>
+        <file>assets/fonts/Lato-Regular.ttf</file>
+        <file>assets/fonts/Lato-Bold.ttf</file>
     </qresource>
 </RCC>
