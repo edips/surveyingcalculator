@@ -63,6 +63,8 @@ Item{
         id: macomponent
         CoordSelect {
             id: mapDialog
+            isGeographic: true
+            error_txt: latlong_feature_error
             onClosed: {
                 if( selected && coordName === "latlon1" ) {
                     latlon1.lat_decimal.text = yCoord
@@ -77,10 +79,6 @@ Item{
             }
         }
     }
-    SErrorDialog {
-        id: errDialog
-    }
-
 
     SFlickable {
 
@@ -107,7 +105,7 @@ Item{
                         // send property to mapView component to detect which button is clicked
                         loadComponent.active = true
                         loadComponent.item.coordName = "latlon1"
-                        coordinateSelector( loadComponent.item, errDialog )
+                        loadComponent.item.open()
                     }
                 }
                 LatLong{
@@ -118,7 +116,7 @@ Item{
                         // send property to mapView component to detect which button is clicked
                         loadComponent.active = true
                         loadComponent.item.coordName = "latlon2"
-                        coordinateSelector( loadComponent.item, errDialog )
+                        loadComponent.item.open()
                     }
                 }
             }
