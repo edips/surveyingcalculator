@@ -10,7 +10,7 @@ function startgps(mycount){
     }
 }
 // Start GPS in PositionSource
-function gps_active(){
+function gps_active() {
     // current position coordinates
     var currentPosition = src.position.coordinate
     // When LatLong to UTM is active
