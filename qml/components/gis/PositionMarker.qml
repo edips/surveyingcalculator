@@ -4,13 +4,16 @@ import QtGraphicalEffects 1.0
 import QtQuick.Controls 2.3
 import QtQuick.Controls.Universal 2.3
 import QtQuick.Layouts 1.3
-import Fluid.Controls 1.0 as FluidControls
-import Fluid.Effects 1.0
-import QgsQuick 0.1 as QgsQuick
 
 Item {
     id: positionMarker
-    property QgsQuick.PositionKit positionKit
+
+    property double marker_x;
+    property double marker_y;
+
+    visible: __appSettings.autoCenterMapChecked
+
+    //property QgsQuick.PositionKit positionKit
 
 /*
     Rectangle {
@@ -31,16 +34,17 @@ Item {
     Image {
         id: direction
         source: "qrc:/assets/icons/material/maps/navigation.svg"
+        anchors.centerIn: parent
         fillMode: Image.PreserveAspectFit
-        rotation: positionKit.direction
+        //rotation: positionKit.direction
         transformOrigin: Item.Center
         sourceSize.width: 40
         sourceSize.height: 40
         smooth: true
-        visible: (positionKit.hasPosition) ? true : false
+        //visible: (positionKit.hasPosition) ? true : false
         //visible: positionKit.hasPosition && positionKit.direction >= 0
-        x: positionKit.screenPosition.x - width/2
-        y: positionKit.screenPosition.y - height/2
+        //x: marker_x - width/2
+        //y: marker_y - height/2
         opacity: 0.5
     }
 /*
@@ -68,13 +72,13 @@ Item {
     }*/
    ColorOverlay {
         anchors.fill: direction
-        visible: (positionKit.hasPosition) ? true : false
+        //visible: (positionKit.hasPosition) ? true : false
         //visible: positionKit.hasPosition && positionKit.direction >= 0
         source: direction
         color: "#009900"
 
 
-        rotation: positionKit.direction
+        //rotation: positionKit.direction
         transformOrigin: Item.Center
     }
 }
