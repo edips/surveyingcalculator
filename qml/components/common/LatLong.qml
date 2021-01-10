@@ -43,21 +43,12 @@ Item{
     property string text_lat: "Latitude "
     property string text_lon: "Longitude "
 
+    // todo: edit comments
     // Coordinate Selector function opens coordinate selector dialog if the coordinate input is convenient for the coordinate system
     // if the input coordinates are XY and current project is in projected CRS, it opens the coordinate chooser dialog, else it gives error as it isn't projected crs
     // if the input coordinates are latitude and longitude and the current project CRS is in geographic, coordinate chooser dialog opens, else it gives error
     // as it isn't geographic crs
     // requirements: mapDialog: CoordinateSelect Dialog, and errDialog Error dialog ID
-
-    // it is only for geographic coordinate system
-    function coordinateSelector ( mapDialog, errDialog ) {
-        if( !__loader.isGeographic() ) {
-            errDialog.text = "Coordinate system of the current project is not in geographic coordinate system."
-            errDialog.open()
-        } else {
-            mapDialog.open()
-        }
-    }
 
 
     // Decimal

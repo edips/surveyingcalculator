@@ -15,19 +15,12 @@ Row {
     property alias mapBtn: btn
     property bool readonly : false
 
+    // todo: edit comments
     // Coordinate Selector function opens coordinate selector dialog if the coordinate input is convenient for the coordinate system
     // if the input coordinates are XY and current project is in projected CRS, it opens the coordinate chooser dialog, else it gives error as it isn't projected crs
     // if the input coordinates are latitude and longitude and the current project CRS is in geographic, coordinate chooser dialog opens, else it gives error
     // as it isn't geographic crs
     // requirements: mapDialog: CoordinateSelect Dialog, and errDialog Error dialog ID
-    function coordinateSelector ( mapDialog, errDialog ) {
-        if(__loader.isGeographic()) {
-            errDialog.text = "Coordinate system of the current project is not in projected (metric) coordinate system."
-            errDialog.open()
-        } else {
-            mapDialog.open()
-        }
-    }
 
     anchors.horizontalCenter: parent.horizontalCenter
     spacing:5
