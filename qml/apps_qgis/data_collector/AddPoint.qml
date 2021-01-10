@@ -41,7 +41,7 @@ FluidControls.AlertDialog {
         color: "transparent"
         id: point_column
         // Coordinate Rectangle
-        Rectangle{
+        Rectangle {
             id: mainrect
             height: 100
             width: 200
@@ -50,11 +50,11 @@ FluidControls.AlertDialog {
             Rectangle {
                 id:row1
                 // setting coordinate order
-                //anchors.top : Util.coord_order() === "en" || Util.coord_order() === "lonlat" ? row2.bottom : parent.top
+                anchors.top : isLayerGeographic ? ( Util.coord_order() === "lonlat" ? row2.bottom : parent.top ) : ( Util.coord_order() === "en" ? row2.bottom : parent.top )
                 width: parent.width
                 height: parent.height/2
                 color: "transparent"
-                SText{
+                SText {
                     id: n_txt
                     text: xText
                     anchors.left: parent.left
@@ -69,32 +69,33 @@ FluidControls.AlertDialog {
                     font.pixelSize: 16
                     selectByMouse: true
                 }
-                Row{
+                Row {
                     id: lat_DMS
                     spacing: 5
                     visible: Util.visibility_latlong()
-                    anchors.left:n_txt.right
-                    STextField{id:latdeg; implicitWidth: 40; placeholderText: "°";  font.pixelSize: 16}
-                    STextField{id:latmin; implicitWidth: 35; placeholderText: "'";  font.pixelSize: 16}
-                    STextField{id:latsec; implicitWidth: 100; placeholderText: "''";font.pixelSize: 16}
+                    anchors.left: n_txt.right
+                    STextField{ id:latdeg; implicitWidth: 40; placeholderText: "°";  font.pixelSize: 16 }
+                    STextField{ id:latmin; implicitWidth: 35; placeholderText: "'";  font.pixelSize: 16 }
+                    STextField{ id:latsec; implicitWidth: 100; placeholderText: "''"; font.pixelSize: 16 }
                 }
             }
             // Latitude: N; Longitude: E
-            Rectangle{
+            Rectangle {
                 id:row2
                 // setting coordinate order
-                //anchors.top : Util.coord_order() === "en" || Util.coord_order() === "lonlat" ? parent.top : row1.bottom
+                anchors.top : isLayerGeographic ? ( Util.coord_order() === "lonlat" ? parent.top : row1.bottom ) : ( Util.coord_order() === "en" ? parent.top : row1.bottom )
+                // Util.coord_order() === "en" || Util.coord_order() === "lonlat" ? parent.top : row1.bottom
                 width: parent.width
                 height: parent.height/2
                 color: "transparent"
-                SText{
+                SText {
                     id: e_txt
                     text: yText
                     anchors.left: parent.left
                     font.bold: true
                 }
                 // Editing lat long or N,E
-                STextField{
+                STextField {
                     visible: !( lat_DMS.visible )
                     id: add_E
                     anchors.left:e_txt.right
@@ -102,13 +103,13 @@ FluidControls.AlertDialog {
                     font.pixelSize: 16
                     selectByMouse: true
                 }
-                Row{
+                Row {
                     spacing: 5
                     visible: lat_DMS.visible
                     anchors.left:e_txt.right
-                    STextField{id:londeg; implicitWidth: 40; placeholderText: "°";  font.pixelSize: 16;}
-                    STextField{id:lonmin; implicitWidth: 35; placeholderText: "'";  font.pixelSize: 16;}
-                    STextField{id:lonsec; implicitWidth: 100; placeholderText: "''";font.pixelSize: 16;}
+                    STextField{ id:londeg; implicitWidth: 40; placeholderText: "°";  font.pixelSize: 16; }
+                    STextField{ id:lonmin; implicitWidth: 35; placeholderText: "'";  font.pixelSize: 16; }
+                    STextField{ id:lonsec; implicitWidth: 100; placeholderText: "''";font.pixelSize: 16; }
                 }
             }
         }
