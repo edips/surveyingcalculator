@@ -9,14 +9,14 @@ import "../../components/common/script.js" as Util
 
 Rectangle {
     property int inputFormHeight: data_column.implicitHeight
-    property string coordinateText: ( Util.datacollector_coord() ).toString()
+    property string coordinateText;
     color: Universal.background
     id: collect_pane
     width: parent.width
     height: __activeLayer.layerName === "" ? 0 : data_column.implicitHeight + 15
     anchors.bottom: parent.bottom
     z: 3
-    Column{
+    Column {
         id:data_column
         anchors.fill: parent
         spacing: 7
@@ -36,13 +36,13 @@ Rectangle {
                     text: coordinateText
                     // * TODO: it gives error: "Unable to assign [undefined] to QString" this should be fixed with c++ source codes. if the error keeps, ask it to irc or issues.
                     //text: {
-                        /*if ( positionKit.hasPosition ){
+                    /*if ( positionKit.hasPosition ){
                             return (Util.datacollector_coord()).toString();
                         }
                         return "";
                         */
 
-                   // }
+                    // }
                     width: 300
                     font.pixelSize: 13
                 }
@@ -55,29 +55,35 @@ Rectangle {
                     font.bold: false
                     horizontalAlignment: Text.AlignRight
                     anchors.verticalCenter: parent.verticalCenter
-                    /*
+                    //text: "Accuracy: " + parseFloat((src.position.horizontalAccuracy).toFixed(2)) + " m"
+
                     text: {
                         var label = "Signal Lost"
-                        if ( positionKit.hasPosition )
+                        if ( src.valid && __appSettings.autoCenterMapChecked ) {
                             //label = QgsQuick.Utils.formatPoint( positionKit.position )
-                            if (positionKit.accuracy > 0)
-                                label = "Accuracy: " + QgsQuick.Utils.formatDistance( positionKit.accuracy, positionKit.accuracyUnits, 1 )
+                            if ( src.position.horizontalAccuracy > 0 )
+                                label = "Accuracy: " + parseFloat( ( src.position.horizontalAccuracy ).toFixed( 2 ) ) + " m"
+                        } else
+                            label = ""
                         label;
                     }
-                    */
+
                     width: 120
                     font.pixelSize: 13
-                    /*color: {
-                        if (positionKit.accuracy > 5 || !positionKit.hasPosition){
-                            return "crimson"
-                        }else if(positionKit.accuracy < 5 && positionKit.accuracy > 2){
+                    color:
+                    {
+                        if ( parseFloat( (src.position.horizontalAccuracy) ) > 5 || !src.active ) {
+                            return "red"
+                        }
+                        else if( parseFloat( ( src.position.horizontalAccuracy ) ) < 5 && positionKit.accuracy > 2) {
                             return "coral"
                         }
                         else{
-                            return "green"
+                            return __appSettings.theme === 0 ? "green" : "lawngreen"
                         }
-                    }*/
+                    }
                 }
+
                 // EPSG Name
                 SText {
                     horizontalAlignment: Text.AlignLeft
