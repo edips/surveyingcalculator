@@ -87,33 +87,24 @@ QHash<int, QByteArray> LayersModel::roleNames() const
  * active record and open feature panel to edit features
 */
 // Add Points action: add feature from user's input and coordinates.
-QgsPoint LayersModel::addFeatureSurvey(QString n_str, QString e_str)
+QgsPoint LayersModel::addFeatureSurvey( QString n_str, QString e_str )
 {
-
     double n = n_str.toDouble();
     double e = e_str.toDouble();
 
-
-
-    /*
-    // Create feature and set the vector layer's fields to that feature, give it an id
-    QgsFeature feature(layer->fields(),0);
-    //feature.setGeometry(QgsGeometry::fromPointXY(QgsPointXY(30.0,40.0)));
-    // Set user's input coordinates
-    feature.setGeometry(QgsGeometry::fromPointXY(QgsPointXY(e, n)));
-
-    if(layer->dataProvider()->addFeature(feature)) {
-        qDebug() << "ok man";
-    }
-    layer->updateFields();
-    layer->triggerRepaint();
-    */
-
     QgsPoint mypoint = QgsPoint(e, n, 0);
 
-    qDebug() << "QDEBUG FROM C++";
+    if( mypoint.isEmpty() )
+        return QgsPoint();
 
     return mypoint;
+}
+
+bool LayersModel::pointIsEmpty( QgsPoint p )
+{
+    if( p.x() == 0.0 && p.y() == 0.0 )
+        return false;
+    return p.isEmpty();
 }
 
 
