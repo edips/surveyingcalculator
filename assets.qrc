@@ -231,5 +231,6 @@
         <file>assets/icons/mIconTableLayer.svg</file>
         <file>assets/fonts/Lato-Regular.ttf</file>
         <file>assets/fonts/Lato-Bold.ttf</file>
+        <file>assets/icons/material/action/today.svg</file>
     </qresource>
 </RCC>
