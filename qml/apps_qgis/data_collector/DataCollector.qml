@@ -2,7 +2,7 @@
 // Copy Right Edip Ahmet Taşkın
 import QtQuick 2.10 as QQ
 import QtQuick.Controls 2.12
-import QtQuick.Controls.Universal 2.3
+import QtQuick.Controls.Universal 2.12
 import QtQuick.Layouts 1.3
 import QtQuick.Window 2.12
 import Qt.labs.settings 1.1
@@ -53,7 +53,7 @@ FluidControls.Page{
     title:qsTr("")
     appBar.maxActionCount: 5
     anchors.fill: parent
-    id:dataCollector
+    id: dataCollector
     visible: true
 
     // PositionSource to get currrent GPS coordinates
