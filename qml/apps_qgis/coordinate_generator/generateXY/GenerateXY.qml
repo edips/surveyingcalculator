@@ -31,7 +31,6 @@ Item{
     Loader {
         id: loadComponent
         anchors.fill: parent
-        asynchronous: true
         active: false
         sourceComponent: macomponent
     }
