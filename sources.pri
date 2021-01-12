@@ -12,6 +12,7 @@ SOURCES += \
     cpp/appsettings.cpp \
     cpp/inpututils.cpp \
     cpp/digitizingcontroller.cpp \
+    cpp/layersproxymodel.cpp \
     cpp/androidutils.cpp
 
 HEADERS += \
@@ -27,6 +28,7 @@ HEADERS += \
     cpp/appsettings.h \
     cpp/digitizingcontroller.h \
     cpp/inpututils.h \
+    cpp/layersproxymodel.h \
     cpp/androidutils.h
 
 RESOURCES += qml.qrc \
