@@ -274,9 +274,62 @@ static void copy_sqlite( const QString &sqliteDir )
 #endif
 }
 
+quint64 dir_size(const QString & str)
+{
+    quint64 sizex = 0;
+    QFileInfo str_info(str);
+    if (str_info.isDir())
+    {
+        QDir dir(str);
+        QFileInfoList list = dir.entryInfoList(QDir::Files | QDir::Dirs |  QDir::Hidden | QDir::NoSymLinks | QDir::NoDotAndDotDot);
+        for (int i = 0; i < list.size(); ++i)
+        {
+            QFileInfo fileInfo = list.at(i);
+            if(fileInfo.isDir())
+            {
+                    sizex += dir_size(fileInfo.absoluteFilePath());
+            }
+            else
+                sizex += fileInfo.size();
+
+        }
+    }
+    return sizex;
+}
+
+void clearDir( const QString path )
+{
+    QDir dir( path );
+
+    dir.setFilter( QDir::NoDotAndDotDot | QDir::Files );
+    foreach( QString dirItem, dir.entryList() )
+        dir.remove( dirItem );
+
+    dir.setFilter( QDir::NoDotAndDotDot | QDir::Dirs );
+    foreach( QString dirItem, dir.entryList() )
+    {
+        QDir subDir( dir.absoluteFilePath( dirItem ) );
+        subDir.removeRecursively();
+        qDebug() << dir.entryList().length();
+    }
+}
+
 // main cpp
 int main(int argc, char *argv[])
 {
+    // if size of cache or app data is more than 10 MB, set it to zero, set to zero
+    int cache_size = dir_size( QStandardPaths::writableLocation( QStandardPaths::CacheLocation ) );
+    int data_size = dir_size( QStandardPaths::writableLocation( QStandardPaths::AppDataLocation ) );
+
+    if( data_size > 10000000 ) {
+        qputenv("QML_DISABLE_DISK_CACHE", "true");
+    }
+
+    if( cache_size > 10000000 ) {
+        QString path = QStandardPaths::writableLocation( QStandardPaths::CacheLocation );
+        clearDir( path );
+    }
+
     // High DPI
     QGuiApplication::setAttribute(Qt::AA_EnableHighDpiScaling);
     QQuickStyle::setStyle("Universal");
@@ -410,11 +463,6 @@ int main(int argc, char *argv[])
     // copy sqlite database
     copy_sqlite(engine.offlineStoragePath()+"/Databases");
     // end of copy process of SQLite database
-
-
-    //engine.addImportPath( "qrc:///content/coordinate_converter" );
-
-    //engine.load(QUrl(QStringLiteral("qrc:///qml/main.qml")));
 
     //newly added from Map View to load main.qml
     QQmlComponent component( &engine, QUrl( QStringLiteral("qrc:///qml/main.qml")) );
