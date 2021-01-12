@@ -1,10 +1,8 @@
 SOURCES += \
-    $$PWD/cpp/activelayer.cpp \
-    $$PWD/cpp/layersproxymodel.cpp \
-    $$PWD/cpp/localprojectsmanager.cpp \
-    $$PWD/cpp/positiondirection.cpp \
-    $$PWD/cpp/surveyingutils.cpp \
-    $$PWD/cpp/variablesmanager.cpp \
+    cpp/activelayer.cpp \
+    cpp/localprojectsmanager.cpp \
+    cpp/surveyingutils.cpp \
+    cpp/variablesmanager.cpp \
     cpp/mapprovider.cpp \
     cpp/mapthemesmodel.cpp \
     main.cpp \
@@ -17,12 +15,10 @@ SOURCES += \
     cpp/androidutils.cpp
 
 HEADERS += \
-    $$PWD/cpp/activelayer.h \
-    $$PWD/cpp/layersproxymodel.h \
-    $$PWD/cpp/localprojectsmanager.h \
-    $$PWD/cpp/positiondirection.h \
-    $$PWD/cpp/surveyingutils.h \
-    $$PWD/cpp/variablesmanager.h \
+    cpp/activelayer.h \
+    cpp/localprojectsmanager.h \
+    cpp/surveyingutils.h \
+    cpp/variablesmanager.h \
     cpp/mapprovider.h \
     cpp/mapthemesmodel.h \
     cpp/projectsmodel.h \

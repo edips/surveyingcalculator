@@ -17,9 +17,7 @@
 #include "cpp/projectsmodel.h"
 #include "cpp/layersmodel.h"
 #include "cpp/digitizingcontroller.h"
-#include "cpp/layersproxymodel.h"
 #include "cpp/activelayer.h"
-#include "cpp/positiondirection.h"
 
 #include "qgsquickutils.h"
 #include "qgsproject.h"
@@ -51,7 +49,11 @@
 #include <QFontDatabase>
 #include <QQuickStyle>
 
-
+/*! TODO
+ * Move functions a new class named InitProject
+ * Try to remove VariablesManager.cpp
+ * Combine InputUtils with SurveyingUtils
+*/
 
 
 static QString getDataDir()
@@ -187,9 +189,7 @@ void initDeclarative()
     qmlRegisterUncreatableType<AppSettings>( "lc", 1, 0, "AppSettings", "" );
     qmlRegisterType<DigitizingController>( "lc", 1, 0, "DigitizingController" );
     qmlRegisterType<SurveyingUtils>( "lc", 1, 0, "SurveyingUtils" );
-    qmlRegisterUncreatableType<LayersProxyModel>( "lc", 1, 0, "LayersProxyModel", "" );
     qmlRegisterUncreatableType<ActiveLayer>( "lc", 1, 0, "ActiveLayer", "" );
-    qmlRegisterType<PositionDirection>( "lc", 1, 0, "PositionDirection" );
 }
 
 void addQmlImportPath( QQmlEngine &engine )
@@ -317,6 +317,9 @@ void clearDir( const QString path )
 // main cpp
 int main(int argc, char *argv[])
 {
+    QElapsedTimer timer;
+    timer.start();
+
     // if size of cache or app data is more than 10 MB, set it to zero
     int cache_size = dir_size( QStandardPaths::writableLocation( QStandardPaths::CacheLocation ) );
     int data_size = dir_size( QStandardPaths::writableLocation( QStandardPaths::AppDataLocation ) );
@@ -330,13 +333,20 @@ int main(int argc, char *argv[])
         clearDir( path );
     }
 
+
+
+    qDebug() << "1 The slow operation took" << timer.elapsed() << "milliseconds";
+
+
+
+
     // High DPI
     QGuiApplication::setAttribute(Qt::AA_EnableHighDpiScaling);
     QQuickStyle::setStyle("Universal");
 
     QgsApplication app( argc, argv, true );
 
-    QQmlEngine engine;
+    QQmlApplicationEngine engine;
 
     // Description of the app for making settings work in QML
     QCoreApplication::setOrganizationName("Geosoft");
@@ -353,6 +363,8 @@ int main(int argc, char *argv[])
 #ifdef ANDROID
     AndroidUtils::requirePermissions();
 #endif
+    qDebug() << "2 The slow operation took" << timer.elapsed() << "milliseconds";
+
 
     // Set/Get enviroment
     QString dataDir = getDataDir( );
@@ -376,27 +388,12 @@ int main(int argc, char *argv[])
     AppSettings as;
     InputUtils iu;
     LayersModel lm;
-    LayersProxyModel browseLpm( &lm, ModelTypes::BrowseDataLayerSelection );
-    LayersProxyModel recordingLpm( &lm, ModelTypes::ActiveLayerSelection );
     ActiveLayer al;
     Loader loader( mtm, as, al );
-    //std::unique_ptr<VariablesManager> vm( new VariablesManager( ma.get() ) );
 
     SurveyingUtils surv;
 
-
-    // Connections
     QObject::connect( &app, &QGuiApplication::applicationStateChanged, &loader, &Loader::appStateChanged );
-    //QObject::connect( &app, &QCoreApplication::aboutToQuit, &loader, &Loader::appAboutToQuit );
-    //QObject::connect( &mtm, &MapThemesModel::mapThemeChanged, &recordingLpm, &LayersProxyModel::onMapThemeChanged );
-    //QObject::connect( &loader, &Loader::projectReloaded, vm.get(), &VariablesManager::merginProjectChanged );
-    /*QObject::connect( QgsApplication::messageLog(),
-                      static_cast<void ( QgsMessageLog::* )( const QString &message, const QString &tag, Qgis::MessageLevel level )>( &QgsMessageLog::messageReceived ),
-                      &iu,
-                      &InputUtils::onQgsLogMessageReceived );*/
-
-
-
 
     QFile projectLoadingFile( Loader::LOADING_FLAG_FILE_PATH );
     if ( projectLoadingFile.exists() )
@@ -406,6 +403,9 @@ int main(int argc, char *argv[])
         projectLoadingFile.remove();
         InputUtils::log( QStringLiteral( "Loading project error" ), QStringLiteral( "The Input has been unexpectedly finished during the last run." ) );
     }
+
+    qDebug() << "3 The slow operation took" << timer.elapsed() << "milliseconds";
+
 
     engine.addImportPath( QgsApplication::qmlImportPath() );
     initDeclarative();
@@ -425,82 +425,36 @@ int main(int argc, char *argv[])
     engine.rootContext()->setContextProperty( "__mapThemesModel", &mtm );
     engine.rootContext()->setContextProperty("__surveyingUtils", &surv );
 
-
-    engine.rootContext()->setContextProperty( "__recordingLayersModel", &recordingLpm );
-    engine.rootContext()->setContextProperty( "__browseDataLayersModel", &browseLpm );
     engine.rootContext()->setContextProperty( "__activeLayer", &al );
+
     // For UTM Map mapprovider
     mapProvider* provider = new mapProvider();
     engine.rootContext()->setContextProperty("provider", provider);
 
-
-#ifdef ANDROID
-    engine.rootContext()->setContextProperty( "__appwindowvisibility", "Maximized" );
-#else
-    engine.rootContext()->setContextProperty( "__appwindowvisibility", "windowed" );
-#endif
-    // Set simulated position for desktop builds
-#ifndef ANDROID
-    bool use_simulated_position = true;
-#else
-    bool use_simulated_position = false;
-#endif
-    engine.rootContext()->setContextProperty( "__use_simulated_position", use_simulated_position );
-
-
     // Copying Storage SQLite database
-    qDebug() << "Default storage path >> "+engine.offlineStoragePath();
+    //qDebug() << "Default storage path >> "+engine.offlineStoragePath();
     QString localPath = QStandardPaths::writableLocation( QStandardPaths::AppDataLocation );
     QString dbpath = appdir() + "/OfflineStorage/Databases/e04d88072f90f86a07481418b8ff4b6b.sqlite";
     QString offline_path = appdir() + "/OfflineStorage";
     engine.setOfflineStoragePath(QString(offline_path));
-    qDebug() << "New storage path >> "+engine.offlineStoragePath();
-
+    //qDebug() << "New storage path >> "+engine.offlineStoragePath();
     // remove database folder before copying
     QDir dir(engine.offlineStoragePath());
     dir.removeRecursively();
-
     // copy sqlite database
     copy_sqlite(engine.offlineStoragePath()+"/Databases");
     // end of copy process of SQLite database
 
-    //newly added from Map View to load main.qml
-    QQmlComponent component( &engine, QUrl( QStringLiteral("qrc:///qml/main.qml")) );
-    QObject *object = component.create();
+    qDebug() << "The slow operation took" << timer.elapsed() << "milliseconds";
 
-    if ( !component.errors().isEmpty() )
-    {
-        qDebug( "%s", QgsApplication::showSettings().toLocal8Bit().data() );
+    engine.load(QUrl(QStringLiteral("qrc:///qml/main.qml")) );
 
-        qDebug() << "****************************************";
-        qDebug() << "*****        QML errors:           *****";
-        qDebug() << "****************************************";
-        for ( const QQmlError &error : component.errors() )
-        {
-            qDebug() << "  " << error;
-        }
-        qDebug() << "****************************************";
-        qDebug() << "****************************************";
-    }
-
-    if ( object == nullptr )
-    {
-        qDebug() << "FATAL ERROR: unable to create main.qml";
-        return EXIT_FAILURE;
-    }
-    // end of map view code
-
+    qDebug() << "The slow operation took" << timer.elapsed() << "milliseconds";
 
 #ifndef ANDROID
     QCommandLineParser parser;
     parser.addVersionOption();
     parser.process( app );
 #endif
-
-    // Add some data for debugging if needed
-    QgsApplication::messageLog()->logMessage( QgsQuickUtils().dumpScreenInfo() );
-    QgsApplication::messageLog()->logMessage( "data directory: " + dataDir );
-    QgsApplication::messageLog()->logMessage( "All up and running" );
-
     return app.exec();
 }
