@@ -68,7 +68,7 @@ FluidControls.Page {
         anchors.topMargin: 15
 
         // Main column
-        ColumnLayout {
+        Column {
             id: dist_column
             spacing: 15
             width: parent.width
@@ -80,8 +80,7 @@ FluidControls.Page {
             // Loading pages
             Loader {
                 id: apploader
-                Layout.fillWidth: true
-                Layout.fillHeight: true
+                width: parent.width
                 sourceComponent: load_page ()
             }
             // Pages
