@@ -1,15 +1,14 @@
 // Author: Edip AHmet Taşkın
 // Copy Right Edip Ahmet Taşkın
 import QtQuick 2.10 as QQ
+import QtLocation 5.6
+import QtPositioning 5.6
 import QtQuick.Controls 2.12
 import QtQuick.Controls.Universal 2.12
 import QtQuick.Layouts 1.3
 import QtQuick.Window 2.12
 import Qt.labs.settings 1.1
 import Fluid.Controls 1.0 as FluidControls
-import Fluid.Core 1.0 as FluidCore
-import Fluid.Effects 1.0
-import QtGraphicalEffects 1.0
 import QgsQuick 0.1 as QgsQuick
 import lc 1.0
 import QtQml.Models 2.2
@@ -18,13 +17,9 @@ import "../../components/gis"
 import "../../components/common"
 import "../../components/common/script.js" as Util
 import "data_collector.js" as JS
-import "../../help"
-
-import QtLocation 5.6
-import QtPositioning 5.6
 
 
-FluidControls.Page{
+FluidControls.Page {
     property color materialcolor: Universal.accent
     // counter for full screen round button for mapcanvas
     property int count_full: 0;
@@ -42,10 +37,8 @@ FluidControls.Page{
     property bool isLayerGeographic;
     // screen point coordinates when clicking on map canvas
     property var screenPoint;
-
     // (Array) GPS coordinate
     property var coords_gps: [];
-
     property var projectedPosition;
     property bool projectPositionValid: false
     // You can change UI based on the display mode
@@ -105,8 +98,6 @@ FluidControls.Page{
         }
     }
 
-
-
     // project's CRS cursor coordinate
     function projectCoord() {
         var screenPoint = Qt.point( mapView.mapCanvas.width/2, mapView.mapCanvas.height/2 )
@@ -119,12 +110,13 @@ FluidControls.Page{
         target: mapView.canvasMapSettings
         onExtentChanged: {
             if( __activeLayer.layerName != "" ) {
-                collect_pane.coordinateText = Util.datacollector_coord()
-            }
-
-            if( __appSettings.autoCenterMapChecked && projectPositionValid === true ) {
-                // set marker to center of the position when moving the map canvas
-                mapView.mapCanvas.mapSettings.setCenter( projectedPosition );
+                if( !__appSettings.autoCenterMapChecked ) {
+                    collect_pane.coordinateText = Util.datacollector_coord()
+                }
+                else if( projectPositionValid === true ) {
+                    // set marker to center of the position when moving the map canvas
+                    mapView.mapCanvas.mapSettings.setCenter( projectedPosition );
+                }
             }
         }
     }
@@ -690,11 +682,11 @@ FluidControls.Page{
             icon.source: "qrc:/assets/icons/material/action/settings.svg"
         }
         // Help
-        MenuItem{
+        /*MenuItem{
             onTriggered: maphelp.open()
             text: qsTr("Help")
             icon.source: "qrc:/assets/icons/material/action/help_outline.svg"
-        }
+        }*/
 
     }
     // Actions on toolbar
@@ -703,15 +695,21 @@ FluidControls.Page{
         FluidControls.Action {
             id:gpsAction
             icon.color: {
-                if(__appSettings.autoCenterMapChecked){
+                if( __appSettings.autoCenterMapChecked && __activeLayer.layerName !== "" ){
                     return Universal.color( Universal.Orange )
                 }
                 else{
                     return __appSettings.theme === 0 ? "black" : "white"
                 }
             }
-            onTriggered:{
-                __appSettings.autoCenterMapChecked =!__appSettings.autoCenterMapChecked
+            onTriggered: {
+                if( __activeLayer.layerName !== "" ) {
+                    __appSettings.autoCenterMapChecked =!__appSettings.autoCenterMapChecked
+                }
+                else {
+                    snack.open("Please select a point layer to enable GPS.")
+                }
+
             }
             toolTip: qsTr("Enable GPS")
             icon.source: "qrc:/assets/icons/material/maps/my_location.svg"
@@ -759,10 +757,11 @@ FluidControls.Page{
     }
 
     // Help Page
+    /*
     PointDataCollectorHelp {
         id: maphelp
         visible: false
-    }
+    }*/
 
     // extracted coordinates from active layer dialog
     /*
@@ -831,31 +830,3 @@ FluidControls.Page{
     }
 
 }
-/** Coordinate transformater */
-/*
-QgsQuick.CoordinateTransformer {
-    id: coordinateTransformer
-    sourcePosition: positionKit.position
-    sourceCrs: positionKit.positionCRS()
-    destinationCrs: QgsQuick.Utils.coordinateReferenceSystemFromEpsgId( epsgID )
-    transformContext: mapView.canvasMapSettings.transformContext()
-}*/
-
-/*
-    var screenPoint = Qt.point( mapCanvas.width/2, mapCanvas.height/2 )
-    var centerPoint = mapView.canvasMapSettings.screenToCoordinate(screenPoint)
-*/
-// display cursor coordinates project
-/*
-QgsQuick.CoordinateTransformer {
-    id: cursorCoordinate
-    sourcePosition: positionKit.position
-    sourceCrs: positionKit.positionCRS()
-    destinationCrs: QgsQuick.Utils.coordinateReferenceSystemFromEpsgId( epsgID )
-    transformContext: mapView.canvasMapSettings.transformContext()
-}*/
-/*
-SFileDialog {
-    id: fileDialog
-}
-*/

@@ -6,7 +6,7 @@ import QgsQuick 0.1 as QgsQuick
 import lc 1.0
 import "../../components/common"
 import "../../components/common/script.js" as Util
-
+// TODO: rename it as coordinate panel
 Rectangle {
     property int inputFormHeight: data_column.implicitHeight
     property string coordinateText;
@@ -72,14 +72,14 @@ Rectangle {
                     font.pixelSize: 13
                     color:
                     {
-                        if ( parseFloat( (src.position.horizontalAccuracy) ) > 5 || !src.active ) {
-                            return "red"
-                        }
-                        else if( parseFloat( ( src.position.horizontalAccuracy ) ) < 5 && positionKit.accuracy > 2) {
+                        if( parseFloat( ( src.position.horizontalAccuracy ) ) < 5 && parseFloat( ( src.position.horizontalAccuracy ) ) > 2) {
                             return "coral"
                         }
-                        else{
+                        else if( parseFloat( ( src.position.horizontalAccuracy ) ) < 2 ) {
                             return __appSettings.theme === 0 ? "green" : "lawngreen"
+                        }
+                        else{
+                            return "red"
                         }
                     }
                 }
