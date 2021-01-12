@@ -317,7 +317,7 @@ void clearDir( const QString path )
 // main cpp
 int main(int argc, char *argv[])
 {
-    // if size of cache or app data is more than 10 MB, set it to zero, set to zero
+    // if size of cache or app data is more than 10 MB, set it to zero
     int cache_size = dir_size( QStandardPaths::writableLocation( QStandardPaths::CacheLocation ) );
     int data_size = dir_size( QStandardPaths::writableLocation( QStandardPaths::AppDataLocation ) );
 
