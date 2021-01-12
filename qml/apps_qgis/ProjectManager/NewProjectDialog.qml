@@ -77,12 +77,10 @@ FluidControls.AlertDialog {
 
             __projectsModel.refreshModel()
 
+            mapView.noprojectVisible = false
+
             //mapView.activeProjectIndexChanged()
             snack.open("Project added: " + projectName.text)
-        }
-        else if( __projectsModel.addNewProject(projectName.text) === "crs_not_found" ) {
-            epsg_error.open()
-            //epsg_code.text = ""
         }
         else if( __projectsModel.addNewProject(projectName.text) === "fileExists" ) {
             snack.open(projectName.text + " already exists. Please try a different name.")

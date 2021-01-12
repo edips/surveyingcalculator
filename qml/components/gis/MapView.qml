@@ -14,6 +14,8 @@ import "../common"
 import "mapview"
 
 Item {
+    // No project visible
+    property bool noprojectVisible: projectList.count === 0
     // opens project panel to choose a project
     property bool openProject: false
     // Map canvas
@@ -133,11 +135,7 @@ Item {
                     visible: true
                     delegate: projectPanelEnabled ? projectDelegate : simpleDelegate
                     // No project found label
-                    NoProject { id: noProject }
-                    Component.onCompleted: {
-                        if(projectList.count === 0)
-                            noProject.visible = true
-                    }
+                    NoProject { id: noProject; visible: noprojectVisible }
                 }
             }
 
