@@ -112,7 +112,6 @@ TopSheet {
                     SText{
                         font.pixelSize: 15
                         text:qsTr(" Latitude and Longitude Display")
-                        font.bold: true
                     }
                     SText{
                         text:{
@@ -135,7 +134,6 @@ TopSheet {
                     SText{
                         font.pixelSize: 15
                         text:qsTr("Latitude and Longitude Format")
-                        font.bold: true
                     }
                     SText{
                         text:{
@@ -158,7 +156,6 @@ TopSheet {
                         id: order_text
                         font.pixelSize: 15
                         text:qsTr("Latitude and Longitude Order")
-                        font.bold: true
                     }
                     SText{
                         text:rd_lat1.checked ? rd_lat1.text : rd_lat2.text
@@ -179,7 +176,6 @@ TopSheet {
                     SText{
                         font.pixelSize: 15
                         text:qsTr("Northing and Easting Order")
-                        font.bold: true
                     }
                     SText{
                         id: latlon_order_txt
@@ -198,7 +194,6 @@ TopSheet {
                 SText {
                     font.pixelSize: 15
                     text:qsTr("X,Y Display")
-                    font.bold: true
                     leftPadding: 5
                 }
 
