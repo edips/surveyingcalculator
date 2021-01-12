@@ -25,12 +25,11 @@ Component {
             if(!isValid) return "qrc:/assets/icons/material/action/help_outline.svg"
             return "qrc:/assets/icons/material/maps/map.svg"
         }
-        rightItem: RoundButton{
+        rightItem: RoundButton {
             anchors.centerIn: parent
             flat: true
             visible: alwaysOpenPanel && isValid
             icon.source: "qrc:/assets/icons/material/navigation/more_vert.svg"
-            //Universal.foreground: listItem.highlighted ? listItem.Universal.accentColor : enabled ? listItem.Universal.iconColor : listItem.Universal.iconDisabledColor
             onClicked:{
                 menuIndex = index
                 menuProjectPath = path
@@ -43,7 +42,6 @@ Component {
         highlighted: activeProjectPath !== "" && path === activeProjectPath ? true : false
         onClicked: {
             activeProjectIndex = index
-
         }
     }
 }
