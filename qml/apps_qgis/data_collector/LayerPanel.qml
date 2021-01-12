@@ -10,7 +10,7 @@ import QgsQuick 0.1 as QgsQuick
 import lc 1.0
 import "../../components/common"
 
-FluidControls.NavigationListView{
+FluidControls.NavigationListView {
     id: navDrawer
     width: parent.width - 100
     height: parent.height
