@@ -13,7 +13,6 @@ Column {
         id: loadComponent
         parent: basic_surveying
         anchors.fill: parent
-        asynchronous: true
         active: false
         sourceComponent: macomponent
     }
