@@ -51,7 +51,7 @@ SRoundButton {
             var screenY = mapView.mapCanvas.height/2
             dataCollector.recordFeature(screenX, screenY)
         }else{
-            snack.open("Not recorded. Point layer is not selected.")
+            snack.open("Please select a point layer from Active Layer panel to record points.")
         }
     }
 }
