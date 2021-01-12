@@ -42,6 +42,7 @@
 #include "cpp/appsettings.h"
 #include "cpp/surveyingutils.h"
 #include "cpp/mapprovider.h"
+#include "cpp/layersproxymodel.h"
 
 #include <QQmlComponent>
 #include <QQmlEngine>
@@ -189,6 +190,7 @@ void initDeclarative()
     qmlRegisterUncreatableType<AppSettings>( "lc", 1, 0, "AppSettings", "" );
     qmlRegisterType<DigitizingController>( "lc", 1, 0, "DigitizingController" );
     qmlRegisterType<SurveyingUtils>( "lc", 1, 0, "SurveyingUtils" );
+    qmlRegisterUncreatableType<LayersProxyModel>( "lc", 1, 0, "LayersProxyModel", "" );
     qmlRegisterUncreatableType<ActiveLayer>( "lc", 1, 0, "ActiveLayer", "" );
 }
 
@@ -317,9 +319,6 @@ void clearDir( const QString path )
 // main cpp
 int main(int argc, char *argv[])
 {
-    QElapsedTimer timer;
-    timer.start();
-
     // if size of cache or app data is more than 10 MB, set it to zero
     int cache_size = dir_size( QStandardPaths::writableLocation( QStandardPaths::CacheLocation ) );
     int data_size = dir_size( QStandardPaths::writableLocation( QStandardPaths::AppDataLocation ) );
@@ -332,14 +331,6 @@ int main(int argc, char *argv[])
         QString path = QStandardPaths::writableLocation( QStandardPaths::CacheLocation );
         clearDir( path );
     }
-
-
-
-    qDebug() << "1 The slow operation took" << timer.elapsed() << "milliseconds";
-
-
-
-
     // High DPI
     QGuiApplication::setAttribute(Qt::AA_EnableHighDpiScaling);
     QQuickStyle::setStyle("Universal");
@@ -363,9 +354,6 @@ int main(int argc, char *argv[])
 #ifdef ANDROID
     AndroidUtils::requirePermissions();
 #endif
-    qDebug() << "2 The slow operation took" << timer.elapsed() << "milliseconds";
-
-
     // Set/Get enviroment
     QString dataDir = getDataDir( );
     QString projectDir = dataDir + "/projects";
@@ -388,6 +376,7 @@ int main(int argc, char *argv[])
     AppSettings as;
     InputUtils iu;
     LayersModel lm;
+    LayersProxyModel recordingLpm( &lm, ModelTypes::ActiveLayerSelection );
     ActiveLayer al;
     Loader loader( mtm, as, al );
 
@@ -403,9 +392,6 @@ int main(int argc, char *argv[])
         projectLoadingFile.remove();
         InputUtils::log( QStringLiteral( "Loading project error" ), QStringLiteral( "The Input has been unexpectedly finished during the last run." ) );
     }
-
-    qDebug() << "3 The slow operation took" << timer.elapsed() << "milliseconds";
-
 
     engine.addImportPath( QgsApplication::qmlImportPath() );
     initDeclarative();
@@ -424,6 +410,7 @@ int main(int argc, char *argv[])
     engine.rootContext()->setContextProperty( "__appSettings", &as );
     engine.rootContext()->setContextProperty( "__mapThemesModel", &mtm );
     engine.rootContext()->setContextProperty("__surveyingUtils", &surv );
+    engine.rootContext()->setContextProperty( "__recordingLayersModel", &recordingLpm );
 
     engine.rootContext()->setContextProperty( "__activeLayer", &al );
 
@@ -445,11 +432,7 @@ int main(int argc, char *argv[])
     copy_sqlite(engine.offlineStoragePath()+"/Databases");
     // end of copy process of SQLite database
 
-    qDebug() << "The slow operation took" << timer.elapsed() << "milliseconds";
-
     engine.load(QUrl(QStringLiteral("qrc:///qml/main.qml")) );
-
-    qDebug() << "The slow operation took" << timer.elapsed() << "milliseconds";
 
 #ifndef ANDROID
     QCommandLineParser parser;
