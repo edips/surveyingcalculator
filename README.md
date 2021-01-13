@@ -1,31 +1,35 @@
 # Surveying Calculator
 A modern engineering app with surveying and GIS aromas
 
-Surveying Calculator has commonly used land surveying tools. This includes coordinate geometry calculations, offline point data collection, displaying CAD, GIS, raster data and online maps in QGIS 3 project format. Surveying Calculator supports QGIS 3 projects. (qgs, qgz)
-It is available on Play Store: https://play.google.com/store/apps/details?id=org.project.geoclass
-Features:
-- Basic Surveying Tools: X(N), Y(E) Calculation, Distance, Azimuth Calculation, Interior Angle, Latitude Longitude from point, distance and bearing
-- Intersection Methods: Forward Intersection, Line - Line Intersection, Circle by 3 Points
-- Distance between Coordinates: 2D, 3D distance from X, Y and distance from Latitude, Longitude
-- Area calculation from coordinates
-- Degree - Decimal Conversion
-- Coordinate Transformation: WGS84 Latitude/Longitude to UTM XY or UTM XY to Latitude/Longitude Conventer, Coordinate Converter tool, 2D Helmert transformation
-- Point Data Collector - Survey:
-→ Create projects in GeoPackage formats with coordinate system code (EPSG code).
-→ You can also prepare a job in QGIS on desktop with CAD-GIS data. Import CAD, GIS, raster data or add online map services in QGIS. And transfer the data folder to Surveying_Calculator/projects folder on your device. Select the project to display in Survey module.
-→ Collect unlimited points with "name" and "description". You can record your location or any place you want.
-→ This app supports the formats to display:
-→ Raster (GeoTIFF, DEM, JPEG, PNG, GRD, XYZ, ..),
-→ CAD (DXF, DGN v7),
-→ GIS (ArcGIS shp, Google Earth (kml, kmz), GeoJSON, GPX..),
-→ Online map services. Online maps can be prepared using QuickMapServices plugin in QGIS. You can add Open Street Maps, hybrid or satellite maps in QGIS project for Surveying Calculator.
-- Generate Coordinates: Generate coordinates in latitude/ longitude or in X, Y.
-- Settings: Coordinate order of northing, easting or latitude, longitude. DMS or decimal options for geographic coordinate systems. Scale bar unit settings in metric or imperial.
-- and more.
-Surveying Calculator supports Android 6.0 and up. Minimum 2GB RAM with 300MB free space are recommended.
-If you need help or if you have any suggestion about this app please mail to geosoft@gmail.com or join Surveying Calculator Facebook group to ask questions. You can follow news about the app on Facebook Page:
-fb.me/surveyingcalculator
-You can open issues for any suggestions or bug reports.
+Surveying Calculator is an open source app that includes powerful tools for GIS and surveying. This app can create and open QGIS projects. 
+
+Why Surveying Calculator? 
+- A land surveyor can convert a construction CAD project to QGIS project. He transfers the QGIS project to Surveying Calculator. He can extract coordinates of a building with this app to stake out with Total Station. No need to have coordinate list papers with maps.
+- A civil engineer can transfer a road construction project to Surveying Calculator. He can use it to store points with taking pictures. It will be helpful for measuring manufacturing and reports.
+- A geology engineer can use Surveying Calculator to store drilling points with taking pictures.
+
+Surveying Calculator supports metric and imperial units for distance and area.
+Using Surveying Calculator you can do:
+- Collect points: Create projects in Project Manager in QGIS format. You can store points with taking photos in latitude and longitude format.
+- Display QGIS projects. You can convert your CAD or GIS data to QGIS project and you can display it on Surveying Calculator. You can display AutoCAD DXF, Esri SHP, KML, GPX, GeoJSON, GeoTIFF, DEM... and other popular data formats.
+- Get list of coordinates, length, area value of geometric features
+- Get list of coordinates of point layer
+- Display details of a geometric feature attribute or edit feature attribute
+- Add point with coordinates. Remove or modify any features. You can add point in XY or latitude, longitude format depending on the project coordinate system.
+ - Control visibility of layers. You can turn on or turn off layers.
+- For calculations, you can manually enter values or you can choose point from your project.
+- Measure distance, bearing / azimuth from two points.
+- Measure angle from 3 points.
+- Calculate latitude, longitude or X,Y from coordinate, distance and bearing / azimuth.
+- Intersections; forward, line - line and circle by 3 points
+- Convert latitude longitude to UTM or vice versa
+- Calculate decimal to degree, minute, second
+- Get UTM location on online maps with latitude, longitude, MGRS, X,Y coordinates
+- Generate coordinates from two points. You can generate using X,Y or latitude, longitude
+- Convert local coordinates
+- Calculate area from X,Y coordinates
+You can follow news about the app on Facebook Page:
+<i>fb.me/surveyingcalculator</i>
 
 # Development
 Surveying calculator uses open source GIS libraries (QGIS, GDAL, Proj, SpatialIndex, GEOS) libraries. This app uses source codes of Input app(https://github.com/lutraconsulting/input). 
