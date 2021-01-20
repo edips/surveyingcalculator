@@ -1,3 +1,15 @@
+/***************************************************************************
+  Copyright            : (C) 2021 by Edip Ahmet Taşkın
+  Email                : geosoft66@gmail.com
+ ***************************************************************************
+ *                                                                         *
+ *   This program is free software; you can redistribute it and/or modify  *
+ *   it under the terms of the GNU General Public License as published by  *
+ *   the Free Software Foundation; either version 2 of the License, or     *
+ *   (at your option) any later version.                                   *
+ *                                                                         *
+ ***************************************************************************/
+
 import QtQuick 2.7
 import QtQuick.Controls 2.2
 import QtQuick.Controls.Universal 2.3
@@ -30,21 +42,23 @@ TopSheet {
     Rectangle {
         anchors.topMargin: 5
         anchors.top: toolbar.bottom
-        height: parent.height-40
+        height: parent.height - layerPanel.toolbar.height
         width: parent.width
         color: "transparent"
         ListView {
             id:grid
             width: parent.width
-            height: parent.height
+            height: parent.height - layerPanel.toolbar.height
             focus: true
             interactive: true
             clip: true
             model: __recordingLayersModel
             boundsBehavior: Flickable.StopAtBounds
             delegate: ItemDelegate {
+                Component.onCompleted: console.log( "istItem.height", listItem.height )
                 id: listItem
                 width: parent.width
+                height: hasPointGeometry ? implicitHeight : 0
                 //height: isVector && !isReadOnly && hasGeometry ? grid.cellHeight : 0
                 SText {
                     text: layerName ? layerName : ""
@@ -56,7 +70,6 @@ TopSheet {
                     anchors.verticalCenter: parent.verticalCenter
                     color: Universal.foreground
                 }
-                enabled: hasPointGeometry
                 icon.source: iconSource ? iconSource : ""
                 icon.color: "transparent"
                 opacity: enabled ? 1 : 0.5
@@ -79,7 +92,7 @@ TopSheet {
                 horizontalAlignment: Qt.AlignHCenter
                 verticalAlignment: Qt.AlignVCenter
                 visible: parent.count == 0
-                text: qsTr("No editable layers..")
+                text: qsTr("No point layer..")
                 font.pixelSize: 18
                 font.bold: true
                 wrapMode: Label.WordWrap
