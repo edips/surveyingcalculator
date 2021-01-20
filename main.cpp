@@ -1,3 +1,15 @@
+/***************************************************************************
+  Copyright            : (C) 2021 by Edip Ahmet Taşkın
+  Email                : geosoft66@gmail.com
+ ***************************************************************************
+ *                                                                         *
+ *   This program is free software; you can redistribute it and/or modify  *
+ *   it under the terms of the GNU General Public License as published by  *
+ *   the Free Software Foundation; either version 2 of the License, or     *
+ *   (at your option) any later version.                                   *
+ *                                                                         *
+ ***************************************************************************/
+
 #define STR1(x)  #x
 #define STR(x)  STR1(x)
 #include <QtQml>
@@ -97,7 +109,6 @@ static void setEnvironmentQgisPrefixPath()
 {
 #ifdef DESKTOP_OS
 #ifdef QGIS_PREFIX_PATH
-    // it is very important to set Prefix path, elsewhere we will get QgsQuick not installed error
     qputenv( "QGIS_PREFIX_PATH", STR( QGIS_PREFIX_PATH ) );
 #endif
     if ( QString::fromLocal8Bit( qgetenv( "QGIS_PREFIX_PATH" ) ).isEmpty() )
