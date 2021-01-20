@@ -1,5 +1,15 @@
-// Author: Edip AHmet Taşkın
-// Copy Right Edip Ahmet Taşkın
+/***************************************************************************
+  Copyright            : (C) 2021 by Edip Ahmet Taşkın
+  Email                : geosoft66@gmail.com
+ ***************************************************************************
+ *                                                                         *
+ *   This program is free software; you can redistribute it and/or modify  *
+ *   it under the terms of the GNU General Public License as published by  *
+ *   the Free Software Foundation; either version 2 of the License, or     *
+ *   (at your option) any later version.                                   *
+ *                                                                         *
+ ***************************************************************************/
+
 import QtQuick 2.10 as QQ
 import QtLocation 5.6
 import QtPositioning 5.6
@@ -23,6 +33,9 @@ FluidControls.Page {
     property color materialcolor: Universal.accent
     // counter for full screen round button for mapcanvas
     property int count_full: 0;
+    // average accuracy
+    // xoom2point counter
+    property int count_zoom: 0;
     // // Project's EPSG ID for transforming from project crs to active layer's crs cursor coordinate system
     // Project's EPSG ID
     property int epsgID;
@@ -38,7 +51,7 @@ FluidControls.Page {
     // screen point coordinates when clicking on map canvas
     property var screenPoint;
     // (Array) GPS coordinate
-    property var coords_gps: [];
+    property var transformed_pt: [];
     property var projectedPosition;
     property bool projectPositionValid: false
     // You can change UI based on the display mode
@@ -57,43 +70,104 @@ FluidControls.Page {
         active: __appSettings.autoCenterMapChecked
         QQ.Component.onCompleted: epsgID = __loader.epsg_code()
         onPositionChanged: {
+            var currentPosition;
+            var coords_pr;
+            var newpoint;
+            var coord_qgs;
             if( layerEPSG !== 0 && epsgID !== 0 && src.valid ) {
-                // Converting Latitude and Longitude to active layer's coordinate system
 
+                // Converting Latitude and Longitude to active layer's coordinate system to display coordinates
+                // Converting Latitude and Longitude to project coordinate system to display marker
+
+                // Displaying Current Position Coordinates
                 // (array) Get GPS's lat and long
-                var currentPosition = src.position.coordinate
+                currentPosition = src.position.coordinate
 
                 // (QgsPoint) convert GPS coordinate string to QgsPoint
-                var coord_qgs = __layersModel.addFeatureSurvey( currentPosition.latitude, currentPosition.longitude )
+                coord_qgs = __layersModel.addFeatureSurvey( currentPosition.latitude, currentPosition.longitude )
 
                 // (array) Convert coordinate from GPS's lat long to Active Layer's CRS
                 var coords = __loader.coordTransformer( coord_qgs,
                                                        mapView.canvasMapSettings.transformContext(), 4326, layerEPSG )
 
-                // (array) Assign active layer's coords_gps to coords for javascript, then display on coordinate panel
-                coords_gps = coords
+                // (array) Assign active layer coordinates to coords, then display it on coordinate panel
+                transformed_pt = coords
                 collect_pane.coordinateText = Util.datacollector_coord()
 
                 // update EPSG code of QGIS project
-                epsgID = __loader.epsg_code()
+                //epsgID = __loader.epsg_code()
 
+                // Displaying Marker
                 // (array) Convert GPS coordinate to Project's CRS for marker location
-                var coords_pr = __loader.coordTransformer( coord_qgs,
-                                                          mapView.canvasMapSettings.transformContext(), 4326, epsgID )
+                coords_pr = __loader.coordTransformer( coord_qgs,
+                                                      mapView.canvasMapSettings.transformContext(), 4326, epsgID )
 
                 // (QgsPoint) Convert coordinate of Project's CRS for marker's location on map canvas
-                var newpoint = __layersModel.addFeatureSurvey( coords_pr[1], coords_pr[0] )
+                newpoint = __layersModel.addFeatureSurvey( coords_pr[1], coords_pr[0] )
 
 
                 // set marker to center of the position when position is changed
                 if( !__layersModel.pointIsEmpty( newpoint ) ) {
+                    // set center of the point
                     mapView.mapCanvas.mapSettings.setCenter( newpoint );
+                    // project position is valid
                     projectPositionValid = true
+                    // newpoint is active layer's coordinate, assign it to projectedPosition to display in coordinate panel
                     projectedPosition = newpoint
-                } else {
-                    projectPositionValid = false
-                }
 
+                    var temp_acc = 0
+                    if( parseInt( src.position.horizontalAccuracy ) < 50 ) {
+                        temp_acc++
+                        if( temp_acc === 1 ) {
+                            crosshair.nav_visible = true
+                        }
+                        count_zoom++
+                        if( count_zoom == 1 ) {
+                            // zoom to point
+                            var zoom2point = mapView.canvasMapSettings.coordinateToScreen( projectedPosition )
+                            __loader.zoom_to_point( mapView.canvasMapSettings, zoom2point )
+                        }
+                    }
+                }
+            }
+            else if( epsgID !== 0 && src.valid ) {
+                // Converting Latitude and Longitude to project coordinate system to display marker
+
+                // (array) Get GPS's lat and long
+                currentPosition = src.position.coordinate
+
+                // (QgsPoint) convert GPS coordinate string to QgsPoint
+                coord_qgs = __layersModel.addFeatureSurvey( currentPosition.latitude, currentPosition.longitude )
+
+                // update EPSG code of QGIS project
+                //epsgID = __loader.epsg_code()
+
+                // (array) Convert GPS coordinate to Project's CRS for marker location
+                coords_pr = __loader.coordTransformer( coord_qgs,
+                                                      mapView.canvasMapSettings.transformContext(), 4326, epsgID )
+
+                // (QgsPoint) Convert transformed coordinate to QgsPoint
+                newpoint = __layersModel.addFeatureSurvey( coords_pr[1], coords_pr[0] )
+                // set center of the point
+                mapView.mapCanvas.mapSettings.setCenter( newpoint );
+                // project position is valid
+                projectPositionValid = true
+                // newpoint is project's coordinate, assign it to projectedPosition to display in coordinate panel
+                projectedPosition = newpoint
+
+                var temp_acc2 = 0
+                if( parseInt( src.position.horizontalAccuracy ) < 50 ) {
+                    temp_acc2++
+                    if( temp_acc2 === 1 ) {
+                        crosshair.nav_visible = true
+                    }
+                    count_zoom++
+                    if( count_zoom == 1 ) {
+                        // zoom to point
+                        var zoom2point2 = mapView.canvasMapSettings.coordinateToScreen( projectedPosition )
+                        __loader.zoom_to_point( mapView.canvasMapSettings, zoom2point2 )
+                    }
+                }
             }
         }
     }
@@ -109,14 +183,12 @@ FluidControls.Page {
     QQ.Connections {
         target: mapView.canvasMapSettings
         onExtentChanged: {
-            if( __activeLayer.layerName != "" ) {
-                if( !__appSettings.autoCenterMapChecked ) {
-                    collect_pane.coordinateText = Util.datacollector_coord()
-                }
-                else if( projectPositionValid === true ) {
-                    // set marker to center of the position when moving the map canvas
-                    mapView.mapCanvas.mapSettings.setCenter( projectedPosition );
-                }
+            if( projectPositionValid === true ) {
+                // set marker to center of the position when moving the map canvas
+                mapView.mapCanvas.mapSettings.setCenter( projectedPosition );
+            }
+            else {
+                collect_pane.coordinateText = Util.datacollector_coord()
             }
         }
     }
@@ -127,9 +199,7 @@ FluidControls.Page {
         if (digitizing.isPairValid(pair)) {
             // Add the feature
             featurePanel.show_panel(pair, "Add", "form")
-            console.log("Feature Panel must open")
         } else {
-            console.log("Feature Panel didn't open")
             showMessage("Editing feature is not valid")
         }
     }
@@ -197,7 +267,6 @@ FluidControls.Page {
         // MapView's initialization
         QQ.Component.onCompleted: {
             isGeographic = __loader.isGeographic()
-            //console.log("__activeLayer.layerId ): ", __activeLayer.layerId)
             //console.log("index of active layer ): ", __browseDataLayersModel.indexFromLayerId( __activeLayer.layerId ))
 
             __loader.mapSettings = mapView.canvasMapSettings
@@ -633,6 +702,15 @@ FluidControls.Page {
             text: qsTr("Add Point")
             icon.source: "qrc:/assets/icons/material/maps/add_location.svg"
             onTriggered: {
+                __appSettings.autoCenterMapChecked = false
+                //-------for disabling gps relating params --------
+                count_zoom = 0;
+                projectPositionValid = false
+                crosshair.nav_visible = false
+                //-------for disabling gps relating params --------
+
+
+
                 if( __loader.activeLayerValid() ) {
                     addpoint_loader.active = true
 
@@ -642,10 +720,9 @@ FluidControls.Page {
                     addpoint_loader.item.coord_row1.anchors.top = Util.coord_order() === "en" || Util.coord_order() === "lonlat" ? addpoint_loader.item.coord_row2.bottom : parent.top
                     addpoint_loader.item.coord_row2.anchors.top = Util.coord_order() === "en" || Util.coord_order() === "lonlat" ? parent.top : addpoint_loader.item.coord_row1.bottom
 
-                    console.log("Util.coord_order(): ", Util.coord_order())
-
-                    console.log("n_txt: ", addpoint_loader.item.xText)
-                    console.log("e_txt: ", addpoint_loader.item.yText)
+                    //console.log("Util.coord_order(): ", Util.coord_order())
+                    //console.log("n_txt: ", addpoint_loader.item.xText)
+                    //console.log("e_txt: ", addpoint_loader.item.yText)
 
                     if( __activeLayer.layerName != "" ) {
                         isLayerGeographic = __loader.isLayerGeographic()
@@ -695,21 +772,21 @@ FluidControls.Page {
         FluidControls.Action {
             id:gpsAction
             icon.color: {
-                if( __appSettings.autoCenterMapChecked && __activeLayer.layerName !== "" ){
+                if( __appSettings.autoCenterMapChecked ) {
                     return Universal.color( Universal.Orange )
                 }
-                else{
+                else {
                     return __appSettings.theme === 0 ? "black" : "white"
                 }
             }
             onTriggered: {
-                if( __activeLayer.layerName !== "" ) {
-                    __appSettings.autoCenterMapChecked =!__appSettings.autoCenterMapChecked
-                }
-                else {
-                    snack.open("Please select a point layer to enable GPS.")
-                }
+                __appSettings.autoCenterMapChecked = !__appSettings.autoCenterMapChecked
 
+                //-------for disabling gps relating params --------
+                count_zoom = 0;
+                projectPositionValid = false
+                crosshair.nav_visible = false
+                //-------for disabling gps relating params --------
             }
             toolTip: qsTr("Enable GPS")
             icon.source: "qrc:/assets/icons/material/maps/my_location.svg"
@@ -733,10 +810,16 @@ FluidControls.Page {
             toolTip: qsTr("Zoom to Project")
             icon.source: "qrc:/assets/icons/material/maps/zoom_out_map.svg"
             onTriggered:{
-                if(__appSettings.autoCenterMapChecked){
-                    __appSettings.autoCenterMapChecked =!__appSettings.autoCenterMapChecked
+                if( __appSettings.autoCenterMapChecked ){
+                    __appSettings.autoCenterMapChecked = false
                 }
                 __loader.zoomToProject( mapView.canvasMapSettings )
+
+                //-------for disabling gps relating params --------
+                count_zoom = 0;
+                projectPositionValid = false
+                crosshair.nav_visible = false
+                //-------for disabling gps relating params --------
             }
         },
         // Menu
