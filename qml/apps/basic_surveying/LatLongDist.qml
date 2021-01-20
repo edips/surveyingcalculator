@@ -1,3 +1,15 @@
+/***************************************************************************
+  Copyright            : (C) 2021 by Edip Ahmet Taşkın
+  Email                : geosoft66@gmail.com
+ ***************************************************************************
+ *                                                                         *
+ *   This program is free software; you can redistribute it and/or modify  *
+ *   it under the terms of the GNU General Public License as published by  *
+ *   the Free Software Foundation; either version 2 of the License, or     *
+ *   (at your option) any later version.                                   *
+ *                                                                         *
+ ***************************************************************************/
+
 import QtQuick 2.12
 import QtQuick.Controls 2.12
 import Qt.labs.settings 1.1
@@ -65,10 +77,15 @@ Column {
             property alias londec2: dist_latlon2.lon_decimal_txt
             property alias latdec1: dist_latlon1.lat_decimal_txt
             property alias latdec2: dist_latlon2.lat_decimal_txt
-            property alias azimuth2: azimuth_txt.text
             // Result
             // LatLOng result
             property alias dist_result:    dist.text
+
+            property alias azim_to2_dec: azimuth_txt.decimal_txt
+            property alias azim_to2_deg: azimuth_txt.degree_txt
+            property alias azim_to2_min: azimuth_txt.minute_txt
+            property alias azim_to2_sec: azimuth_txt.second_txt
+            property alias azim_to2_gon: azimuth_txt.gon_txt
         }
         // Lat Long 1
         LatLong{
@@ -110,10 +127,11 @@ Column {
                     dist_latlon2.lon_deg, dist_latlon2.lon_min, dist_latlon2.lon_sec,
                     dist_latlon1.lon_decimal,dist_latlon2.lon_decimal,
                     dist_latlon1.lat_decimal,dist_latlon2.lat_decimal,
-                    dist, azimuth_txt
+                    dist
                 ]
                 clear.onClicked:{
                     clearAll();
+                    Utils.angle_clear( [ azimuth_txt ] )
                 }
 
             }
@@ -143,13 +161,15 @@ Column {
                 verticalAlignment: Text.AlignVCenter
                 height: parent.height
             }
+            /*
             STextField{
                 id: azimuth_txt
                 implicitWidth: 150
                 font.pixelSize: 16
                 placeholderText: "°"
                 readOnly: true
-            }
+            }*/
+            SAngle{ read_only: true; id: azimuth_txt }
         }
     }
 }

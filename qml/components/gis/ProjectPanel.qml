@@ -1,9 +1,7 @@
-// Author: Edip AHmet Taşkın
 // Copy Right Edip Ahmet Taşkın
 
 /* TODO
-  * Refactor, collect javascript and use it, it can be stored in script.js
-  * Code optimization is needed. When a job is done, after an action run, destructor must destruct or clean things and it should reload things again
+  * should be REMOVED
 */
 
 import QtQuick 2.10

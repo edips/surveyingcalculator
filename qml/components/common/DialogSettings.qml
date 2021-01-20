@@ -1,3 +1,15 @@
+/***************************************************************************
+  Copyright            : (C) 2021 by Edip Ahmet Taşkın
+  Email                : geosoft66@gmail.com
+ ***************************************************************************
+ *                                                                         *
+ *   This program is free software; you can redistribute it and/or modify  *
+ *   it under the terms of the GNU General Public License as published by  *
+ *   the Free Software Foundation; either version 2 of the License, or     *
+ *   (at your option) any later version.                                   *
+ *                                                                         *
+ ***************************************************************************/
+
 import QtQuick 2.12
 import QtQuick.Controls 2.12 as QQC2
 import QtQuick.Controls.Universal 2.12
@@ -14,7 +26,6 @@ TopSheet {
     title: "Settings"
 
     id: settingsDialog
-    //topPadding: banner2.visible ? banner2.height : 0
     closePolicy: QQC2.Popup.CloseOnEscape | QQC2.Popup.CloseOnPressOutside
     // settings_page to open dialog
     property alias settingsPage: settingsDialog

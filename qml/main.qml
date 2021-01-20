@@ -1,3 +1,15 @@
+/***************************************************************************
+  Copyright            : (C) 2021 by Edip Ahmet Taşkın
+  Email                : geosoft66@gmail.com
+ ***************************************************************************
+ *                                                                         *
+ *   This program is free software; you can redistribute it and/or modify  *
+ *   it under the terms of the GNU General Public License as published by  *
+ *   the Free Software Foundation; either version 2 of the License, or     *
+ *   (at your option) any later version.                                   *
+ *                                                                         *
+ ***************************************************************************/
+
 import QtQuick 2.12 as QQ
 import QtQuick.Controls 2.12 as QQC2
 import QtQuick.Controls.Universal 2.12
@@ -7,11 +19,11 @@ import QtQuick.Window 2.12
 import "components/common"
 import "components/common/script.js" as Js
 import "."
-//import QtAndroidTools 1.0
 
 FluidControls.ApplicationWindow {
     // Settings loader visibility
     property bool loaderVisible: false
+    property int count;
     // About loader visible
     property bool loaderAboutVisible: false
     id: windoww
@@ -20,21 +32,17 @@ FluidControls.ApplicationWindow {
     visibility: Window.AutomaticVisibility
     // font loader
     font.family : "Lato"
-    width: 480
-    height: 720
+    width: 1080
+    height: 1920
     // Count of the app action icons
     appBar.maxActionCount: 1
     Universal.theme: __appSettings.theme === 0 ? Universal.Light : Universal.Dark
     Universal.accent: "#0050EF"
-    //Universal.background: Universal.chromeMediumLowColor
+
+
 
     // snack bar
     FluidControls.SnackBar { id: snack }
-    QQ.Component.onCompleted: {
-        // banner makes the app slow, is there any way to load it asyncroniously? for example the app opens on Galaxy a5 in 2.5 secons
-        // without banner2.show the start up time is 2.0 seconds
-        //banner2.show();
-    }
 
     QQ.Loader {
         id: about
@@ -49,12 +57,9 @@ FluidControls.ApplicationWindow {
     // Initial Main Page
     initialPage: FluidControls.Page {
         title: windoww.title
-        MainMenu{}
-        /*Loader{
-            layer.enabled: true
-            anchors.fill: parent
-            source: "MainMenu.qml"
-        }*/
+        MainMenu{
+
+        }
         id:initPage
         actions: [
             FluidControls.Action {

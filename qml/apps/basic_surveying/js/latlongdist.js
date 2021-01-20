@@ -1,9 +1,21 @@
+/***************************************************************************
+  Copyright            : (C) 2021 by Edip Ahmet Taşkın
+  Email                : geosoft66@gmail.com
+ ***************************************************************************
+ *                                                                         *
+ *   This program is free software; you can redistribute it and/or modify  *
+ *   it under the terms of the GNU General Public License as published by  *
+ *   the Free Software Foundation; either version 2 of the License, or     *
+ *   (at your option) any later version.                                   *
+ *                                                                         *
+ ***************************************************************************/
+
 Qt.include( "../../../components/common/script.js" )
 Qt.include( "../../other_tools/libs/geographiclib.js" )
 // Lat Long distance function
 function distance_latlong( ) {
     // DMS
-    if( !hesap_btn.decimalCheck )
+    if( !hesap_btn.decimalActive )
     {
         if(dist_latlon1.lat_deg.text === "" || dist_latlon1.lat_min.text === "" ||
                 dist_latlon1.lat_sec.text === "" || dist_latlon2.lat_deg.text === "" ||
@@ -61,13 +73,14 @@ function distance_latlong( ) {
             }
             console.log("azimuth from 1 to 2: ", azimuth )
 
-            azimuth_txt.text = azimuth
+            // calculate azimuth in degree or gon
+            angle_text_output( azimuth, azimuth_txt )
             // calculate distance based on units
             lengthUnits( dist, d )
         }
     }
     // Decimal
-    else if ( hesap_btn.decimalCheck )
+    else if ( hesap_btn.decimalActive )
     {
         if( dist_latlon1.lat_decimal.text === "" || dist_latlon1.lon_decimal.text === "" || dist_latlon2.lat_decimal.text === "" || dist_latlon2.lon_decimal.text === "" )
         {
@@ -91,7 +104,8 @@ function distance_latlong( ) {
             }
             console.log("azimuth from 1 to 2: ", azimuth )
 
-            azimuth_txt.text = azimuth
+            // calculate azimuth in degree or gon
+            angle_text_output( azimuth, azimuth_txt )
 
             let d2 =r2.s12.toFixed(3)
             // calculate based on units

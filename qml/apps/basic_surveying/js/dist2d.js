@@ -1,8 +1,21 @@
+/***************************************************************************
+  Copyright            : (C) 2021 by Edip Ahmet Taşkın
+  Email                : geosoft66@gmail.com
+ ***************************************************************************
+ *                                                                         *
+ *   This program is free software; you can redistribute it and/or modify  *
+ *   it under the terms of the GNU General Public License as published by  *
+ *   the Free Software Foundation; either version 2 of the License, or     *
+ *   (at your option) any later version.                                   *
+ *                                                                         *
+ ***************************************************************************/
+
 Qt.include( "../../../components/common/script.js" )
+
 function calc2d() {
-    if(dist2d_1.east.text==="" || dist2d_2.east.text==="" || dist2d_1.north.text==="" || dist2d_2.north.text==="")
+    if(dist2d_1.east.text === "" || dist2d_2.east.text === "" || dist2d_1.north.text === "" || dist2d_2.north.text === "" )
     {
-        snack.open(qsTr("Please enter the values."))
+        snack.open( qsTr( "Please enter the values." ) )
         dist_2d.text = ""
     }
     else {
@@ -41,12 +54,12 @@ function calc2d() {
         else if( dx < 0 && dy < 0 ) {
             abg = abg + angle_200();
         }
-        else if(dx > 0 && dy < 0 ){
+        else if( dx > 0 && dy < 0 ){
             abg = abg + angle_400();
         }
 
         lengthUnits( dist_2d, dist2d )
-        angle_text_output( parseFloat( abg ).toFixed(4), abg_to2)
+        angle_text_output( abg, abg_to2 )
     }
 }
 
