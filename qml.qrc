@@ -117,7 +117,6 @@
         <file>qml/components/common/NorthEast.qml</file>
         <file>qml/apps/other_tools/deg2dec/DegreeDecimal.qml</file>
         <file>qml/apps/other_tools/mylocation/MapviewForm.qml</file>
-        <file>qml/apps/other_tools/mylocation/components/Accuracy.qml</file>
         <file>qml/apps/other_tools/mylocation/components/AlertDialog.qml</file>
         <file>qml/apps/other_tools/mylocation/components/MapComponent.qml</file>
         <file>qml/apps/other_tools/mylocation/components/MapPopupMenu.qml</file>
@@ -166,7 +165,6 @@
         <file>qml/apps/basic_surveying/XYCalc.qml</file>
         <file>qml/apps/basic_surveying/js/dist2d.js</file>
         <file>qml/apps/basic_surveying/js/dist3d.js</file>
-        <file>qml/apps/basic_surveying/js/distance.js</file>
         <file>qml/apps/basic_surveying/js/latlongcalc.js</file>
         <file>qml/apps/basic_surveying/js/latlongdist.js</file>
         <file>qml/apps/basic_surveying/js/xycalc.js</file>
