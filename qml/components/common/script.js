@@ -1,3 +1,15 @@
+/***************************************************************************
+  Copyright            : (C) 2021 by Edip Ahmet Taşkın
+  Email                : geosoft66@gmail.com
+ ***************************************************************************
+ *                                                                         *
+ *   This program is free software; you can redistribute it and/or modify  *
+ *   it under the terms of the GNU General Public License as published by  *
+ *   the Free Software Foundation; either version 2 of the License, or     *
+ *   (at your option) any later version.                                   *
+ *                                                                         *
+ ***************************************************************************/
+
 // 1
 // Displaying coordinates for Data Collector
 //* TODO: isValid must be added to QML in order to check projected or geographic coordinates, we should set default to geographic if it isn't valid, means WGS84
@@ -112,7 +124,7 @@ function cursorTextDeg() {
 // GPSSS
 // 1- GPS cartesien crs
 function gps_XY() {
-    var coords = coords_gps
+    var coords = transformed_pt
     if( coords.length === 2 ) {
         if(__appSettings.xyOrder === "ne") {
             return "<b>" + textN() + ":</b> " + coords[1].toFixed(2) + "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"  + "<b>" + textE() + ":</b> " + coords[0].toFixed(2)
@@ -124,7 +136,7 @@ function gps_XY() {
 }
 // 2- GPS Degree decimal
 function gps_decimal(){
-    var coords = coords_gps
+    var coords = transformed_pt
     if( coords.length === 2 ) {
         if(__appSettings.latlongFormat === "format_included"){
             coords = (__surveyingUtils.formatPoint_decimal( coords[0], coords[1], "included"  )).split(",")
@@ -142,7 +154,7 @@ function gps_decimal(){
 
 // 3- GPS DMS
 function gps_DMS() {
-    var coords = coords_gps
+    var coords = transformed_pt
     if( coords.length === 2 ) {
         if( __appSettings.latlongFormat === "format_included" ) {
             coords = ( __surveyingUtils.formatPoint_dms( coords[0], coords[1], "included"  )).split(",")
@@ -370,10 +382,10 @@ function add_point() {
     var en1;
     var boy1;
     if( __appSettings.latlongDisplay === "display_dms" && __loader.isLayerGeographic() ) {
-        if(latdeg.text==="" || latmin.text==="" || latsec.text==="" || londeg.text==="" || lonmin.text==="" || lonsec.text===""){
+        if( latdeg.text === "" || latmin.text === "" || latsec.text === "" || londeg.text === "" || lonmin.text === "" || lonsec.text === "" ) {
             snack.open("Cannot add point. Please check the cordinates.")
         }
-        else if ( digitizing.hasPointGeometry( activeLayerPanel.activeVectorLayer )) {
+        else if ( digitizing.hasPointGeometry( activeLayerPanel.activeVectorLayer ) ) {
             if( __loader.layerProjectCrs() ) {
                 var lat_deg = parseFloat(latdeg.text)
                 var lat_min = parseFloat(latmin.text)
@@ -445,7 +457,7 @@ function add_point() {
                 var newpoint2
                 newpoint2 = __layersModel.addFeatureSurvey( coords2[1], coords2[0] )
 
-                // set the point to mapcanvas's map settings in order to zoom the point, convert it from CRS to screen coordinates
+                // (QPointF) set the point to mapcanvas's map settings in order to zoom the point, convert it from CRS to screen coordinates
                 var newqpoint2 = mapView.canvasMapSettings.coordinateToScreen( newpoint2 )
 
                 // zoom_to_point zooms to point to open feature form to record the point. It requires mapsettings of map canvas and screen point
@@ -471,7 +483,7 @@ function add_point() {
 
 // Seeting for visibility according to DMS mode for lat long
 function visibility_latlong() {
-    if( __appSettings.latlongDisplay === "display_dms" && ( __loader.isActiveLayerGeographic() ) ){
+    if( __appSettings.latlongDisplay === "display_dms" && ( __loader.isActiveLayerGeographic() ) ) {
         return true
     }
     else{
@@ -733,20 +745,21 @@ function angle_text_input(my_angle){
 }
 
 //returns angle float value for output
-function angle_text_output(output,my_angle){
-    if(__appSettings.angleUnit === 0){
+function angle_text_output(output, my_angle){
+    if( __appSettings.angleUnit === 0 ) {
+        output = parseFloat( output ).toFixed(4)
         my_angle.decimal.text = output  + "°"
     }
-    else if(__appSettings.angleUnit === 1){
-
-        var latintdeg=parseInt(output)
-        var latintmin=parseInt((output-latintdeg)*60)
-        var latdecsn=(output-latintdeg-latintmin/60)*3600
+    else if( __appSettings.angleUnit === 1 ) {
+        var latintdeg = parseInt(output)
+        var latintmin = parseInt((output-latintdeg) * 60 )
+        var latdecsn=( output - latintdeg - latintmin / 60 ) * 3600
         my_angle.degree.text=latintdeg + "°"
         my_angle.minute.text=Math.abs(latintmin) + "'"
         my_angle.second.text=(Math.abs(latdecsn)).toFixed(4) + "''"
     }
-    else if(__appSettings.angleUnit === 2){
+    else if( __appSettings.angleUnit === 2 ) {
+        output = parseFloat( output ).toFixed(4)
         my_angle.gon.text = output  + " gon"
     }
 }
