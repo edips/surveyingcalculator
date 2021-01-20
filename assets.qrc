@@ -232,5 +232,10 @@
         <file>assets/fonts/Lato-Regular.ttf</file>
         <file>assets/fonts/Lato-Bold.ttf</file>
         <file>assets/icons/material/action/today.svg</file>
+        <file>assets/icons/material/image/photo_camera.svg</file>
+        <file>assets/icons/material/image/photo_library.svg</file>
+        <file>assets/icons/checkbox_outline_dark.svg</file>
+        <file>assets/icons/checkbox_outline_light.svg</file>
+        <file>assets/icons/checkbox.svg</file>
     </qresource>
 </RCC>
