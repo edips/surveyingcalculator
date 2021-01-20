@@ -1,5 +1,15 @@
-// Author: Edip AHmet Taşkın
-// Copy Right Edip Ahmet Taşkın
+/***************************************************************************
+  Copyright            : (C) 2021 by Edip Ahmet Taşkın
+  Email                : geosoft66@gmail.com
+ ***************************************************************************
+ *                                                                         *
+ *   This program is free software; you can redistribute it and/or modify  *
+ *   it under the terms of the GNU General Public License as published by  *
+ *   the Free Software Foundation; either version 2 of the License, or     *
+ *   (at your option) any later version.                                   *
+ *                                                                         *
+ ***************************************************************************/
+
 import QtQuick 2.10
 import QtQuick.Controls 2.12
 import QtQuick.Layouts 1.3
@@ -14,7 +24,6 @@ FluidControls.NavigationListView {
     id: navDrawer
     width: parent.width - 100
     height: parent.height
-    //topPadding: banner2.visible ? banner2.height : ""
     readonly property bool mobileAspect: dataCollector.width < 500
     modal: true
     interactive: true
@@ -23,7 +32,7 @@ FluidControls.NavigationListView {
         width: parent.width
         ListView {
             id:my_layerlist
-            implicitHeight: navDrawer.height
+            implicitHeight: navDrawer.height - 70
             implicitWidth: parent.width
             clip: true
             boundsBehavior: Flickable.StopAtBounds
@@ -34,7 +43,8 @@ FluidControls.NavigationListView {
                 width: parent.width
                 onClicked: {
                     __loader.layerChecked(layerId)
-                    icon2.source = __loader.layerVisibility( layerId ) ? "qrc:/assets/icons/material/toggle/check_box.svg" : "qrc:/assets/icons/material/toggle/check_box_outline_blank.svg"
+                    icon2.source = __loader.layerVisibility( layerId ) ? "qrc:/assets/icons/checkbox.svg" :
+                                                  ( __appSettings.theme === 0 ? "qrc:/assets/icons/checkbox_outline_light.svg" : "qrc:/assets/icons/checkbox_outline_dark.svg" )
                 }
                 Row{
                     spacing: 10
@@ -44,7 +54,8 @@ FluidControls.NavigationListView {
                         id: icon2
                         visible: false
                         anchors.verticalCenter: parent.verticalCenter
-                        source: __loader.layerVisibility( layerId ) ? "qrc:/assets/icons/material/toggle/check_box.svg" : "qrc:/assets/icons/material/toggle/check_box_outline_blank.svg"
+                        source: __loader.layerVisibility( layerId ) ? "qrc:/assets/icons/checkbox.svg" :
+                                                   ( __appSettings.theme === 0 ? "qrc:/assets/icons/checkbox_outline_light.svg" : "qrc:/assets/icons/checkbox_outline_dark.svg" )
                         sourceSize.width: 25
                         sourceSize.height: 25
 
@@ -53,7 +64,7 @@ FluidControls.NavigationListView {
                         width: icon2.width
                         height: icon2.height
                         source: icon2
-                        color: Universal.accent
+                        color: "transparent"
                         transformOrigin: Item.Center
                     }
 
