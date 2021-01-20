@@ -2,6 +2,8 @@ android {
     message("Building ANDROID")
     message("ANDROID Platform: $${ANDROID_TARGET_ARCH}")
 
+    ANDROID_PACKAGE_SOURCE_DIR = $$PWD/android
+
     DEFINES += MOBILE_OS
 
     isEmpty(QGIS_INSTALL_PATH) {
@@ -36,8 +38,6 @@ android {
     # files from this folder will be added to the package
     # (and will override any default files from Qt - template is in $QTDIR/src/android)
     QT_LIBS_DIR = $$dirname(QMAKE_QMAKE)/../lib
-
-    ANDROID_PACKAGE_SOURCE_DIR = $$PWD/android
 
     DISTFILES += android/AndroidManifest.xml \
         android/build.gradle \
