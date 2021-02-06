@@ -452,7 +452,7 @@ static QString getDataDir()
     {
         qDebug() << "extDir: " << extDir.path() << " not writable";
 
-        QStringList split = QDir::homePath().split( "/" ); // something like /data/user/0/org.project.geoclass/files
+        QStringList split = QDir::homePath().split( "/" ); // something like /data/user/0/org.project.xyz/files
         QFileInfo usrDir( "/storage/emulated/" + split[2] + "/" );
         dataPathRaw = usrDir.path() + "/" + dataPathRaw;
         if ( !( usrDir.isDir() && usrDir.isWritable() ) )

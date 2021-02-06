@@ -22,7 +22,7 @@ import "../components/common/script.js" as Util
 /** The form toolbar **/
 TopSheet{
     id: mapviewer_help
-    title: "Point Data Collector"
+    title: "Survey"
 
     SFlickable {
         id:optionsPage
@@ -31,32 +31,38 @@ TopSheet{
 SColumnHelp{
     id: optionsColumn
     STextHelp{
-            stext:qsTr("Point Data Collector collects points and displays QGIS projects. You can collect points in
-ShapeFile or GeoPackage formats with name and description attributes.
-You can also display vector, raster, geodatabase and online maps formats with this app using QGIS software. QGIS is a free geographic information system (GIS) application
- that supports viewing, editing, and analysis of geospatial data. It runs on Windows, Linux, and Mac OSX. You can download QGIS from www.qgis.org.
+
+            stext:qsTr("Survey module collects points and displays QGIS projects. You can collect points in GeoPackage formats with name, description and photo attributes.
+Before starting with survey module, create a new project from Project Manager. The new project is stored in Surveying_Calculator/projects path in your storage.
+Project format is in QGIS.
  <br> <br>
 <b>Features:</b> <br><br>
-    • <b>Add Project:</b> New projects can be created with Add Project button in shapefile or geopackage formats. Coordinate system is set by EPSG codes. ,
-More than 5000 coordinate systems are supported with EPSG code in meter or feet units.<br>
-    • <b>Settings:</b> Lets you to customize the app. <br>
-      &#8203;&#32;&#8203;&#32;&#8203;&#32;- <b>Order of Northing and Easting:</b> Display coordinates as Northing before Easting or Easting before Northing. (e.g. X, Y or Y,X.)<br>
-      &#8203;&#32;&#8203;&#32;&#8203;&#32;- <b>Order of Latitude and Longitude:</b> Display coordinates as Latitude before Longitude or Longitude before Latitude.<br>
-      &#8203;&#32;&#8203;&#32;&#8203;&#32;- <b>Display of X,Y coordinates:</b> Display Northing and Easting as N,E or X,Y or Y,X according to your routine.<br>
-     &#8203;&#32;&#8203;&#32;&#8203;&#32; - <b>Dislay of Latitude and Longitude coordinates:</b> Display Latitude and Longitude as decimal format or Degree Minute Second (DMS) format.<br>
-      &#8203;&#32;&#8203;&#32;&#8203;&#32;- <b>Latitude and Longitude format:</b> Choose 'Include direction(N,E,S,W)' to tisplay coordinates with directions (e.g. 38.70 N, 35.45 E).
-        Choose 'Without suffix' to not include directions.<br>
-    • <b>Record:</b> Store points with name and description attributes<br>
-    • <b>GPS:</b> Turn on GPS mode to collect current location. Turn off GPS mode to collect any point on the map.<br>
-    • <b>Zoom to Project:</b> Use this button to zoom to the extents of the project.<br>
-    • <b>Project Details:</b> Displays details about project, unit and coordinate system<br>
-    • <b>Add Point:</b> Adds point with point name, description X,Y or latitude, longitude format depending on the coordinate system.<br><br>
-    • <b>Active Layer Panel:</b> Lets you to add point layers in ShapeFile or GeoPackage formats. Click on Active Layer button to open the panel.
-You can see raster, point, line and polygon layers. It is only allowed to select point layers. Do not use spaces for layer name.<br>
+• <b>GPS:</b> Turn on GPS mode to collect current point for your location. When GPS is active with enough accuracy, it zooms to your position.
+ If active point layer is selected, it displays
+coordinates of your position. If GPS doesn't work, please active your GPS from Android settings or accept GPS permission when you open the app.
 
-You can easily import CAD or GIS data to QGIS. After you prepared QGIS project, you can transfer your qgs project with its dependencies to your
- phone's storage with USB cable. You should copy your QGIS project folder to Surveying_Calculator/projects folder.
+<br><br>• <b>Active Layer Panel:</b> Let's you to choose point layer. It only displays point layers. When active layer is selected, you will be able to see your current location,
+you can add points and you can get coordinate list of the point layer.
 
+<br><br>• <b>Layer Panel:</b> You can see vector or raster layers. You can turn on or turn off the layers.
+<br><br>• <b>Zoom to Project:</b> Use this button to zoom to the extents of the project.
+
+<br><br>• <b>Record:</b> Store points with name, description and photo attributes. You take a photo with camera or you can choose photo from gallery for the point.
+
+<br><br>• <b>Add Point:</b> Adds point with X,Y or latitude, longitude format depending on the coordinate system of the active layer.
+
+<br><br>• <b>Coordinate List:</b> Extracts all point coordinates from the active point layer.
+ Coordinate format can be X, Y or Latitude, Longitude depending on the coordinate system of the active layer.
+
+<br><br>• <b>Full Screen button:</b> You can see the map in full screen mode. It prevents editing the map.
+
+<br><br>Survey module can display vector, raster, geodatabase (postgis) and online maps in QGIS format.
+You can install QGIS to your desktop to prepare your projects for Surveying Calculator.
+It is very easy to prepare project with QGIS. Just drag and drop your data into QGIS and set up the coordinate system of your project.
+ It supports AutoCAD DWG, DXF, Esri SHP, GeoTIFF and many more formats.
+After you prepared QGIS project, you can transfer your qgs project with its dependencies to your phone's storage with USB cable.
+You should copy your QGIS project folder to Surveying_Calculator/projects folder.
+For more details, please watch the video:  <a href=\"https://www.youtube.com/watch?v=JKo1xtH6zfo\">Preparing project on QGIS desktop</a>
  ")
 
     }
@@ -111,46 +117,6 @@ You can easily import CAD or GIS data to QGIS. After you prepared QGIS project, 
             source:"qrc:/assets/images/help/mapviewer/mv4.png"
         }
     }
-
-    STextHelp{
-        id:helplabel2
-        stext:qsTr("
-    You can see your position in the project with 'My Location'. 'My Location' is working properly for projects using WGS84 coordinate system.
-<br>QGIS projects can include vector, raster and geodatabase data.<br><b>Supported CAD-GIS formats:</b><br>
-    • shp (ESRI shapefiles)<br>
-    • mif, tab (MapInfo File)<br>
-    • dgn (MicroStation v7)<br>
-    • dxf (AutoCAD)<br>
-    • PostGIS<br>
-    • SpatiaLite<br>
-    • e00 (ArcInfo ASCII Coverage)<br>
-    • mdb (ESRI Personal GeoDatabase)<br>
-    • gpkg (Geopackage)<br>
-    • gpx<br>
-    • GeoJSON<br>
-    • TopoJSON<br>
-    • GML<br>
-    • Geospatial PDF<br>
-    • svg<br>
-    • kml, kmz<br>
-    • osm (OpenStreet Map)<br>
-    and many more. <br>
-    <br>
-    <b>Supported Raster formats:</b><br>
-    • xyz (ASCII Gridded XYZ)<br>
-    • asc (ArcInfo ASCII Grid)<br>
-    • e00 (ArcInfo export E00 grid)<br>
-    • img (ERDAS Imagine img)<br>
-    • GeoTIFF<br>
-    • grd (Golden Software 7 Binary Grid)<br>
-    • JPEG, PNG, BMP<br>
-    • DEM(USGS ASCII DEM)<br>
-    and many more.<br>
-    ")
-
-        }
-
-
 }
     }
 }

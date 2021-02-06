@@ -1,4 +1,5 @@
 package org.project.geoclass;
+//package org.project.surveyingcalculator;
 
 import java.text.SimpleDateFormat;
 import java.io.File;
@@ -61,6 +62,9 @@ public class CameraActivity extends Activity{
                 Uri photoURI = FileProvider.getUriForFile(this,
                                                           "org.project.geoclass.fileprovider",
                                                           photoFile);
+                //Uri photoURI = FileProvider.getUriForFile(this,
+                //                                          "org.project.surveyingcalculator.fileprovider",
+                //                                          photoFile);
                 
                 takePictureIntent.putExtra(MediaStore.EXTRA_OUTPUT, photoURI);
                 takePictureIntent.putExtra("__RESULT__", "takePictureIntent__RESULT__");

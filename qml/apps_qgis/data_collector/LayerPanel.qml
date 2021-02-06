@@ -24,6 +24,7 @@ FluidControls.NavigationListView {
     id: navDrawer
     width: parent.width - 100
     height: parent.height
+
     readonly property bool mobileAspect: dataCollector.width < 500
     modal: true
     interactive: true

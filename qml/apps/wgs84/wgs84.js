@@ -28,8 +28,8 @@ function gps_active() {
     // When LatLong to UTM is active
     if(geoutm.checked){
         if(Calc.coord_display_latlong()){
-            rect_input.lon_decimal.text=parseFloat((currentPosition.longitude).toFixed(10))
-            rect_input.lat_decimal.text=parseFloat((currentPosition.latitude).toFixed(10))
+            rect_input.lon_decimal.text=parseFloat((currentPosition.longitude).toFixed(7))
+            rect_input.lat_decimal.text=parseFloat((currentPosition.latitude).toFixed(7))
         }
         else{
             // convert decimal latitude and longitude to DMS
@@ -40,7 +40,7 @@ function gps_active() {
             var latsecc=(latdec2-latdegg-latminn/60)*3600
             rect_input.lat_deg.text=latdegg
             rect_input.lat_min.text=latminn
-            rect_input.lat_sec.text=parseFloat((latsecc).toFixed(6))
+            rect_input.lat_sec.text=parseFloat((latsecc).toFixed(5))
             // Longitude to DMS
             var londec2 = currentPosition.longitude
             var londegg=parseInt(londec2)
@@ -48,7 +48,7 @@ function gps_active() {
             var lonsecc=(londec2-londegg-lonminn/60)*3600
             rect_input.lon_deg.text=londegg
             rect_input.lon_min.text=lonminn
-            rect_input.lon_sec.text=parseFloat((lonsecc).toFixed(6))
+            rect_input.lon_sec.text=parseFloat((lonsecc).toFixed(5))
         }
     }
     // When UTM to LatLong is active

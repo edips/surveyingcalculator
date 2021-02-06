@@ -35,6 +35,8 @@ RoundBtn{
             recordToolbar.visible = true
             recordButton.visible = true
             windoww.footer.visible = true
+            crosshair.visible = true
+            north.visible = true
         }
         else if(count_full %2 === 1){
             windoww.visibility = Window.FullScreen
@@ -42,6 +44,8 @@ RoundBtn{
             recordToolbar.visible = false
             recordButton.visible = false
             windoww.footer.visible = false
+            crosshair.visible = false
+            north.visible = false
         }
     }
     icon.source:{

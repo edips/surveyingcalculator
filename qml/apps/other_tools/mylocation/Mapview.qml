@@ -56,7 +56,7 @@ MapviewForm{
     }
     // Create map from map providers
     function createMap(pluginName) {
-        map = mapComponent.createObject(rectMap);
+        map = mapComponent.createObject( rectMap );
         /*
         Setting map provider and setting map plugin to the map component.
         Then set the map type model according to the map provider
@@ -75,15 +75,12 @@ MapviewForm{
     }
 
     //-------------Coordinate Capture Functions ----------------------------
-    function coordinate_message(){
+    function coordinate_message() {
         var latlon_txt = __appSettings.latlongOrder === "order_latlong" ? "<b>Latitude: %1</b><br/><b>Longitude: %2</b><br/><br/><b>"
                                                           : "<b>Longitude: %2</b><br/><b>Latitude: %1</b><br/><br/><b>"
         var ne_txt = __appSettings.xyOrder === "en" ? "Easting: %3</b><br/><b>Northing: %4</b><br/><b>UTM Zone: %5</b>"
                                                         : "Northing: %4</b><br/><b>Easting: %3</b><br/><b>UTM Zone: %5</b>"
         var mgrs_txt = mapssetting.mgrs_enabled ? "<br/><br/><b>MGRS: %6</b>" : ""
-
-        //console.log("mgrs is enabled?", mapssetting.mgrs_enabled)
-        //console.log("coordinate message: ", latlon_txt + ne_txt + mgrs_txt)
 
         return latlon_txt + ne_txt + mgrs_txt
     }
@@ -93,7 +90,7 @@ MapviewForm{
         return x.toString().replace(/\B(?=(\d{5})+(?!\d))/g, " ");
     }
 
-    function coordCapture(latitude, longitude){
+    function coordCapture(latitude, longitude) {
         // DMS parameters
         var latdec2 = latitude
         var latdegg=parseInt(latdec2)
@@ -144,7 +141,7 @@ MapviewForm{
         return mapssetting.mgrs_enabled ? coords_with_mgrs : coords
     }
 
-    function coord_capture2(currentPosition, enlem, boylam, dilimno, mgrs, northing, easting){
+    function coord_capture2(currentPosition, enlem, boylam, dilimno, mgrs, northing, easting) {
         //console.debug("current position:", currentPosition.latitude, currentPosition.longitude);
         // DMS parameters
         var latdec2 = currentPosition.latitude
@@ -157,8 +154,8 @@ MapviewForm{
         var lonminn=parseInt((londec2-londegg)*60)
         var lonsecc=parseFloat(((londec2-londegg-lonminn/60)*3600).toFixed(6))
 
-        enlem.text= __appSettings.latlongDisplay === "display_dec"  ? parseFloat((currentPosition.latitude).toFixed(10)) : latdegg + "° " + latminn + "' " + latsecc + "\""
-        boylam.text= __appSettings.latlongDisplay === "display_dec" ? parseFloat((currentPosition.longitude).toFixed(10)) : londegg + "° " + lonminn + "' " + lonsecc + "\""
+        enlem.text= __appSettings.latlongDisplay === "display_dec"  ? parseFloat((currentPosition.latitude).toFixed( 7 )) : latdegg + "° " + latminn + "' " + latsecc + "\""
+        boylam.text= __appSettings.latlongDisplay === "display_dec" ? parseFloat((currentPosition.longitude).toFixed( 7 )) : londegg + "° " + lonminn + "' " + lonsecc + "\""
 
         // Northing and Easting
         var clong=currentPosition.longitude
@@ -180,12 +177,56 @@ MapviewForm{
         easting.text=ccoord[0].toFixed(2)
 
         // MGRS calculation
-        var point = new proj4.Point(clong, clat);
+        var point = new proj4.Point( clong, clat );
 
         mgrs.text = numberWithSpaces( point.toMGRS() )
         // UTM zone
-        var utm_designator = Script.getLetterDesignator(clat);
-        dilimno.text = parseInt((31+(clong/6))) + (__appSettings.gridZone ? utm_designator : "")
+        var utm_designator = Script.getLetterDesignator( clat );
+        dilimno.text = parseInt( (31 + ( clong / 6 ) ) ) + ( __appSettings.gridZone ? utm_designator : "" )
+    }
+
+    // For marker coordinate
+    function screen_coordinate( lat_val, long_val, enlem, boylam, dilimno, mgrs, northing, easting ) {
+        // DMS parameters
+        var latdec2 = lat_val
+        var latdegg=parseInt(latdec2)
+        var latminn=parseInt((latdec2-latdegg)*60)
+        var latsecc=parseFloat(((latdec2-latdegg-latminn/60)*3600).toFixed(6))
+
+        var londec2 = long_val
+        var londegg=parseInt(londec2)
+        var lonminn=parseInt((londec2-londegg)*60)
+        var lonsecc=parseFloat(((londec2-londegg-lonminn/60)*3600).toFixed(6))
+
+        enlem.text= __appSettings.latlongDisplay === "display_dec"  ? parseFloat((lat_val).toFixed( 7 )) : latdegg + "° " + latminn + "' " + latsecc + "\""
+        boylam.text= __appSettings.latlongDisplay === "display_dec" ? parseFloat((long_val).toFixed( 7 )) : londegg + "° " + lonminn + "' " + lonsecc + "\""
+
+        // Northing and Easting
+        var clong=long_val
+        var clat=lat_val
+        var cmyzone=parseInt((31+(clong/6)))
+
+        // new added ****************************************************
+        var cepsgutm;
+        if (long_val < 0 ){
+            cepsgutm="+proj=utm +zone=%1 +datum=WGS84 +units=m +south +no_defs".arg(cmyzone)
+        }
+        else{
+           cepsgutm="+proj=utm +zone=%1 +datum=WGS84 +units=m +no_defs".arg(cmyzone)
+        }
+        // new added ****************************************************
+
+        var ccoord= utm2latlong(cepsgutm,clong,clat)
+        northing.text = ccoord[1].toFixed(2)
+        easting.text=ccoord[0].toFixed(2)
+
+        // MGRS calculation
+        var point = new proj4.Point( clong, clat );
+
+        mgrs.text = numberWithSpaces( point.toMGRS() )
+        // UTM zone
+        var utm_designator = Script.getLetterDesignator( clat );
+        dilimno.text = parseInt( (31 + ( clong / 6 ) ) ) + ( __appSettings.gridZone ? utm_designator : "" )
     }
 
     //------------------------------------------------------------------------------------
@@ -193,7 +234,6 @@ MapviewForm{
     function show(coordinate, x, y, mapPopupMenu) {
         //coordCaptureDialog.open()
         mapPopupMenu.coordinate = coordinate
-        mapPopupMenu.mapItemsCount = map.mapItems.length
         mapPopupMenu.update()
         mapPopupMenu.popup(x,y)
     }

@@ -39,8 +39,6 @@ FluidControls.ApplicationWindow {
     Universal.theme: __appSettings.theme === 0 ? Universal.Light : Universal.Dark
     Universal.accent: "#0050EF"
 
-
-
     // snack bar
     FluidControls.SnackBar { id: snack }
 

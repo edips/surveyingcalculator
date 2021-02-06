@@ -115,11 +115,23 @@ void AndroidUtils::callCamera( const QString &targetPath )
 
   const QString IMAGE_CAPTURE_ACTION = QString( "android.media.action.IMAGE_CAPTURE" );
 
+
+
+
   QAndroidJniObject activity = QAndroidJniObject::fromString( QStringLiteral( "org.project.geoclass.CameraActivity" ) );
   QAndroidJniObject intent = QAndroidJniObject( "android/content/Intent", "(Ljava/lang/String;)V", activity.object<jstring>() );
 
   QAndroidJniObject packageName = QAndroidJniObject::fromString( QStringLiteral( "org.project.geoclass" ) );
   QAndroidJniObject className = QAndroidJniObject::fromString( QStringLiteral( "org.project.geoclass.CameraActivity" ) );
+
+  /*
+  QAndroidJniObject activity = QAndroidJniObject::fromString( QStringLiteral( "org.project.surveyingcalculator.CameraActivity" ) );
+  QAndroidJniObject intent = QAndroidJniObject( "android/content/Intent", "(Ljava/lang/String;)V", activity.object<jstring>() );
+
+  QAndroidJniObject packageName = QAndroidJniObject::fromString( QStringLiteral( "org.project.surveyingcalculator" ) );
+  QAndroidJniObject className = QAndroidJniObject::fromString( QStringLiteral( "org.project.surveyingcalculator.CameraActivity" ) );
+  */
+
 
   intent.callObjectMethod( "setClassName", "(Ljava/lang/String;Ljava/lang/String;)Landroid/content/Intent;", packageName.object<jstring>(), className.object<jstring>() );
 

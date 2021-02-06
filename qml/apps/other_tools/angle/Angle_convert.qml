@@ -23,6 +23,7 @@ Item{
     SFlickable {
         id:optionsPage
 
+
         Settings{
             id:mysetting45
             property alias angleroot: angle_root.currentIndex
@@ -33,7 +34,7 @@ Item{
             property alias text5:result4.text
         }
         Column{
-            spacing: 20
+            spacing: 35
             anchors.horizontalCenter: parent.horizontalCenter
             Row{
                 anchors.horizontalCenter: parent.horizontalCenter
@@ -41,17 +42,13 @@ Item{
                 CustomComboBox {
                     id: angle_root
                     currentIndex: 0
+                    height: aci.height
                     model: ListModel {
                         id: model
                         ListElement { text: qsTr("Degree") }
                         ListElement { text: qsTr("Grad") }
                         ListElement { text: qsTr("Radian") }
                         ListElement { text: qsTr("Mil (NATO)") }
-                    }
-                    onAccepted: {
-                        id:maccepted
-                        if (find(editText) === -1)
-                            model.append({text: editText})
                     }
                 }
                 STextField{id:aci;}
@@ -120,16 +117,13 @@ Item{
                    spacing: 10
             CustomComboBox {
                 id: angle1
+                height: aci.height
                 currentIndex: 0
                 model: ListModel {
                     id: model2
                     ListElement { text: qsTr("Grad") }
                     ListElement { text: qsTr("Radian") }
                     ListElement { text: qsTr("Mil (NATO)") }
-                }
-                onAccepted: {
-                    if (find(editText) === -1)
-                        model2.append({text: editText})
                 }
             }
             STextField{id:result1;}

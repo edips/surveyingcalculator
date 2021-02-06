@@ -39,9 +39,6 @@
         <file>qml/apps/other_tools/libs/geographiclib.js</file>
         <file>qml/apps/other_tools/libs/index.js</file>
         <file>qml/apps/other_tools/libs/proj4.js</file>
-        <file>qml/apps/other_tools/mapscale/mapscale.js</file>
-        <file>qml/apps/other_tools/mapscale/MapScale.qml</file>
-        <file>qml/apps/other_tools/mapscale/MapScale2.qml</file>
         <file>qml/apps/other_tools/mylocation/maps.js</file>
         <file>qml/apps/other_tools/mylocation/Maps2.qml</file>
         <file>qml/apps/other_tools/mylocation/Mapview.qml</file>
@@ -72,9 +69,8 @@
         <file>qml/help/FourHelp.qml</file>
         <file>qml/help/HelmertHelp.qml</file>
         <file>qml/help/LineHelp.qml</file>
-        <file>qml/help/MapScaleHelp.qml</file>
         <file>qml/help/MapViewerHelp.qml</file>
-        <file>qml/help/MylocationHelp.qml</file>
+        <file>qml/help/UTMMapHelp.qml</file>
         <file>qml/help/RoadHelp.qml</file>
         <file>qml/help/SecondHelp.qml</file>
         <file>qml/help/ThirdHelp.qml</file>
@@ -174,5 +170,7 @@
         <file>qml/apps/basic_surveying/BearingCalc.qml</file>
         <file>qml/apps/basic_surveying/js/interiorAngle.js</file>
         <file>qml/apps/basic_surveying/js/bearingCalc.js</file>
+        <file>qml/apps/other_tools/mylocation/components/target.qml</file>
+        <file>qml/apps/other_tools/mylocation/components/GoCoordinateDialog.qml</file>
     </qresource>
 </RCC>

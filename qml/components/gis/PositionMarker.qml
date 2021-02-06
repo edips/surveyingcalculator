@@ -21,9 +21,6 @@ import QtQuick.Layouts 1.3
 Item {
     id: positionMarker
 
-    property double marker_x;
-    property double marker_y;
-
     visible: __appSettings.autoCenterMapChecked
 
     //property QgsQuick.PositionKit positionKit
@@ -54,35 +51,8 @@ Item {
         sourceSize.width: 40
         sourceSize.height: 40
         smooth: true
-        //visible: (positionKit.hasPosition) ? true : false
-        //visible: positionKit.hasPosition && positionKit.direction >= 0
-        //x: marker_x - width/2
-        //y: marker_y - height/2
         opacity: 0.5
     }
-/*
-    Image {
-        id: navigation
-        source: "qrc:/assets/icons/material/maps/navigation.svg"
-        fillMode: Image.PreserveAspectFit
-        sourceSize.width: 40
-        sourceSize.height: 40
-        visible: (positionKit.direction >= 0) ? false : (positionKit.hasPosition) ? true : false
-        onVisibleChanged:{
-            console.log("visible of navigation:::: ", navigation.visible )
-            console.log("positionKit.hasPosition:::: ", positionKit.hasPosition )
-        }
-        smooth: true
-        x: positionKit.screenPosition.x - width/2
-        y: positionKit.screenPosition.y - height/2
-        opacity: 0.5
-    }
-    ColorOverlay {
-        anchors.fill: navigation
-        visible: (positionKit.direction >= 0) ? false : (positionKit.hasPosition) ? true : false
-        source: navigation
-        opacity: 0.5
-    }*/
    ColorOverlay {
         anchors.fill: direction
         //visible: (positionKit.hasPosition) ? true : false

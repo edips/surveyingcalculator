@@ -14,6 +14,7 @@ import QtQuick 2.12
 import QtQuick.Controls 2.12
 import QtQuick.Controls.Universal 2.12
 import QtLocation 5.12
+import QtQuick.Window 2.12
 import QtPositioning 5.12
 import QtSensors 5.12
 import Qt.labs.settings 1.1
@@ -76,6 +77,16 @@ Item {
         }
     ]
     state: "normal"
+    onStateChanged: {
+        if( state === "normal" ) {
+            windoww.visibility = Window.AutomaticVisibility
+            windoww.footer.visible = true
+        }
+        else if( state === "full" ) {
+            windoww.visibility = Window.FullScreen
+            windoww.footer.visible = false
+        }
+    }
 
     // new added ****************************************************
     property int rotation: 0;
@@ -93,8 +104,8 @@ Item {
         return qsTr("Compass is calibrated");
     }*/
     function normAngle(angle) {
-            return (angle + 360) % 360;
-        }
+        return (angle + 360) % 360;
+    }
 
     // todo: enable timer and compass when compass azimuth is active
     Timer {
@@ -118,8 +129,11 @@ Item {
         updateInterval: 1000
         active: true
         onPositionChanged: {
-            var currentPosition = src.position.coordinate
-            coord_capture2(currentPosition, enlem, boylam, dilimno, mgrs, northing, easting)
+            if( followme ) {
+                var currentPosition = src.position.coordinate
+                coord_capture2( currentPosition, enlem, boylam, dilimno, mgrs, northing, easting )
+                mapcalc.mapCenter = src.position.coordinate
+            }
         }
     }
     // Map component is filling rectMap
@@ -132,12 +146,30 @@ Item {
     // Map component
     Component {
         id: mapComponent
-        MapComponent{
+        MapComponent {
             id: mymap
             width:rectMap.width
             height: rectMap.height
             anchors.horizontalCenter: parent.horizontalCenter
-            activeMapType: supportedMapTypes[selectmap.currentIndex]
+            activeMapType: supportedMapTypes[ selectmap.currentIndex ]
+
+            Timer {
+                id: timer_map
+                interval: 300; running: false; repeat: false
+                onTriggered: {
+                    var screenPoint = Qt.point( mymap.width/2, mymap.height/2 )
+                    var center_lat = map.toCoordinate( screenPoint ).latitude
+                    var center_long = map.toCoordinate( screenPoint ).longitude
+                    screen_coordinate( center_lat, center_long, enlem, boylam, dilimno, mgrs, northing, easting )
+                }
+            }
+
+            onCenterChanged: {
+                if( !mapcalc.followme ) {
+                    timer_map.start()
+                }
+            }
+
             // Compass Image
             Image {
                 visible: mapssetting.compass_enabled
@@ -153,8 +185,19 @@ Item {
                 opacity: 0.5
                 Behavior on rotation { RotationAnimation { properties: "rotation"; direction: RotationAnimation.Shortest; duration: 500 }}
             }
+
+            // Cross hair Marker
+            Image {
+                visible: !mapcalc.followme && crossHair.checked
+                anchors.centerIn: parent
+                height: 40
+                width: height
+                source: "qrc:/assets/icons/crosshair.svg"
+                sourceSize.width: width
+                sourceSize.height: height
+            }
             // full screen and normal screen map
-            RoundBtn{
+            RoundBtn {
                 z:1
                 id:gps
                 background_color: "#80d9d9d9"
@@ -164,10 +207,10 @@ Item {
                     margins: 10
                 }
                 onClicked: {
-                        count_full++
-                        mapview.state = mapview.state === "full" ? "normal" : "full";
-                    }
-                icon.source:{
+                    count_full++
+                    mapview.state = mapview.state === "full" ? "normal" : "full";
+                }
+                icon.source: {
                     if (count_full %2 === 0){
                         return "qrc:/assets/icons/material/navigation/fullscreen.svg"
                     }
@@ -192,15 +235,20 @@ Item {
             onShowMainMenu: show(coordinate, mousex, mousey, mapPopupMenu)
         }
     }
+
     // Get Coordinates Menu
     MapPopupMenu {
         id: mapPopupMenu
         onItemClicked: {
-            coordCaptureDialog.open()
             switch (item) {
             case "getCoordinate":
                 // Using coordinatesCaptured signal to get coordinates and display on dialog
                 map.coordinatesCaptured(coordinate.latitude, coordinate.longitude)
+                coordCaptureDialog.open()
+                break
+            case "gotoCoordinate":
+                map.addNewTarget()
+                map.targetChanged( map.targetName );
                 break
             default:
                 console.log("Unsupported operation")
@@ -212,6 +260,49 @@ Item {
         id: coordCaptureDialog
         title: qsTr("Coordinates")
     }
+
+    // Get Coordinates Dialog
+/*
+  TODO: add XY, LatLong and MGRS coordinate inputs with input
+  Or add separate menus like Go to Coordinates
+    GoCoordinateDialog {
+       id: goCoordsDialog
+    }
+*/
+    AlertDialog {
+        id: goCoordsDialog
+        visible: mapcalc.goCoordActive
+        standardButtons: Dialog.Ok | Dialog.Cancel
+        onClosed: mapcalc.goCoordActive = false
+
+        title: qsTr("Go to Coordinate")
+        Row {
+            spacing: 5
+            SText {
+                text: "Latitude: "
+            }
+            STextField {
+                id: latTxt
+                width: 150
+            }
+        }
+        Row {
+            spacing: 5
+            SText {
+                text: "Longitude: "
+            }
+            STextField {
+                id: lonTxt
+                width: 150
+            }
+        }
+        onAccepted: {
+            console.log( "accepted: ", "lat: ", latTxt.text, "long: ", lonTxt.text )
+            map.addTargetFromCoord( latTxt.text, lonTxt.text )
+            map.targetChanged( map.targetName );
+        }
+    }
+
     // Flickable form
     SFlickable {
         id:optionsPage
@@ -337,7 +428,7 @@ Item {
                             verticalAlignment: Text.AlignVCenter
                         }
                     }
-                 }
+                }
                 // Accuracy and UTM Zone
                 Row{
                     anchors.horizontalCenter: parent.horizontalCenter
@@ -425,6 +516,13 @@ Item {
                         }else if(esri_btn.checked){
                             mapview.currentIndex_esri = currentIndex
                         }
+
+                        if( mapview.state === "full" ) {
+                            console.log("yeah it is full.. so ???")
+                            windoww.visibility = Window.AutomaticVisibility
+                            windoww.footer.visible = true
+                        }
+
                         mapview.map.destroy()
                     }
                 }

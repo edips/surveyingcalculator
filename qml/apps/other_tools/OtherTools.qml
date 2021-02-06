@@ -35,11 +35,9 @@ SFlickable {
             cellWidth: 110
             cellHeight: 130
             model: ListModel {
-                ListElement { title: qsTr("Area from X,Y"); source: "areaFromPoints/areaCalc2.qml" ; imgsrc:"qrc:/assets/icons/areaXY.png" }
                 ListElement { title: qsTr("2D Helmert Transform"); source: "helmert/Helmert2.qml"; imgsrc:"qrc:/assets/icons/helmert.png"  }
                 ListElement { title: qsTr("Horizontal Curve"); source: "hz_curve/RoadCalc2.qml"; imgsrc:"qrc:/assets/images/karayolu.png" }
                 ListElement { title: qsTr("Angle Conversion"); source: "angle/Angle_convert2.qml"; imgsrc:"qrc:/assets/icons/angle_conversion.png"  }
-                ListElement { title: qsTr("Map Scale Calculator"); source: "mapscale/MapScale2.qml" ; imgsrc:"qrc:/assets/icons/map_scale.png" }
             }
             delegate: ListItem {
                 width: 110

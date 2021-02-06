@@ -27,7 +27,7 @@ import lc 1.0
 import "../../components/gis"
 import "../../components/common"
 import "../../components/common/script.js" as Utils
-import "../../help"
+
 
 FluidControls.Page {
     property string project_name: __projectsModel.data(__projectsModel.index(mapView.menuIndex), ProjectModel.ProjectName)
@@ -56,12 +56,9 @@ FluidControls.Page {
         // reset the project name before the dialog opens
         onClicked: { inputDialog.project_name.text = ""; inputDialog.open() }
     }
-    // Help page
-    PointDataCollectorHelp{
-        id:maphelp
-        visible: false
-    }
+
     // Actions
+    /*
     actions: [
         // Help
         FluidControls.Action {
@@ -71,6 +68,7 @@ FluidControls.Page {
             toolTip: qsTr("Help")
         }
     ]
+    */
     // Dialogs and Bottom sheet menu
     Column {
         id:optionsC

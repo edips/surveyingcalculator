@@ -1,7 +1,7 @@
 <RCC>
     <qresource prefix="/">
         <file>assets/icons/angle_conversion.png</file>
-        <file>assets/icons/areaXY.png</file>
+        <file>assets/icons/areaXY.svg</file>
         <file>assets/icons/basic_surveying.svg</file>
         <file>assets/icons/coord_convert.png</file>
         <file>assets/icons/degree_decimal.png</file>
@@ -14,7 +14,6 @@
         <file>assets/icons/intersection.png</file>
         <file>assets/icons/latlong_calc.png</file>
         <file>assets/icons/linear.png</file>
-        <file>assets/icons/map_scale.png</file>
         <file>assets/icons/mapviewer.png</file>
         <file>assets/icons/mIconLineLayer.svg</file>
         <file>assets/icons/mIconPointLayer.svg</file>
@@ -80,7 +79,6 @@
         <file>assets/images/help/dist.png</file>
         <file>assets/images/help/forward.png</file>
         <file>assets/images/help/linear.png</file>
-        <file>assets/images/help/mapscale.png</file>
         <file>assets/images/help/sine_a_side.png</file>
         <file>assets/images/help/sine_alpha.png</file>
         <file>assets/images/theme/hdpi/ic_arrow_drop_down_black_24dp.png</file>
@@ -237,5 +235,12 @@
         <file>assets/icons/checkbox_outline_dark.svg</file>
         <file>assets/icons/checkbox_outline_light.svg</file>
         <file>assets/icons/checkbox.svg</file>
+        <file>assets/images/help/area/display_options.png</file>
+        <file>assets/icons/marker.svg</file>
+        <file>assets/images/help/utm_map/fullscren.jpg</file>
+        <file>assets/images/help/utm_map/gotopoint.jpg</file>
+        <file>assets/images/help/utm_map/long_press.jpg</file>
+        <file>assets/images/help/utm_map/menu.jpg</file>
+        <file>assets/images/help/utm_map/providers.jpg</file>
     </qresource>
 </RCC>

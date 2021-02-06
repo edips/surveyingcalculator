@@ -17,7 +17,7 @@ import Fluid.Controls 1.0 as FluidControls
 import QtQuick.Layouts 1.3
 TopSheet {
     id: alertt
-    title: "Surveying Calculator 3.5.2"
+    title: "Surveying Calculator 3.5.3"
     onClosed: {
         loaderAboutVisible = false
     }
@@ -30,7 +30,7 @@ TopSheet {
         Column {
             id: column
             anchors.fill: parent
-            spacing: 10
+            spacing: 15
 
             Label {
                 onLinkActivated: Qt.openUrlExternally(link)
@@ -62,11 +62,12 @@ and <a href=\"https://www.opengis.ch/\">OPENGIS.ch</a> for providing open source
                 text: qsTr("Rate Surveying Calculator")
                 width: parent.width - 30
                 icon.source: "qrc:/assets/icons/material/toggle/star_border.svg"
-                flat: true
                 onClicked: {
-                    Qt.openUrlExternally("https://play.google.com/store/apps/details?id=org.project.geoclass&hl=tr")
+                    //Qt.openUrlExternally("https://play.google.com/store/apps/details?id=org.project.surveyingcalculator")
+                    Qt.openUrlExternally("https://play.google.com/store/apps/details?id=org.project.geoclass")
                 }
             }
+
             Label {
                 onLinkActivated: Qt.openUrlExternally(link)
                 width: parent.width

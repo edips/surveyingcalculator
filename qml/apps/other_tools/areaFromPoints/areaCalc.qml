@@ -21,14 +21,15 @@ import "../../../components/common/script.js" as JS
 import "../../../components/common"
 import "areaCalc.js" as Calc
 import "../../../components/gis"
-Item{
+Item {
     property var my_arr : []
-    property int cogo_count: 0
     Settings{
         id:dist_settings
         property alias areaxttext : editor.text
         property alias unitindex_Area : areacombo.currentIndex
         property alias area_result : area.text
+        property alias perim_txt: perimeter.text
+        property alias perimCombo: perim_combo.currentIndex
     }
 
     // Coordinate select from map dialog
@@ -58,18 +59,20 @@ Item{
         id:optionsPage
         contentHeight: Math.max(macolumn.implicitHeight+65, height)
         anchors.topMargin: 15
-        Column{
+        Column {
             id:macolumn
             width: parent.width
             spacing: 20
             anchors.horizontalCenter: parent.horizontalCenter
             NEHeader {}
-            Row {
+
+            Row{
                 anchors.horizontalCenter: parent.horizontalCenter
                 Rectangle{
                     width:  275
                     height:  250
                     color:"transparent"
+
                     Flickable {
                         id: flickable
                         anchors.fill: parent
@@ -77,6 +80,7 @@ Item{
                         contentWidth: parent.width
                         contentHeight: editor.height
                         clip: true
+
                         Column {
                             id: lineNumber
                             spacing: 0
@@ -85,8 +89,8 @@ Item{
                                 model: editor.lineCount
                                 STextTop {
                                     text: index + 1
-                                    font.pixelSize: 19
-                                    color: "gray"
+                                    color: 'gray'
+                                    font.pixelSize: 17
                                 }
                             }
                         }
@@ -97,17 +101,18 @@ Item{
                             selectByMouse: true
                             topPadding: 0
                             leftPadding: 10
-                            inputMethodHints:  JS.keyboard_display()
-                            font.pixelSize: 19
+                            inputMethodHints: JS.keyboard_display()
+                            font.pixelSize: 17
                             anchors.left: lineNumber.right
                         }
                         ScrollBar.vertical: ScrollBar { }
                     }
                 }
             }
-            Row{
+            Row {
                 anchors.horizontalCenter: parent.horizontalCenter
-                spacing: 45
+                spacing:50
+
                 Button {
                     id:hesaplak
                     width: 50
@@ -119,15 +124,23 @@ Item{
                     }
                     highlighted: true
                     onClicked: {
-                        Calc.calc();
+                        Calc.result();
+                        canvas.visible = true
                     }
                 }
+
                 Button {
                     id:c
                     width: 40
                     icon.source: "qrc:/assets/icons/material/content/clear.svg"
-                    onClicked: area.text = editor.text = ""
+                    onClicked: {
+                        area.text = editor.text = perimeter.text = ""
+                        var ctx = canvas.getContext("2d");
+                        ctx.reset();
+                        canvas.visible = false
+                    }
                 }
+
                 Button {
                     id: btn_map
                     icon.source: "qrc:/assets/icons/material/maps/map.svg"
@@ -140,16 +153,16 @@ Item{
                 }
             }
 
-            Row{
+            Row {
                 anchors.horizontalCenter: parent.horizontalCenter
                 spacing:5
-                SText {text: "Area: "; }
+                SText {text: "Area: "; font.pixelSize: 16; height: area.height; }
                 STextField{id:area; readOnly:true}
-                CustomComboBox {
+                ComboBox {
                     id: areacombo
-                    height: area.height
                     currentIndex: 0
-                    implicitWidth:80
+                    implicitWidth: 80
+                    height: area.height
                     model: ListModel {
                         id: model
                         ListElement { text: qsTr("m²") }
@@ -160,10 +173,43 @@ Item{
                         ListElement { text: qsTr("yd²") }
                         ListElement { text: qsTr("ft²") }
                     }
-                    onCurrentIndexChanged: Calc.unitcalc();
+                    onCurrentIndexChanged: {
+                        Calc.areaByUnits();
+                    }
                 }
             }
-        }
 
+            Row {
+                anchors.horizontalCenter: parent.horizontalCenter
+                spacing:5
+                SText{ text: "Perimeter: "; font.pixelSize: 16; height: perimeter.height }
+                STextField{ id: perimeter; readOnly:true; width: 100; }
+                ComboBox {
+                    id: perim_combo
+                    currentIndex: 0
+                    implicitWidth: 80
+                    height: perimeter.height
+                    model: ListModel {
+                        ListElement { text: qsTr("m") }
+                        ListElement { text: qsTr("km") }
+                        ListElement { text: qsTr("mi") }
+                        ListElement { text: qsTr("yd") }
+                        ListElement { text: qsTr("ft") }
+                    }
+                    onCurrentIndexChanged: {
+                        Calc.perimByUnits();
+                    }
+                }
+            }
+
+            // Print the area
+            Canvas {
+                id: canvas
+                visible: false
+                width: parent.width > 600 ? 580 : parent.width - 15
+                height: width  + 150
+                anchors.horizontalCenter: parent.horizontalCenter
+            }
+        }
     }
 }

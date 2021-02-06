@@ -48,6 +48,7 @@ SFlickable {
                 //ListElement { title: qsTr("Map Viewer"); source: "apps_qgis/mapviewer/MapViewer2.qml"; imgsrc:"qrc:/assets/icons/mapviewer.png" }
                 ListElement { title: qsTr("Distance, Bearing"); source: "apps/basic_surveying/BasicSurveying.qml" ; imgsrc:"qrc:/assets/icons/basic_surveying.svg" }
                 ListElement { title: qsTr("Intersection Methods"); source: "apps/intersection/Intersection.qml" ; imgsrc:"qrc:/assets/icons/intersection.png" }
+                ListElement { title: qsTr("Area from X,Y"); source: "apps/other_tools/areaFromPoints/areaCalc2.qml" ; imgsrc:"qrc:/assets/icons/areaXY.svg" }
                 ListElement { title: qsTr("Lat/Long UTM"); source: "apps/wgs84/Wgs842.qml" ; imgsrc:"qrc:/assets/icons/utm_latlon.png" }
                 ListElement { title: qsTr("Degree Decimal"); source: "apps/other_tools/deg2dec/Degree2decimal2.qml" ; imgsrc:"qrc:/assets/icons/degree_decimal.png" }
                 ListElement { title: qsTr("UTM Map"); source: "apps/other_tools/mylocation/Maps2.qml"; imgsrc:"qrc:/assets/icons/mylocation.png"  }

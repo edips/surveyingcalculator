@@ -1,4 +1,6 @@
 package org.project.geoclass;
+//package org.project.surveyingcalculator;
+
 import android.os.Bundle;
 import android.view.WindowManager;
 import org.qtproject.qt5.android.bindings.QtActivity;

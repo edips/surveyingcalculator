@@ -354,7 +354,7 @@ int main(int argc, char *argv[])
     QCoreApplication::setOrganizationName("Geosoft");
     QCoreApplication::setOrganizationDomain("surveyingcalculator.org");
     QCoreApplication::setApplicationName("Surveying Calculator");
-    QCoreApplication::setApplicationVersion( "3.1" );
+    QCoreApplication::setApplicationVersion( "3.5" );
 
     qDebug() << "Built with QGIS version " << VERSION_INT;
     // Add fonts to fontDatabase

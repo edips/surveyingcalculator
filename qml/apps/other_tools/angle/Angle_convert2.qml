@@ -20,6 +20,7 @@ import "angle.js" as JS
 import "../../../components/common/script.js" as Utils
 FluidControls.Page{
     title:qsTr("Angle Converter")
+    topPadding: 15
     appBar.maxActionCount: 2
     id:angconv
     Settings{

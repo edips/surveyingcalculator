@@ -21,8 +21,21 @@ Item {
     property int rotation: 0;
     property bool nav_visible: false
 
+    property double speed_limit: 4.16 // 4.16 m/s = 15 km/h. If user's speed is over speed_limit, it will use position's direction.
+
+    function direction( positionSrc ) {
+        var dir_val;
+        if( positionSrc.position.speedValid && positionSrc.position.directionValid && positionSrc.position.speed >= speed_limit ) {
+            dir_val = positionSrc.position.direction
+        } else {
+            dir_val = crosshair.rotation
+        }
+
+        return dir_val
+    }
+
     id: crosshair
-    property real size:{
+    property real size: {
         if (__appSettings.autoCenterMapChecked){
             return 20
         }else{
@@ -49,11 +62,12 @@ Item {
     // todo: enable the compass when compass azimuth is active
     Compass {
         id: compass
-        active: direction.visible
+        alwaysOn: false
+        active: direction.visible //&& src.ready && src.position.speedValid !== null && src.position.speedValid && src.position.speed < 2.78
         skipDuplicates: true
         onReadingChanged: {
             //calib_level.text = calib_status(reading)
-            crosshair.rotation = (reading.azimuth).toFixed(2)
+            crosshair.rotation = ( reading.azimuth ).toFixed(2)
         }
     }
 
@@ -63,15 +77,11 @@ Item {
         source: "qrc:/assets/icons/material/maps/navigation.svg"
         anchors.centerIn: parent
         fillMode: Image.PreserveAspectFit
-        rotation: -crosshair.rotation
+        rotation: crosshair.direction( src )
         transformOrigin: Item.Center
         sourceSize.width: 40
         sourceSize.height: 40
         smooth: true
-        //visible: (positionKit.hasPosition) ? true : false
-        //visible: positionKit.hasPosition && positionKit.direction >= 0
-        //x: marker_x - width/2
-        //y: marker_y - height/2
         opacity: 0.5
         Behavior on rotation { RotationAnimation { properties: "rotation"; direction: RotationAnimation.Shortest; duration: 500 }}
     }

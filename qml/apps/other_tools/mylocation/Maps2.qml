@@ -15,9 +15,11 @@ import QtQuick.Controls 2.2
 import QtQuick.Controls.Universal 2.2
 import Fluid.Controls 1.0 as FluidControls
 import Fluid.Core 1.0 as FluidCore
+import QtPositioning 5.2
 import Qt.labs.settings 1.1
 import "../../"
 import "maps.js" as JS
+import "../../../help"
 
 /*
 TODO
@@ -25,18 +27,30 @@ TODO
 - remove windoww.decimal or any related thing, use __appSettings instead
 */
 
-FluidControls.Page{
-    title: "UTM Map"
-    appBar.maxActionCount: 1
+FluidControls.Page {
+    property bool followme: true
+    property variant mapCenter: QtPositioning.coordinate( 0.0, 0.0 )
+    property bool goCoordActive: false
+
     id:mapcalc
-    /*onGoBack: {
-    }*/
+    title: "UTM Map"
+    appBar.maxActionCount: 3
+
     Settings{
         id:mapssetting
         //property alias mapsChecked2: mapcalc.map_count
         property alias mgrs_enabled: mgrs_action.checked
         property alias compass_enabled: compass_action.checked
+        property alias gpsLock: mapcalc.followme
+        property alias map_center_utm: mapcalc.mapCenter
+        property alias map_cross_hair: crossHair.checked
     }
+
+    // Help
+    UTMMapHelp {
+        id: utmHelp
+    }
+
     Mapview{
         id: map_loader
         //source: "Mapview.qml"
@@ -53,56 +67,65 @@ FluidControls.Page{
         width: mgrs_action.implicitWidth
         transformOrigin: Menu.TopRight
         modal: true
+
+        // MGRS Coordinates
+        MenuItem {
+            id: addPoint
+            text: "Go to Coordinate"
+            onTriggered: goCoordActive = true
+            icon.source: "qrc:/assets/icons/material/maps/near_me.svg"
+        }
         // MGRS Coordinates
         MenuItem {
             id:mgrs_action
-            text: "MGRS Coordinates"
+            text: "Display MGRS Coordinates"
             checkable: true
             checked: true
         }
         // Compass
         MenuItem {
             id:compass_action
-            text: "Compass"
+            text: "Display Compass"
             checkable: true
             checked: true
         }
         // Grid designator
         MenuItem {
             id: designator
-            text: "Grid Zone Code"
+            text: "Display Grid Zone Code"
             checkable: true
             checked: __appSettings.gridZone
             onCheckedChanged: __appSettings.gridZone = checked
+        }
+        // Grid designator
+        MenuItem {
+            id: crossHair
+            text: "Display Crosshair"
+            checkable: true
+            checked: true
         }
     }
 
 
     actions: [
-        /*FluidControls.Action {
-          id:map_action
-            onTriggered:{
-                map_count++
-                JS.map_fav()
+        FluidControls.Action {
+            icon.source: "qrc:/assets/icons/material/maps/my_location.svg"
+            icon.color: {
+                if( mapcalc.followme ) {
+                    return Universal.color( Universal.Orange )
+                }
+                else {
+                    return __appSettings.theme === 0 ? "black" : "white"
+                }
             }
-            text: qsTr("Favourite")
-            icon.source: FluidControls.Utils.iconUrl(JS.map_icon())
-            toolTip: qsTr("Favourite")
+            toolTip: qsTr("Enable GPS")
+            onTriggered: mapcalc.followme = !mapcalc.followme
         },
         FluidControls.Action {
-            id:mgrs_action
-            text: qsTr("MGRS")
-            //icon.source: FluidControls.Utils.iconUrl(JS.map_helpicon())
-            toolTip: qsTr("MGRS")
-            checkable: true
+            icon.source: "qrc:/assets/icons/material/action/help_outline.svg"
+            toolTip: qsTr("Help")
+            onTriggered: utmHelp.open()
         },
-        FluidControls.Action {
-            id: compass_action
-            text: qsTr("Compass")
-            //icon.source: FluidControls.Utils.iconUrl(JS.map_helpicon())
-            toolTip: qsTr("Compass")
-            checkable: true
-        },*/
         // UTM Map Menu
         FluidControls.Action {
             icon.source: "qrc:/assets/icons/material/navigation/more_vert.svg"

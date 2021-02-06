@@ -23,6 +23,7 @@ import QgsQuick 0.1 as QgsQuick
 import lc 1.0
 import QtQml.Models 2.2
 import Qt.labs.settings 1.1
+import "../../help"
 import "../../components/gis"
 import "../../components/common"
 import "../../components/common/script.js" as Util
@@ -188,7 +189,7 @@ FluidControls.Page {
                 mapView.mapCanvas.mapSettings.setCenter( projectedPosition );
             }
             else {
-                collect_pane.coordinateText = Util.datacollector_coord()
+                collect_pane.coordinateText = __appSettings.autoCenterMapChecked ? "" : Util.datacollector_coord()
             }
         }
     }
@@ -689,6 +690,12 @@ FluidControls.Page {
         }
     }
 
+    // Help page
+    PointDataCollectorHelp{
+        id:maphelp
+        visible: false
+    }
+
     // Menu
     Menu {
         id: moreMenu
@@ -759,11 +766,12 @@ FluidControls.Page {
             icon.source: "qrc:/assets/icons/material/action/settings.svg"
         }
         // Help
-        /*MenuItem{
+        MenuItem {
+            id:map_help
+            text: "Help"
             onTriggered: maphelp.open()
-            text: qsTr("Help")
             icon.source: "qrc:/assets/icons/material/action/help_outline.svg"
-        }*/
+        }
 
     }
     // Actions on toolbar

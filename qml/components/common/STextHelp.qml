@@ -23,6 +23,7 @@ Rectangle{
         id:helplabel
         text: stext
         font.pixelSize:15
+        onLinkActivated: Qt.openUrlExternally(link)
         textFormat: Label.RichText
         //anchors.horizontalCenter: parent.horizontalCenter
         wrapMode: Label.WordWrap
